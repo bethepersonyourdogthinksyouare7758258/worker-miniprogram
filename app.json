@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/calculator/index",
+    "pages/calculator/scene/scene",
     "pages/textpack/textpack",
     "pages/textpack/list/list",
     "pages/index/index",
@@ -44,7 +45,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "打工人工具箱",
+    "navigationBarTitleText": "打工者生存工具包",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",

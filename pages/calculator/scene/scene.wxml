@@ -1,0 +1,17 @@
+<!--pages/calculator/scene/scene.wxml-->
+<view class="container">
+  <view class="scene-header">
+    <text class="scene-title">{{scene.title}}</text>
+    <text class="scene-description">{{scene.description}}</text>
+  </view>
+
+  <view class="calculator-list">
+    <block wx:for="{{scene.calculators}}" wx:key="path">
+      <view class="calculator-item" bindtap="navigateToCalculator" data-path="{{item.path}}">
+        <text class="item-icon">{{item.icon}}</text>
+        <text class="item-name">{{item.name}}</text>
+        <text class="item-arrow">›</text>
+      </view>
+    </block>
+  </view>
+</view>

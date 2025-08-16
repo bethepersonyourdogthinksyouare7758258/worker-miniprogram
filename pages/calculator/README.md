@@ -1,51 +1,25 @@
-# 劳动法计算器小程序
+# 劳动权益计算器
 
-这是一个微信小程序项目，包含多个劳动法相关的计算器工具。
+本目录包含了小程序中的核心计算器功能，旨在帮助用户更好地理解和计算劳动报酬及相关权益。
 
-## 功能模块
+## 功能列表
 
-1. 标准工时加班费计算器
-2. 综合工时加班费计算器
-3. 计件工时加班费计算器
-4. 经济补偿金计算器
-5. 病假工资计算器
-6. 社保公积金基数计算器
-7. 工伤赔偿计算器
-8. 死亡赔偿计算器
-9. 税后工资计算器
+小程序目前支持以下计算器：
 
-## 项目结构
+- **💰 个人所得税计算器** (`/pages/calculator/individual-income-tax/`) - 计算个人所得税。
+- **🕒 加班费计算器** (`/pages/calculator/overtime-pay/`) - 根据加班情况计算加班费。
+- **🌴 未休年假补偿** (`/pages/calculator/annual-leave-compensation/`) - 计算未休年假的经济补偿。
+- **✌️ 双倍工资计算器** (`/pages/calculator/double-salary/`) - 计算未签订劳动合同的双倍工资。
+- **📄 经济赔偿金** (`/pages/calculator/severance-pay/`) - 计算违法解除劳动合同的经济赔偿金。
+- **💸 经济补偿金计算器** (`/pages/calculator/economic-bcj/`) - 计算合法解除或终止劳动合同的经济补偿金。
+- **🤒 病假工资** (`/pages/calculator/sick-pay/`) - 计算病假期间的工资。
+- **🏦 社保公积金基数** (`/pages/calculator/social-base/`) - 计算社保和公积金的缴纳基数。
+- **🩹 工伤赔偿计算器** (`/pages/calculator/injury-compensation/`) - 计算工伤赔偿相关项目。
+- **🕊️ 一次性工亡赔偿金** (`/pages/calculator/death-compensation/`) - 计算一次性工亡补助金。
+- **💳 税后工资计算器** (`/pages/calculator/after-tax-salary/`) - 根据税后工资反推税前工资。
+- **🧾 五险一金计算器** (`/pages/calculator/social-insurance/`) - 计算五险一金的个人和单位缴纳部分。
+- **⏳ 劳动仲裁/诉讼时效** (`/pages/calculator/labor-arbitration/`) - 计算劳动仲裁或诉讼的时效。
 
-```
-├── app.js                  # 小程序入口文件
-├── app.json                # 小程序全局配置
-├── app.wxss                # 小程序全局样式
-├── index.js                # 首页逻辑文件
-├── index.json              # 首页配置文件
-├── index.wxml              # 首页结构文件
-├── index.wxss              # 首页样式文件
-├── project.config.json     # 项目配置文件
-├── project.private.config.json  # 项目私有配置文件
-├── sitemap.json            # 小程序页面索引配置
-├── standard-overtime/      # 标准工时加班费计算器页面
-├── comprehensive-overtime/ # 综合工时加班费计算器页面
-├── piecework-overtime/     # 计件工时加班费计算器页面
-├── severance-pay/          # 经济补偿金计算器页面
-├── sick-pay/               # 病假工资计算器页面
-├── social-base/            # 社保公积金基数计算器页面
-├── injury-compensation/    # 工伤赔偿计算器页面
-├── death-compensation/     # 死亡赔偿计算器页面
-├── net-salary/             # 税后工资计算器页面
-```
+## 使用说明
 
-## 如何运行
-
-1. 使用微信开发者工具打开此项目目录
-2. 在微信开发者工具中编译并预览小程序
-3. 可以直接在微信开发者工具中进行调试和开发
-
-## 注意事项
-
-- 所有页面路径已在 `app.json` 中正确配置
-- 每个计算器页面都是独立的，包含完整的逻辑、结构和样式文件
-- 首页作为导航页面，可以跳转到各个计算器页面
+每个计算器都是一个独立的小程序页面，用户可以在计算器列表中选择相应功能进入。所有计算逻辑均依据最新的法律法规。

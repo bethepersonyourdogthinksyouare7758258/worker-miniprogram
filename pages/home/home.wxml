@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="title">🧰 打工人万事通</view>
+  <view class="title">🧰 打工者生存工具包</view>
   <view class="grid">
     <view class="grid-item" bindtap="navigateToOfferComparer">
       <text class="grid-icon">📊</text>

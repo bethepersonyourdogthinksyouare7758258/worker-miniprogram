@@ -1,26 +1,62 @@
 Page({
   data: {
-    calculators: [
-      { name: '个人所得税计算器', url: '/pages/calculator/individual-income-tax/individual-income-tax', icon: '💰' },
-      { name: '加班费计算器', url: '/pages/calculator/overtime-pay/overtime-pay', icon: '🕒' },
-      { name: '未休年假补偿', url: '/pages/calculator/annual-leave-compensation/annual-leave-compensation', icon: '🌴' },
-      { name: '双倍工资计算器', url: '/pages/calculator/double-salary/double-salary', icon: '✌️' },
-      { name: '经济赔偿金', url: '/pages/calculator/severance-pay/severance-pay', icon: '📄' },
-      { name: '经济补偿金计算器', url: '/pages/calculator/economic-bcj/economics-bcj', icon: '💸' },
-      { name: '病假工资', url: '/pages/calculator/sick-pay/sick-pay', icon: '🤒' },
-      { name: '社保公积金基数', url: '/pages/calculator/social-base/social-base', icon: '🏦' },
-      { name: '工伤赔偿计算器', url: '/pages/calculator/injury-compensation/injury-compensation', icon: '🩹' },
-      { name: '一次性工亡赔偿金', url: '/pages/calculator/death-compensation/death-compensation', icon: '🕊️' },
-      { name: '税后工资计算器', url: '/pages/calculator/after-tax-salary/after-tax-salary', icon: '💳' },
-      { name: '五险一金计算器', url: '/pages/calculator/social-insurance/social-insurance', icon: '🧾' },
-      { name: '劳动仲裁/诉讼时效', url: '/pages/calculator/labor-arbitration/labor-arbitration', icon: '⏳' }
+    scenes: [
+      {
+        id: 'salary',
+        title: '这个工资合理么？',
+        description: '计算到手工资、个税和理想薪资'
+      },
+      {
+        id: 'overtime',
+        title: '怎么计算我的加班费用',
+        description: '不同工时制度下的加班费计算'
+      },
+      {
+        id: 'social_insurance',
+        title: '五险一金缴对了么',
+        description: '社保、公积金基数与缴纳计算'
+      },
+      {
+        id: 'severance',
+        title: '我离职了 钱给齐了么？',
+        description: '经济补偿、赔偿与未休年假工资'
+      }
+    ],
+    tools: [
+      { name: '个人所得税', path: '/pages/calculator/individual-income-tax/individual-income-tax', icon: '💰' },
+      { name: '标准工时加班费', path: '/pages/calculator/standard-overtime/standard-overtime', icon: '🕒' },
+      { name: '综合工时加班费', path: '/pages/calculator/comprehensive-overtime/comprehensive-overtime', icon: '🕒' },
+      { name: '不定时工时加班费', path: '/pages/calculator/merged-overtime/merged-overtime', icon: '🕒' },
+      { name: '计件工时加班费', path: '/pages/calculator/piecework-overtime/piecework-overtime', icon: '🕒' },
+      { name: '未休年假补偿', path: '/pages/calculator/annual-leave-compensation/annual-leave-compensation', icon: '🌴' },
+      { name: '经济补偿金(N)', path: '/pages/calculator/economic-compensation/economic-compensation', icon: '💼' },
+      { name: '违法解除赔偿金(2N)', path: '/pages/calculator/severance-pay/severance-pay', icon: '⚖️' },
+      { name: '病假工资', path: '/pages/calculator/sick-pay/sick-pay', icon: '🤒' },
+      { name: '工伤赔偿', path: '/pages/calculator/injury-compensation/injury-compensation', icon: '🤕' },
+      { name: '工亡赔偿', path: '/pages/calculator/death-compensation/death-compensation', icon: '💀' },
+      { name: '五险一金', path: '/pages/calculator/social-insurance/social-insurance', icon: '📄' },
+      { name: '税后反推税前', path: '/pages/calculator/net-salary/net-salary', icon: '💸' },
+      { name: '仲裁时效', path: '/pages/calculator/labor-arbitration/labor-arbitration', icon: '⏳' }
     ]
   },
 
-  navigateToCalculator: function(e) {
-    const url = e.currentTarget.dataset.url;
+  navigateToScene: function(e) {
+    const sceneId = e.currentTarget.dataset.sceneId;
     wx.navigateTo({
-      url: url
+      url: `/pages/calculator/scene/scene?id=${sceneId}`
+    });
+  },
+
+  navigateToCalculator: function(e) {
+    const path = e.currentTarget.dataset.path;
+    wx.navigateTo({
+      url: path,
+      fail: () => {
+        wx.showToast({
+          title: '功能暂未开放',
+          icon: 'none'
+        });
+      }
     });
   },
 
