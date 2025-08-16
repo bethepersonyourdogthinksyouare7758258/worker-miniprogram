@@ -14,7 +14,7 @@
 - **💸 经济补偿金计算器** (`/pages/calculator/economic-bcj/`) - 计算合法解除或终止劳动合同的经济补偿金。
 - **🤒 病假工资** (`/pages/calculator/sick-pay/`) - 计算病假期间的工资。
 - **🏦 社保公积金基数** (`/pages/calculator/social-base/`) - 计算社保和公积金的缴纳基数。
-- **🩹 工伤赔偿计算器** (`/pages/calculator/injury-compensation/`) - 计算工伤赔偿相关项目。
+- **🩹 工伤赔偿计算器** (`/pages/calculator/injury-compensation/`) - 计算工伤赔償相关项目。
 - **🕊️ 一次性工亡赔偿金** (`/pages/calculator/death-compensation/`) - 计算一次性工亡补助金。
 - **💳 税后工资计算器** (`/pages/calculator/after-tax-salary/`) - 根据税后工资反推税前工资。
 - **🧾 五险一金计算器** (`/pages/calculator/social-insurance/`) - 计算五险一金的个人和单位缴纳部分。

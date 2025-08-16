@@ -23,20 +23,19 @@ Page({
       }
     ],
     tools: [
-      { name: '个人所得税', path: '/pages/calculator/individual-income-tax/individual-income-tax', icon: '💰' },
-      { name: '标准工时加班费', path: '/pages/calculator/standard-overtime/standard-overtime', icon: '🕒' },
-      { name: '综合工时加班费', path: '/pages/calculator/comprehensive-overtime/comprehensive-overtime', icon: '🕒' },
-      { name: '不定时工时加班费', path: '/pages/calculator/merged-overtime/merged-overtime', icon: '🕒' },
-      { name: '计件工时加班费', path: '/pages/calculator/piecework-overtime/piecework-overtime', icon: '🕒' },
+      { name: '个人所得税计算器', path: '/pages/calculator/individual-income-tax/individual-income-tax', icon: '💰' },
+      { name: '加班费计算器', path: '/pages/calculator/overtime-pay/overtime-pay', icon: '🕒' },
       { name: '未休年假补偿', path: '/pages/calculator/annual-leave-compensation/annual-leave-compensation', icon: '🌴' },
-      { name: '经济补偿金(N)', path: '/pages/calculator/economic-compensation/economic-compensation', icon: '💼' },
-      { name: '违法解除赔偿金(2N)', path: '/pages/calculator/severance-pay/severance-pay', icon: '⚖️' },
+      { name: '双倍工资计算器', path: '/pages/calculator/double-salary/double-salary', icon: '✌️' },
+      { name: '经济赔偿金', path: '/pages/calculator/severance-pay/severance-pay', icon: '📄' },
+      { name: '经济补偿金计算器', path: '/pages/calculator/economic-bcj/economics-bcj', icon: '💸' },
       { name: '病假工资', path: '/pages/calculator/sick-pay/sick-pay', icon: '🤒' },
-      { name: '工伤赔偿', path: '/pages/calculator/injury-compensation/injury-compensation', icon: '🤕' },
-      { name: '工亡赔偿', path: '/pages/calculator/death-compensation/death-compensation', icon: '💀' },
-      { name: '五险一金', path: '/pages/calculator/social-insurance/social-insurance', icon: '📄' },
-      { name: '税后反推税前', path: '/pages/calculator/net-salary/net-salary', icon: '💸' },
-      { name: '仲裁时效', path: '/pages/calculator/labor-arbitration/labor-arbitration', icon: '⏳' }
+      { name: '社保公积金基数', path: '/pages/calculator/social-base/social-base', icon: '🏦' },
+      { name: '工伤赔偿计算器', path: '/pages/calculator/injury-compensation/injury-compensation', icon: '🩹' },
+      { name: '一次性工亡赔偿金', path: '/pages/calculator/death-compensation/death-compensation', icon: '🕊️' },
+      { name: '税后工资计算器', path: '/pages/calculator/after-tax-salary/after-tax-salary', icon: '💳' },
+      { name: '五险一金计算器', path: '/pages/calculator/social-insurance/social-insurance', icon: '🧾' },
+      { name: '劳动仲裁/诉讼时效', path: '/pages/calculator/labor-arbitration/labor-arbitration', icon: '⏳' }
     ]
   },
 
