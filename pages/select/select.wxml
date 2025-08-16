@@ -1,0 +1,6 @@
+<view class="container">
+  <image class="logo" src="/.cloudbase/assets/logo.gif" mode="aspectFit" />
+  <text class="title">选择比较方式</text>
+  <button class="option-btn" bindtap="goToOfferComparison">Offer与理想工作比较</button>
+  <button class="option-btn" bindtap="goToTwoOfferComparison">两份工作比较</button>
+</view>

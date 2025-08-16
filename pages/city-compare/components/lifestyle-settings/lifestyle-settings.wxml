@@ -1,0 +1,89 @@
+<view class="lifestyle-settings">
+  <view class="tabs">
+    <view class="tab {{activeTab === 'housing' ? 'active' : ''}}" bindtap="switchTab" data-tab="housing">住房</view>
+    <view class="tab {{activeTab === 'daily' ? 'active' : ''}}" bindtap="switchTab" data-tab="daily">日常</view>
+    <view class="tab {{activeTab === 'education' ? 'active' : ''}}" bindtap="switchTab" data-tab="education">教育</view>
+  </view>
+
+  <view class="tab-content">
+    <!-- 住房设置 -->
+    <view wx:if="{{activeTab === 'housing'}}">
+      <view class="setting-group">
+        <label>住房方式</label>
+        <picker bindchange="handleSettingChange" data-key="housingType" value="{{housingTypeIndex}}" range="{{housingTypeOptions}}">
+          <view class="picker">{{housingTypeOptions[housingTypeIndex]}}</view>
+        </picker>
+      </view>
+      <view class="setting-group">
+        <label>住房位置</label>
+        <picker bindchange="handleSettingChange" data-key="housingLocation" value="{{housingLocationIndex}}" range="{{housingLocationOptions}}">
+          <view class="picker">{{housingLocationOptions[housingLocationIndex]}}</view>
+        </picker>
+      </view>
+      <view class="setting-group">
+        <label>住房大小</label>
+        <picker bindchange="handleSettingChange" data-key="housingSize" value="{{housingSizeIndex}}" range="{{housingSizeOptions}}">
+          <view class="picker">{{housingSizeOptions[housingSizeIndex]}}</view>
+        </picker>
+      </view>
+      <view wx:if="{{settings.housingType === 'buy'}}" class="buy-options">
+        <view class="setting-group">
+          <label>贷款年利率: {{settings.loanInterestRate * 100 | 1}}%</label>
+          <slider min="3" max="7" step="0.1" value="{{settings.loanInterestRate * 100}}" bindchange="handleSliderChange" data-key="loanInterestRate" />
+        </view>
+        <view class="setting-group">
+          <label>贷款期限</label>
+          <picker bindchange="handleSettingChange" data-key="loanTerm" value="{{loanTermIndex}}" range="{{loanTermOptions}}">
+            <view class="picker">{{loanTermOptions[loanTermIndex]}}年</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <!-- 日常生活 -->
+    <view wx:if="{{activeTab === 'daily'}}">
+      <view class="setting-group">
+        <label>公司供餐</label>
+        <switch checked="{{settings.companyMeals}}" bindchange="handleSettingChange" data-key="companyMeals" />
+      </view>
+      <view class="setting-group">
+        <label>在家吃饭比例: {{settings.diningHomeRatio}}%</label>
+        <slider min="0" max="100" step="10" value="{{settings.diningHomeRatio}}" bindchange="handleSliderChange" data-key="diningHomeRatio" />
+      </view>
+      <view class="setting-group">
+        <label>交通方式</label>
+        <picker bindchange="handleSettingChange" data-key="transportType" value="{{transportTypeIndex}}" range="{{transportTypeOptions}}">
+          <view class="picker">{{transportTypeOptions[transportTypeIndex]}}</view>
+        </picker>
+      </view>
+      <view wx:if="{{settings.transportType === 'car'}}" class="car-loan">
+        <label>每月车贷</label>
+        <input type="number" value="{{settings.carLoanMonthlyPayment}}" bindinput="handleInputChange" data-key="carLoanMonthlyPayment" />
+      </view>
+      <view class="setting-group">
+        <label>娱乐水平</label>
+        <picker bindchange="handleSettingChange" data-key="entertainmentLevel" value="{{entertainmentLevelIndex}}" range="{{entertainmentLevelOptions}}">
+          <view class="picker">{{entertainmentLevelOptions[entertainmentLevelIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 子女教育 -->
+    <view wx:if="{{activeTab === 'education'}}">
+      <view class="setting-group">
+        <label>子女数量</label>
+        <picker bindchange="handleSettingChange" data-key="childrenCount" value="{{settings.childrenCount}}" range="{{[0, 1, 2, 3]}}">
+          <view class="picker">{{settings.childrenCount}}个</view>
+        </picker>
+      </view>
+      <block wx:for="{{settings.educationTypes}}" wx:key="index">
+        <view class="setting-group">
+          <label>子女{{index + 1}}教育阶段</label>
+          <picker bindchange="handleEducationTypeChange" data-index="{{index}}" value="{{educationTypeIndexes[index]}}" range="{{educationTypeOptions}}">
+            <view class="picker">{{educationTypeOptions[educationTypeIndexes[index]]}}</view>
+          </picker>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

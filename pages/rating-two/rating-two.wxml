@@ -1,0 +1,62 @@
+<!-- pages/rating/rating.wxml -->
+<view class="container">
+  <view class="weight-section">
+    <text class="section-title">请打分，虽想但不能全要</text>
+    
+    <!-- 潜在发展空间 -->
+    <view class="rating-item">
+      <text>发展空间，能在职场看到想成为的人</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.potentialDevelopment}}" bindchange="onWeightChange" data-type="potentialDevelopment" />
+    </view>
+    
+    <!-- 再生产系数 -->
+    <view class="rating-item">
+      <text>除去工作能支配的时间多</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.reproduction}}" bindchange="onWeightChange" data-type="reproduction" />
+    </view>
+
+    <!-- 人际增值系数 -->
+    <view class="rating-item">
+      <text>工作能为自己带来人脉</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.socialValue}}" bindchange="onWeightChange" data-type="socialValue" />
+    </view>
+
+    <!-- 社交认可度 -->
+    <view class="rating-item">
+      <text>家人、朋友对工作的评价</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.socialRecognition}}" bindchange="onWeightChange" data-type="socialRecognition" />
+    </view>
+
+    <!-- 简历美化度 -->
+    <view class="rating-item">
+      <text>能积攒项目经验，美化简历</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.resume}}" bindchange="onWeightChange" data-type="resume" />
+    </view>
+
+    <!-- 职场舒适度 -->
+    <view class="rating-item">
+      <text>职场上老登、贱人、傻逼少，环境好</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.workComfort}}" bindchange="onWeightChange" data-type="workComfort" />
+    </view>
+
+    <!-- 职业稳定性 -->
+    <view class="rating-item">
+      <text>公司发展稳定，裁员几率小</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.jobStability}}" bindchange="onWeightChange" data-type="jobStability" />
+    </view>
+
+    <!-- 工作轻松系数 -->
+    <view class="rating-item">
+      <text>工作轻松，复杂性低</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.jobEase}}" bindchange="onWeightChange" data-type="jobEase" />
+    </view>
+
+    <!-- 工作自由度 -->
+    <view class="rating-item">
+      <text>时间地点灵活，请假容易</text>
+      <slider min="1" max="10" step="1" show-value value="{{weights.flexibility}}" bindchange="onWeightChange" data-type="flexibility" />
+    </view>
+
+    <button bindtap="goToDataInput" class="next-btn">下一步</button>
+  </view>
+</view>

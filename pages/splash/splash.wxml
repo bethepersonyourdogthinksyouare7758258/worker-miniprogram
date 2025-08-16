@@ -1,0 +1,21 @@
+<view class="splash-container">
+  <!-- 在标题上添加 GIF 动画 -->
+  <image class="logo" src="/.cloudbase/assets/logo.gif" mode="aspectFit" />
+
+  <!-- 标题容器 -->
+  <view class="title-container">
+    <text class="title-line1">工作性价比</text>
+    <text class="title-line2">对比器</text>
+  </view>
+
+  <!-- 描述文本 -->
+  <text class="description">如果你
+  即将入职，却仍不知选择哪一份新工作
+  准备跳槽，但不知道这是否值得
+  已经离职，但仍不知新方向在哪
+  又或者，失去什么是最重要的答案
+  </text>
+
+  <!-- 进入按钮 -->
+  <button bindtap="goToNextPage" class="enter-btn">测一测吧</button>
+</view>

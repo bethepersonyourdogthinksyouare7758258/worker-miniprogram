@@ -1,0 +1,148 @@
+<view class="container">
+  <view class="header">
+    <text class="title">劳动者企业背景调查优化指南</text>
+    <text class="subtitle">通过可访问的在线工具和平台调查潜在用人单位</text>
+  </view>
+
+  <view class="content">
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">📱 1. 使用手机应用查询基本企业信息</text>
+      </view>
+      <view class="section-content">
+        <text class="description">劳动者可通过主流企业信息查询应用获取基本信息。这些应用通常提供免费基础查询功能。输入用人单位全称，进入企业主页。</text>
+        <view class="tip">
+          <text class="tip-text">💡 小贴士：可使用常见的企业信息查询应用</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">🏛️ 2. 通过国家企业信用信息公示系统查询</text>
+      </view>
+      <view class="section-content">
+        <text class="description">访问国家企业信用信息公示系统官网，注册有效邮箱，搜索用人单位主页，下载详细报告至邮箱供参考。</text>
+        <view class="link-box">
+          <button class="copy-link-btn" bindtap="copyLink" data-link="https://shiming.gsxt.gov.cn/socialuser-use-rlregister.html">复制官网链接</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">⚖️ 3. 通过中国裁判文书网查询法律案件</text>
+      </view>
+      <view class="section-content">
+        <text class="description">使用微信登录裁判文书网，输入用人单位全称搜索。通过关键词查找过往劳动争议或其他诉讼案件，了解潜在风险，如未决诉讼或债务。</text>
+        <view class="link-box">
+          <button class="copy-link-btn" bindtap="copyLink" data-link="https://wenshu.court.gov.cn/">复制官网链接</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">📋 4. 通过信用中国查询信用信息</text>
+      </view>
+      <view class="section-content">
+        <text class="description">在微信搜索信用信息查询公众号或访问官网，搜索用人单位并下载信用报告，查看过往行政处罚记录，尤其是运输业、垃圾处理业等易受处罚的行业。</text>
+        <view class="link-box">
+          <button class="copy-link-btn" bindtap="copyLink" data-link="https://www.creditchina.gov.cn/">复制官网链接</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">🏢 5. 验证民办非企业单位</text>
+      </view>
+      <view class="section-content">
+        <text class="description">对于注册为民办非企业单位的用人单位，使用微信小程序"国家社会组织法人库"确认其合法注册状态。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">💾 6. 从应用中保存企业信息</text>
+      </view>
+      <view class="section-content">
+        <text class="description">在天眼查或企查查中，输入用人单位全称，进入主页后点击右上角"..."图标，在"更多功能"中选择"生成长图"，将企业信息保存至手机相册。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">⚠️ 7. 查询诉讼与债务情况</text>
+      </view>
+      <view class="section-content">
+        <text class="description">在应用的企业主页中，查看法院公开信息，了解用人单位是否涉及诉讼或未清债务。存在未偿债务的单位可能无偿债能力，影响劳动者薪资保障。</text>
+        <view class="warning">
+          <text class="warning-text">⚠️ 警告：存在未偿债务的单位可能影响薪资保障</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">🛡️ 8. 查看过往社保缴纳情况</text>
+      </view>
+      <view class="section-content">
+        <text class="description">在应用中找到"基本信息"中的"企业年报"，保存为长图。查看年报中的社保信息，了解用人单位过往为员工缴纳社保的情况。</text>
+        <view class="note">
+          <text class="note-text">📝 注意：年报反映历史数据，非当前情况，仅供参考</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">📄 9. 核查劳务派遣资质</text>
+      </view>
+      <view class="section-content">
+        <text class="description">若需签订劳务派遣合同，在应用的企业经营信息中查看"行政许可"，确认用人单位是否持有有效劳务派遣许可证，以判断合同法律效力。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">📑 10. 获取法律诉讼证据</text>
+      </view>
+      <view class="section-content">
+        <text class="description">从国家企业信用信息公示系统下载的企业报告第二页"照面信息"，可用作仲裁或诉讼中证明用人单位信息的材料。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">📊 11. 查询行政处罚记录</text>
+      </view>
+      <view class="section-content">
+        <text class="description">访问当地市场监督管理局或城管局等官网，查看用人单位过往行政处罚公示信息，尤其适用于易受监管的行业。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">🔍 12. 检索劳动争议案件</text>
+      </view>
+      <view class="section-content">
+        <text class="description">在中国裁判文书网上，搜索用人单位全称并筛选劳动争议案件，了解其过往劳动纠纷历史。</text>
+      </view>
+    </view>
+
+    <view class="summary">
+      <view class="summary-header">
+        <text class="summary-title">📝 总结</text>
+      </view>
+      <view class="summary-content">
+        <text class="summary-text">通过以上步骤，劳动者可收集潜在用人单位的关键信息，包括法律、财务和运营详情，从而做出明智的就业选择。</text>
+      </view>
+    </view>
+
+    <view class="actions">
+      <button class="copy-btn" bindtap="copyGuide">复制完整指南</button>
+      <button class="share-btn" bindtap="shareGuide">分享指南</button>
+    </view>
+  </view>
+</view>

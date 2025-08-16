@@ -1,0 +1,37 @@
+<view class="container">
+  <view wx:if="{{isLoading}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载城市数据中...</text>
+  </view>
+
+  <view wx:elif="{{error}}" class="error-container">
+    <text>{{error}}</text>
+  </view>
+
+  <block wx:else>
+    <main-inputs
+      settings="{{settings}}"
+      availableCities="{{availableCities}}"
+      bind:settingChange="handleSettingChange"
+    />
+    
+    <lifestyle-settings
+      settings="{{settings}}"
+      bind:settingChange="handleSettingChange"
+    />
+    
+    <income-expense-details
+      wx:if="{{sourceIncome && sourceCosts}}"
+      cityName="{{settings.sourceCity}}"
+      income="{{sourceIncome}}"
+      costs="{{sourceCosts}}"
+    />
+    
+    <city-comparison
+      settings="{{settings}}"
+      availableCities="{{availableCities}}"
+      bind:calculateRequiredSalary="calculateRequiredSalary"
+      bind:getCityIncomeAndCosts="getCityIncomeAndCosts"
+    />
+  </block>
+</view>

@@ -1,0 +1,49 @@
+.main-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .main-inputs {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30rpx;
+    padding: 30rpx;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.input, .picker {
+  border: 1rpx solid #dcdfe6;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  color: #333;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+}
+
+.input-desc {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 10rpx;
+}

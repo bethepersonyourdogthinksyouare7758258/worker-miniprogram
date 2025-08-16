@@ -1,0 +1,42 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="header">
+      <text class="title">HR沟通话术库</text>
+      <text class="subtitle">职场沟通，从容应对</text>
+    </view>
+    
+    <view class="category-list">
+      <view class="category-card" bindtap="navigateToList" data-category="jobSeeking">
+        <view class="card-icon">📝</view>
+        <view class="card-content">
+          <text class="card-title">求职阶段</text>
+          <text class="card-desc">简历投递、面试沟通、薪资谈判等</text>
+        </view>
+        <view class="card-arrow">></view>
+      </view>
+      
+      <view class="category-card" bindtap="navigateToList" data-category="working">
+        <view class="card-icon">💼</view>
+        <view class="card-content">
+          <text class="card-title">在职阶段</text>
+          <text class="card-desc">请假申请、工作协调、绩效沟通等</text>
+        </view>
+        <view class="card-arrow">></view>
+      </view>
+      
+      <view class="category-card" bindtap="navigateToList" data-category="resignation">
+        <view class="card-icon">🚪</view>
+        <view class="card-content">
+          <text class="card-title">离职阶段</text>
+          <text class="card-desc">辞职申请、工作交接、薪资结算等</text>
+        </view>
+        <view class="card-arrow">></view>
+      </view>
+    </view>
+    
+    <view class="footer">
+      <text class="footer-text">选择对应场景，获取专业话术模板</text>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,44 @@
+<!--list.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">{{pageTitle}}</text>
+  </view>
+
+  <!-- 话术列表 -->
+  <scroll-view class="phrases-list" scroll-y>
+    <view wx:for="{{phrases}}" wx:key="id" class="phrase-item">
+      <!-- 话术标题 -->
+      <view class="phrase-header" bindtap="toggleExpand" data-id="{{item.id}}">
+        <view class="phrase-title-section">
+          <text class="phrase-title">{{item.title}}</text>
+        </view>
+        <view class="expand-icon {{expandedItems[item.id] ? 'expanded' : ''}}">
+          <text>∨</text>
+        </view>
+      </view>
+
+      <!-- 话术内容（展开时显示） -->
+      <view wx:if="{{expandedItems[item.id]}}" class="phrase-content">
+        <!-- 使用提示 - 移到模板列表上方 -->
+        <view wx:if="{{item.tips}}" class="tips-section">
+          <text class="tips-label">💡 使用提示</text>
+          <text class="tips-content">{{item.tips}}</text>
+        </view>
+
+        <!-- 模板列表 -->
+        <view wx:for="{{item.templates}}" wx:for-item="template" wx:for-index="templateIndex" wx:key="templateIndex" class="template-item">
+          <view class="template-header">
+            <text class="template-type">{{template.type}}</text>
+            <view class="copy-btn" bindtap="copyText" data-text="{{template.content}}">
+              <text>复制</text>
+            </view>
+          </view>
+          <view class="template-content">
+            <text>{{template.content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

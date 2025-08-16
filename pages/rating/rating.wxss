@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0; /* 移除默认外边距 */
+  padding: 0; /* 移除默认内边距 */
+}
+
+.weight-section {
+  margin-top: 30px; /* 沉到底部 */
+  width: 80%;
+  padding: 20px;
+  background-color:#ffffff;
+  border-top-left-radius: 10px; /* 顶部左圆角 */
+  border-top-right-radius: 10px; /* 顶部右圆角 */
+  border-bottom-left-radius: 0; /* 底部无圆角 */
+  border-bottom-right-radius: 0; /* 底部无圆角 */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 阴影向上 */
+  margin-bottom: 0; /* 确保底部无外边距 */
+}
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.rating-item {
+  margin-bottom: 20px;
+  margin-top: 25px;
+}
+
+.next-btn {
+  padding: 12px 40px;
+  background-color: #000;  /* 黑色按钮 */
+  color: white;
+  border-radius: 25px;
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}

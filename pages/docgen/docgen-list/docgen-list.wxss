@@ -1,0 +1,160 @@
+.container {
+  padding: 20rpx;
+  background-color: #FDF8E1;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 40rpx 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #000000;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #333333;
+  display: block;
+  line-height: 1.5;
+}
+
+.document-types {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+}
+
+.type-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.type-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.type-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #E6A23C 0%, #F56C6C 100%);
+}
+
+.type-card:hover {
+  transform: translateY(-8rpx);
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.18);
+}
+
+.card-icon {
+  font-size: 48rpx;
+  margin-bottom: 15rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10rpx;
+}
+
+.card-desc {
+  font-size: 26rpx;
+  color: #7f8c8d;
+}
+
+.help-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.help-content {
+  margin-top: 20rpx;
+}
+
+.help-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.step-number {
+  width: 48rpx;
+  height: 48rpx;
+  background: linear-gradient(135deg, #E6A23C 0%, #F56C6C 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(230, 162, 60, 0.3);
+}
+
+.step-text {
+  font-size: 26rpx;
+  color: #34495e;
+}
+
+.help-note {
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  color: #7f8c8d;
+  padding: 15rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+}
+
+/* 响应式设计 */
+@media (min-width: 750rpx) {
+  .type-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 20rpx;
+  }
+  
+  .type-card {
+    width: calc(50% - 20rpx);
+    margin-bottom: 20rpx;
+    min-width: 300rpx;
+  }
+}
+
+@media (min-width: 1024rpx) {
+  .type-cards {
+    justify-content: center;
+  }
+  
+  .type-card {
+    width: calc(33.333% - 15rpx);
+    max-width: 300rpx;
+  }
+}

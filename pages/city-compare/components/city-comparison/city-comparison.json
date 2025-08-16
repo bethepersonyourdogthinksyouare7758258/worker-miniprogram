@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "income-expense-details": "../income-expense-details/income-expense-details"
+  }
+}

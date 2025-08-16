@@ -1,0 +1,39 @@
+@import "../calculator-common.wxss";
+
+.picker-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 88rpx;
+  padding: 0 24rpx;
+  border-radius: 6rpx;
+  background-color: #f7f7f5;
+  border: 1px solid #e9e9e7;
+  font-size: 32rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.picker-arrow {
+  font-size: 24rpx;
+  color: #b3b3b1;
+}
+
+.legal-info {
+  margin-top: 40rpx;
+}
+
+.legal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.legal-content {
+  font-size: 26rpx;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+}

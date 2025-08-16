@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0; /* 移除默认外边距 */
+  padding: 0; /* 移除默认内边距 */
+}
+
+.data-section {
+  margin-top: 30px; /* 沉到底部 */
+  width: 80%;
+  padding: 20px;
+  background-color:#ffffff;
+  border-top-left-radius: 10px; /* 顶部左圆角 */
+  border-top-right-radius: 10px; /* 顶部右圆角 */
+  border-bottom-left-radius: 0; /* 底部无圆角 */
+  border-bottom-right-radius: 0; /* 底部无圆角 */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 阴影向上 */
+  margin-bottom: 0; /* 确保底部无外边距 */
+}
+.title-wrapper {
+  text-align: center;
+  margin-bottom: 30px; /* 标题整体与下方内容的间距 */
+}
+
+.section-title {
+  font-size: 28px; /* 加大字体，突出标题感 */
+  font-weight: bold; /* 加粗 */
+  color: #333; /* 深色文字 */
+  display: inline-block; /* 确保标题宽度自适应内容 */
+  padding: 0 20px; /* 左右内边距，增加标题气场 */
+}
+
+.underline {
+  width: 80%; /* 下划线长度，适中 */
+  height: 1px; /* 淡淡的下划线，细线 */
+  background-color: #c1c1c1; /* 淡淡的灰色，透明度0.3 */
+  margin: 10px auto 0; /* 上方10px与标题间距，下方由 title-wrapper 控制 */
+}
+
+.input-item {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* 增加文本框之间的间距 */
+}
+
+input {
+  width: 48%; /* 输入框的宽度 */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 10px;
+}
+
+input:focus {
+  border-color: #253d25;
+  outline: none;
+}
+
+.rating-item {
+  margin-bottom: 20px;
+}
+
+.rating-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}
+
+.rating-group {
+  display: flex;
+  flex-direction: column; /* 每个评分项（Offer和理想工作）分为两行 */
+  justify-content: space-between;
+  gap: 10px; /* 增加滑条之间的间距 */
+  margin-top: 10px;
+}
+
+.slider {
+  width: 80%; /* 控制滑条宽度 */
+}
+
+.next-btn {
+  padding: 12px 40px;
+  background-color: #000;  /* 黑色按钮 */
+  color: white;
+  border-radius: 25px;
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}

@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="title">🧰 打工人万事通</view>
+  <view class="grid">
+    <view class="grid-item" bindtap="navigateToOfferComparer">
+      <text class="grid-icon">📊</text>
+      <text class="grid-text">工作对比器</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToCalculator">
+      <text class="grid-icon">🧮</text>
+      <text class="grid-text">超有用计算器</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToTextPack">
+      <text class="grid-icon">📋</text>
+      <text class="grid-text">沟通文本库</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToDocGen">
+      <text class="grid-icon">✍️</text>
+      <text class="grid-text">文书自动生成器</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToCityCompare">
+      <text class="grid-icon">🏙️</text>
+      <text class="grid-text">城市横向对比</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToCoreLaws">
+      <text class="grid-icon">⚖️</text>
+      <text class="grid-text">核心法条</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToBackgroundCheckGuide">
+      <text class="grid-icon">🕵️</text>
+      <text class="grid-text">背调公司指南</text>
+    </view>
+    <view class="grid-item" bindtap="navigateToContact">
+      <text class="grid-icon">📧</text>
+      <text class="grid-text">联系我们</text>
+    </view>
+  </view>
+</view>

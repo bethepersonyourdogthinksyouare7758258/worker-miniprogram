@@ -1,0 +1,52 @@
+<view class="container">
+  <view class="header">
+    <text class="title">📝 法律文书自动生成器</text>
+    <text class="subtitle">智能填写表单，一键生成专业法律文书</text>
+  </view>
+
+  <view class="document-types">
+    <view class="section-title">选择文书类型</view>
+    <view class="type-cards">
+      <navigator url="../docgen-form/docgen-form?type=arbitration" class="type-card">
+        <view class="card-icon">⚖️</view>
+        <view class="card-title">劳动仲裁申请书</view>
+        <view class="card-desc">工资拖欠、违法解除等争议</view>
+      </navigator>
+      <navigator url="../docgen-form/docgen-form?type=resignation" class="type-card">
+        <view class="card-icon">📋</view>
+        <view class="card-title">被迫离职通知书</view>
+        <view class="card-desc">公司违法行为迫使离职</view>
+      </navigator>
+      <navigator url="../docgen-form/docgen-form?type=complaint" class="type-card">
+        <view class="card-icon">📄</view>
+        <view class="card-title">劳动监察投诉书</view>
+        <view class="card-desc">举报公司违法行为</view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="help-section">
+    <view class="section-title">📖 使用说明</view>
+    <view class="help-content">
+      <view class="help-item">
+        <text class="step-number">1</text>
+        <text class="step-text">选择需要生成的文书类型</text>
+      </view>
+      <view class="help-item">
+        <text class="step-number">2</text>
+        <text class="step-text">按分类填写相关信息</text>
+      </view>
+      <view class="help-item">
+        <text class="step-number">3</text>
+        <text class="step-text">系统自动计算金额并生成文书</text>
+      </view>
+      <view class="help-item">
+        <text class="step-number">4</text>
+        <text class="step-text">复制或分享生成的专业文书</text>
+      </view>
+    </view>
+    <view class="help-note">
+      <text>💡 所有信息仅在本地处理，不会上传到服务器，请放心使用</text>
+    </view>
+  </view>
+</view>

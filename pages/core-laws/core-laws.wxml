@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="header">
+    <text class="title">职场权益速查</text>
+    <text class="subtitle">轻松查询劳动法条，保障您的合法权益</text>
+  </view>
+
+  <view class="search-section">
+    <view class="search-input-container">
+      <input class="search-input" 
+             placeholder="输入关键词，如：工资、试用期、离职" 
+             bindinput="onSearchInput"
+             value="{{searchText}}" />
+    </view>
+    <view class="search-button-container">
+      <button class="search-btn" bindtap="onSearch">搜索</button>
+    </view>
+  </view>
+
+  <view class="help-hint">
+    <text class="hint-text">💡 小提示：选择分类或搜索关键词，快速定位您的问题</text>
+  </view>
+
+  <view class="filter-tabs">
+    <view wx:for="{{categoryFilters}}" wx:key="id" 
+          class="filter-tab {{selectedCategory === item.id ? 'active' : ''}}"
+          bindtap="onCategoryFilter"
+          data-category="{{item.id}}">
+      {{item.name}}
+    </view>
+  </view>
+
+  <view class="tips" wx:if="{{filteredCategories.length === 0}}">
+    <text class="tip-text">未找到相关内容，请尝试其他关键词</text>
+  </view>
+
+  <view class="category-list">
+    <view wx:for="{{filteredCategories}}" wx:key="id" class="category-item" bindtap="navigateToDetail" data-type="{{item.id}}">
+      <view class="category-content">
+        <text class="category-name">{{item.title}}</text>
+        <text class="category-stage">{{item.category === 'onboarding' ? '入职阶段' : item.category === 'working' ? '工作期间' : '离职阶段'}}</text>
+      </view>
+      <image class="arrow-icon" src="/images/arrow-right.png"></image>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,204 @@
+/* list.wxss - 温暖活泼风格 */
+.container {
+  background-color: #FDF8E1;
+  min-height: 100vh;
+  padding: 50rpx 30rpx 80rpx;
+}
+
+.page-header {
+  margin-bottom: 60rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.phrases-list {
+  height: calc(100vh - 200rpx);
+}
+
+.phrase-item {
+  margin-bottom: 32rpx;
+  border-radius: 20rpx;
+  border: 3rpx solid #f0e6cc;
+  overflow: hidden;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 4rpx 20rpx rgba(255, 204, 102, 0.15);
+}
+
+.phrase-item:active {
+  transform: translateY(2rpx);
+  border-color: #ffcc66;
+  box-shadow: 0 2rpx 15rpx rgba(255, 204, 102, 0.25);
+}
+
+.phrase-header {
+  padding: 32rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #fefbf3 100%);
+}
+
+.phrase-header:active {
+  background: linear-gradient(135deg, #fef9f0 0%, #fef3e2 100%);
+}
+
+.phrase-title-section {
+  flex: 1;
+}
+
+.phrase-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  line-height: 1.4;
+}
+
+.expand-icon {
+  font-size: 32rpx;
+  color: #ff9966;
+  transition: transform 0.3s ease;
+  margin-left: 20rpx;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.phrase-content {
+  border-top: 3rpx solid #f5ead6;
+  padding: 40rpx;
+  background: linear-gradient(135deg, #fefcf8 0%, #fef7ed 100%);
+}
+
+.tips-section {
+  background: linear-gradient(135deg, #fff4e6 0%, #ffe4b3 30%, #ffd699 100%);
+  border: 3rpx solid #ffcc66;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.tips-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 204, 102, 0.1) 0%, transparent 70%);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% { opacity: 0.5; }
+  100% { opacity: 0.8; }
+}
+
+.tips-label {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #d2691e;
+  display: block;
+  margin-bottom: 16rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.tips-content {
+  font-size: 28rpx;
+  color: #8b4513;
+  line-height: 1.6;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.template-item {
+  background: #ffffff;
+  border: 3rpx solid #f0e6cc;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(255, 153, 102, 0.1);
+}
+
+.template-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: linear-gradient(135deg, #fef9f0 0%, #fef3e2 100%);
+  border-bottom: 3rpx solid #f5ead6;
+}
+
+.template-type {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 50%, #ff6b35 100%);
+  border: none;
+  border-radius: 12rpx;
+  padding: 16rpx 28rpx;
+  transition: all 0.2s ease;
+  box-shadow: 0 4rpx 15rpx rgba(255, 107, 107, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.copy-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.copy-btn:active {
+  background: linear-gradient(135deg, #ff5252 0%, #ff7043 50%, #ff5722 100%);
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 10rpx rgba(255, 107, 107, 0.4);
+}
+
+.copy-btn:active::before {
+  left: 100%;
+}
+
+.copy-btn text {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.template-content {
+  padding: 32rpx;
+  background: #ffffff;
+}
+
+.template-content text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.8;
+  word-break: break-all;
+  display: block;
+}

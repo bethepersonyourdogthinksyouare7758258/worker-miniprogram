@@ -1,0 +1,226 @@
+.container {
+  padding: 20rpx;
+  background-color: #FDF8E1;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 40rpx 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #000000;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #333333;
+  display: block;
+  line-height: 1.5;
+}
+
+.content {
+  padding: 0 10rpx;
+}
+
+.section {
+  background: white;
+  margin-bottom: 30rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  display: block;
+  line-height: 1.4;
+}
+
+.section-content {
+  line-height: 1.6;
+}
+
+.description {
+  font-size: 28rpx;
+  color: #34495e;
+  display: block;
+  margin-bottom: 20rpx;
+  line-height: 1.6;
+}
+
+.tip {
+  background-color: #FFFACD;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-top: 20rpx;
+  border-left: 6rpx solid #FFD700;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #333333;
+  display: block;
+  font-weight: 500;
+}
+
+.link-box {
+  background: #e8f4f8;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #3498db;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.link-text {
+  font-size: 24rpx;
+  color: #2980b9;
+  flex: 1;
+  word-break: break-all;
+  font-family: monospace;
+  line-height: 1.4;
+}
+
+.copy-link-btn {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white;
+  border: none;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 120rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-link-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.warning {
+  background: #ffeaa7;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #fdcb6e;
+  margin-top: 20rpx;
+}
+
+.warning-text {
+  font-size: 26rpx;
+  color: #e17055;
+  display: block;
+  font-weight: 500;
+}
+
+.note {
+  background: #d1f2eb;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #00b894;
+  margin-top: 20rpx;
+}
+
+.note-text {
+  font-size: 26rpx;
+  color: #00a085;
+  display: block;
+  font-weight: 500;
+}
+
+.summary {
+  padding: 40rpx;
+  margin: 40rpx 0;
+  text-align: center;
+}
+
+.summary-header {
+  margin-bottom: 20rpx;
+}
+
+.summary-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #000000;
+  display: block;
+}
+
+.summary-content {
+  line-height: 1.6;
+}
+
+.summary-text {
+  font-size: 28rpx;
+  color: #333333;
+  display: block;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-top: 40rpx;
+  padding: 0 10rpx;
+}
+
+.copy-btn, .share-btn {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  color: white;
+}
+
+.share-btn {
+  background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+  color: white;
+}
+
+.copy-btn:active, .share-btn:active {
+  transform: scale(0.98);
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .title {
+    font-size: 42rpx;
+  }
+  
+  .section-title {
+    font-size: 28rpx;
+  }
+  
+  .description {
+    font-size: 26rpx;
+  }
+}

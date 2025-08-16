@@ -1,0 +1,148 @@
+<!-- pages/dataInput-two/dataInput-two.wxml -->
+<view class="container">
+  <view class="data-section">
+    <view class="title-wrapper">
+      <text class="section-title">开始对比吧</text>
+      <view class="underline"></view>
+    </view>
+
+    <!-- 工资 -->
+    <view class="input-item">
+      <text class="input-title">工资</text>
+      <view class="input-group">
+        <input type="number" bindinput="onInputChange" data-type="offerSalary" placeholder="请输入A工作工资" />
+        <input type="number" bindinput="onInputChange" data-type="idealSalary" placeholder="请输入B工作工资" />
+      </view>
+    </view>
+
+    <!-- 副业收入 -->
+    <view class="input-item">
+      <text class="input-title">副业收入</text>
+      <view class="input-group">
+        <input type="number" bindinput="onInputChange" data-type="offerSideIncome" placeholder="请输入A工作副业收入" />
+        <input type="number" bindinput="onInputChange" data-type="idealSideIncome" placeholder="请输入B工作副业收入" />
+      </view>
+    </view>
+
+    <!-- 生活成本 -->
+    <view class="input-item">
+      <text class="input-title">生活成本（饮食+住房+通勤）</text>
+      <view class="input-group">
+        <input type="number" bindinput="onInputChange" data-type="offerCost" placeholder="请输入A工作生活成本" />
+        <input type="number" bindinput="onInputChange" data-type="idealCost" placeholder="请输入B工作生活成本" />
+      </view>
+    </view>
+
+    <!-- 系数评分部分 -->
+    <view class="rating-item">
+      <text class="rating-title">1. 发展空间，能在职场看到想成为的人</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.potentialDevelopment.offer}}" bindchange="onWeightChange" data-type="potentialDevelopment" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.potentialDevelopment.ideal}}" bindchange="onWeightChange" data-type="potentialDevelopment" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">2. 除去工作能支配的时间多</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.reproduction.offer}}" bindchange="onWeightChange" data-type="reproduction" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.reproduction.ideal}}" bindchange="onWeightChange" data-type="reproduction" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">3. 工作能为自己带来人脉</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.socialValue.offer}}" bindchange="onWeightChange" data-type="socialValue" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.socialValue.ideal}}" bindchange="onWeightChange" data-type="socialValue" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">4. 家人、朋友对工作的评价</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.socialRecognition.offer}}" bindchange="onWeightChange" data-type="socialRecognition" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.socialRecognition.ideal}}" bindchange="onWeightChange" data-type="socialRecognition" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">5. 能积攒项目经验，美化简历</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.resume.offer}}" bindchange="onWeightChange" data-type="resume" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.resume.ideal}}" bindchange="onWeightChange" data-type="resume" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">6. 职场上老登、贱人、傻逼少，环境好</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.workComfort.offer}}" bindchange="onWeightChange" data-type="workComfort" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.workComfort.ideal}}" bindchange="onWeightChange" data-type="workComfort" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">7. 公司发展稳定，裁员几率小</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.jobStability.offer}}" bindchange="onWeightChange" data-type="jobStability" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.jobStability.ideal}}" bindchange="onWeightChange" data-type="jobStability" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">8. 工作轻松，复杂性低</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.jobEase.offer}}" bindchange="onWeightChange" data-type="jobEase" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.jobEase.ideal}}" bindchange="onWeightChange" data-type="jobEase" data-work="ideal" />
+      </view>
+    </view>
+
+    <view class="rating-item">
+      <text class="rating-title">9. 工作自由，可以居家，请假容易</text>
+      <view class="rating-group">
+        <text>A工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.flexibility.offer}}" bindchange="onWeightChange" data-type="flexibility" data-work="offer" />
+      </view>
+      <view class="rating-group">
+        <text>B工作:</text>
+        <slider min="1" max="10" step="1" show-value value="{{weights.flexibility.ideal}}" bindchange="onWeightChange" data-type="flexibility" data-work="ideal" />
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button bindtap="goToResult" class="next-btn">开始对比</button>
+  </view>
+</view>

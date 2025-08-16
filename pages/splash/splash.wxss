@@ -1,0 +1,66 @@
+.splash-container {
+  display: flex; /* 使用 flexbox 布局 */
+  flex-direction: column; /* 垂直排列内容 */
+  align-items: center; /* 水平居中 */
+  height: 100vh; /* 高度占满整个视口 */
+  background-color: ; /* 背景颜色 */
+  letter-spacing: 2rpx;  /* 增大字母之间的间距 */
+}
+
+/* GIF 动画 */
+.logo {
+  width: 150rpx;  /* 设置 GIF 动画的宽度 */
+  height: 150rpx; /* 设置 GIF 动画的高度 */
+  margin-top: 150rpx;  /* 动画和之间的间隔 */
+  margin-bottom: 10rpx;  /* 动画和标题之间的间隔 */
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column; /* 垂直排列两行标题 */
+  text-align: center; /* 文本居中 */
+  font-weight: bold;
+}
+
+.title-line1 {
+  font-size: 35px;
+  color: #2b2b2b; /* 柔和蓝色 */
+  margin-bottom: 5px; /* 两行文字之间的间隔 */
+}
+
+.title-line2 {
+  font-size: 35px;
+  color: #2b2b2b; /* 柔和蓝色 */
+  margin-bottom: 40px; /* 标题与按钮之间的间隔 */
+}
+/* 说明文本： */
+.description {
+  font-size: 17px;
+  color: #2b2b2b;  /* 深灰色文字 */
+  text-align: left; 
+  margin-left: 40px;  /* 离左边距离 20px */
+  margin-right: 40px; /* 离右边距离 20px */
+  margin-bottom: 80px;
+  line-height: 2;
+  font-family: 'Source Han Sans Serif';  /* 设置字体名称 */
+  src: url('.cloudbase/assets/Fonts/SourceHanSerifTC-Heavy.otf');  /* 字体文件的路径 */
+
+}
+
+/* 进入按钮 */
+.enter-btn {
+  padding: 30px 50px;
+  background-color: #272727;  /* 柔和绿色 */
+  color: rgb(255, 255, 255);
+  border-color: none;
+  border-radius: 20px;  /* 圆角按钮 */
+  font-size: 20px;
+  width: 400rpx;
+  height: 80rpx;
+  box-sizing: border-box;
+  text-align: center;  /* 文本居中 */
+  display: flex;  /* 使用 flexbox 让按钮中的文本居中 */
+  justify-content: center;
+  align-items: center;
+  margin-top:0px ;
+}

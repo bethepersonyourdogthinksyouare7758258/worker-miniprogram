@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="header">
+    <text class="header-icon">🕒</text>
+    <text class="title">加班费计算器</text>
+  </view>
+
+  <view class="card">
+    <view class="input-group">
+      <text class="label">所在省份</text>
+      <picker bindchange="bindRegionChange" value="{{regionIndex}}" range="{{regions}}" class="picker">
+        <view class="picker-input">
+          <text>{{regions[regionIndex]}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="input-group">
+      <text class="label">工时制度</text>
+      <view class="radio-group">
+        <view class="radio-item {{selectedSystem === 'standard' ? 'selected' : ''}}" bindtap="selectWorkSystem" data-system="standard">
+          <text>标准工时工作制</text>
+        </view>
+        <view class="radio-item {{selectedSystem === 'comprehensive' ? 'selected' : ''}}" bindtap="selectWorkSystem" data-system="comprehensive">
+          <text>综合工时工作制</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <button class="btn-calculate" bindtap="navigateToCalculator" disabled="{{selectedSystem === null}}">下一步</button>
+</view>

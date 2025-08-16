@@ -1,0 +1,35 @@
+<view class="main-inputs">
+  <view class="input-group">
+    <label for="sourceCity" class="input-label">选择基准城市</label>
+    <picker id="sourceCity" bindchange="handleCityChange" value="{{cityIndex}}" range="{{availableCities}}">
+      <view class="picker">
+        {{availableCities[cityIndex]}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="input-group">
+    <label for="salary" class="input-label">税前年收入（元）</label>
+    <input
+      type="number"
+      id="salary"
+      class="input"
+      placeholder="请输入年收入"
+      value="{{salaryInput}}"
+      bindinput="handleSalaryChange"
+    />
+  </view>
+
+  <view class="input-group">
+    <label for="housingFundRate" class="input-label">公积金比例（%）</label>
+    <input
+      type="number"
+      id="housingFundRate"
+      class="input"
+      placeholder="公积金比例"
+      value="{{housingFundInput}}"
+      bindinput="handleHousingFundChange"
+    />
+    <view class="input-desc">允许范围: 5% - 12%</view>
+  </view>
+</view>

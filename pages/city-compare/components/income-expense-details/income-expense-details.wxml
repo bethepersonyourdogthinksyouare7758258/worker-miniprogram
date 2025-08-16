@@ -1,0 +1,38 @@
+<block wx:if="{{income && costs}}">
+  <view class="income-expense-details">
+    <view class="summary" bindtap="toggleExpand">
+      <view class="summary-item">
+        <text>月收入</text>
+        <text class="income-value">{{formattedIncome}}</text>
+      </view>
+      <view class="summary-item">
+        <text>月支出</text>
+        <text class="expense-value">{{formattedCosts}}</text>
+      </view>
+      <view class="summary-item">
+        <text>月结余</text>
+        <text class="{{monthlySavings >= 0 ? 'savings-value' : 'deficit-value'}}">{{formattedSavings}}</text>
+      </view>
+      <image class="arrow {{isExpanded ? 'expanded' : ''}}" src="/assets/arrow-down.svg" />
+    </view>
+
+    <view class="details" wx:if="{{isExpanded}}">
+      <view class="tabs">
+        <view class="tab {{activeTab === 'income' ? 'active' : ''}}" bindtap="switchTab" data-tab="income">收入</view>
+        <view class="tab {{activeTab === 'expense' ? 'active' : ''}}" bindtap="switchTab" data-tab="expense">支出</view>
+        <view class="tab {{activeTab === 'savings' ? 'active' : ''}}" bindtap="switchTab" data-tab="savings">结余</view>
+      </view>
+
+      <view class="tab-content">
+        <view wx:if="{{activeTab === 'income'}}">
+          <canvas canvas-id="incomeChart" id="incomeChart" class="charts" />
+        </view>
+        <view wx:if="{{activeTab === 'expense'}}">
+          <canvas canvas-id="expenseChart" id="expenseChart" class="charts" />
+        </view>
+        <view wx:if="{{activeTab === 'savings'}}">
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

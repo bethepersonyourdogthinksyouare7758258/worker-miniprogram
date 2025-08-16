@@ -1,0 +1,68 @@
+.container {
+  background-color: #f7f7f5; /* Notion-like background */
+  min-height: 100vh;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 40rpx 20rpx;
+  text-align: left;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #7c7c7a;
+  margin-top: 10rpx;
+}
+
+.calculator-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.calculator-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 28rpx 32rpx;
+  border-radius: 8rpx;
+  transition: background-color 0.2s ease-in-out;
+  border: 1px solid #e9e9e7;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.calculator-item:active {
+  background-color: #f0f0ee;
+}
+
+.calc-info {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.calc-icon {
+  font-size: 36rpx;
+}
+
+.calc-name {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 36rpx;
+  color: #b3b3b1;
+  font-weight: 300;
+}

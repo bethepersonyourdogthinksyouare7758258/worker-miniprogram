@@ -1,0 +1,47 @@
+<view class="city-comparison">
+  <view class="table">
+    <view class="thead">
+      <view class="tr">
+        <view class="th" bindtap="handleSort" data-field="cityName">城市</view>
+        <view class="th" bindtap="handleSort" data-field="requiredSalary">
+          所需薪资
+          <text wx:if="{{sortBy === 'requiredSalary'}}">{{sortDirection === 'asc' ? '↑' : '↓'}}</text>
+        </view>
+        <view class="th" bindtap="handleSort" data-field="salaryRatio">
+          倍率
+          <text wx:if="{{sortBy === 'salaryRatio'}}">{{sortDirection === 'asc' ? '↑' : '↓'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="tbody">
+      <block wx:for="{{sortedResults}}" wx:key="cityName">
+        <view class="tr" bindtap="toggleCityDetails" data-city="{{item.cityName}}">
+          <view class="td">{{item.cityName}}</view>
+          <view class="td">{{format.cny(item.requiredSalary)}}</view>
+          <view class="td">
+            <text class="{{item.salaryRatio > 1 ? 'red' : 'green'}}">{{item.salaryRatio.toFixed(2)}}</text>
+            <view class="progress-bar">
+              <view class="progress" style="width: {{item.salaryRatio / maxRatio * 100}}%; background-color: {{item.salaryRatio > 1 ? '#e74c3c' : '#2ecc71'}}"></view>
+            </view>
+          </view>
+        </view>
+        <view class="tr-details" wx:if="{{expandedCity === item.cityName}}">
+          <income-expense-details
+            cityName="{{item.cityName}}"
+            income="{{expandedCityDetails.income}}"
+            costs="{{expandedCityDetails.costs}}"
+            hideTitle="{{true}}"
+          />
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<wxs module="format">
+module.exports = {
+  cny: function(value) {
+    return '¥' + value.toLocaleString('zh-CN', { maximumFractionDigits: 0 });
+  }
+}
+</wxs>

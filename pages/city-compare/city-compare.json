@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "main-inputs": "./components/main-inputs/main-inputs",
+    "lifestyle-settings": "./components/lifestyle-settings/lifestyle-settings",
+    "income-expense-details": "./components/income-expense-details/income-expense-details",
+    "city-comparison": "./components/city-comparison/city-comparison"
+  },
+  "navigationBarTitleText": "城市生活成本对比"
+}

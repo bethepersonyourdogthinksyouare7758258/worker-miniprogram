@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="header">
+    <text class="header-icon">⏰</text>
+    <text class="title">综合工时加班费计算器</text>
+  </view>
+
+  <view class="card">
+    <view class="input-group">
+      <text class="label">工资基数</text>
+      <input type="digit" class="input" placeholder="请输入每小时工资基数" bindinput="bindKeyInput" data-field="p" />
+    </view>
+
+    <view class="input-group">
+      <text class="label">工作日加班时长</text>
+      <input type="digit" class="input" placeholder="请输入工作日加班小时数" bindinput="bindKeyInput" data-field="h1" />
+    </view>
+
+    <view class="input-group">
+      <text class="label">法定节假日加班时长</text>
+      <input type="digit" class="input" placeholder="请输入法定节假日加班小时数" bindinput="bindKeyInput" data-field="h2" />
+    </view>
+  </view>
+
+  <button class="btn-calculate" bindtap="calculate">开始计算</button>
+
+  <view class="result-area" wx:if="{{result !== null}}">
+    <view class="result-card">
+      <view class="result-item">
+        <text class="result-label">计算结果</text>
+        <text class="result-value">{{result}} 元</text>
+      </view>
+      <button class="btn-copy" bindtap="copyResult">复制结果</button>
+    </view>
+
+    <view class="detail-card" wx:if="{{detailProcess}}">
+      <view class="detail-toggle" bindtap="toggleDetail">
+        <text>详细计算过程</text>
+        <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
+      </view>
+      <view class="detail-process" wx:if="{{showDetail}}">
+        <text class="detail-content">{{detailProcess}}</text>
+      </view>
+    </view>
+  </view>
+</view>

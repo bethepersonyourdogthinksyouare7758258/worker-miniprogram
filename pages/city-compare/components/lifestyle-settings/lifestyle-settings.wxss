@@ -1,0 +1,58 @@
+.lifestyle-settings {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  margin-top: 20rpx;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1rpx solid #eee;
+}
+
+.tab {
+  padding: 16rpx 24rpx;
+  font-size: 28rpx;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 4rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  color: #3498db;
+  border-bottom-color: #3498db;
+  font-weight: 500;
+}
+
+.tab-content {
+  padding-top: 20rpx;
+}
+
+.setting-group {
+  margin-bottom: 20rpx;
+}
+
+.setting-group label {
+  display: block;
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.picker {
+  border: 1rpx solid #dcdfe6;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  color: #333;
+}
+
+.buy-options, .car-loan {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background-color: #f7f8fa;
+  border-radius: 8rpx;
+}

@@ -1,0 +1,436 @@
+/* 页面容器 */
+.page-container {
+  background-color: #FDF8E1;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* 头部区域 */
+.header-section {
+  padding: 20rpx 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.back-button-wrapper {
+  display: inline-block;
+  margin-bottom: 30rpx;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: linear-gradient(135deg, #E6A23C 0%, #F56C6C 100%);
+  border-radius: 50rpx;
+  box-shadow: 0 4rpx 16rpx rgba(230, 162, 60, 0.3);
+  transition: all 0.3s ease;
+}
+
+.back-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(230, 162, 60, 0.2);
+}
+
+.back-icon {
+  font-size: 36rpx;
+  color: white;
+  font-weight: bold;
+  margin-right: 8rpx;
+}
+
+.back-text {
+  font-size: 28rpx;
+  color: white;
+  font-weight: 500;
+}
+
+.title-area {
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 15rpx;
+}
+
+/* Help Hint Styles */
+.help-hint {
+  margin-top: 20rpx;
+  text-align: left; /* Override center alignment for the hint itself */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 30rpx; /* Add horizontal padding to align with form cards */
+}
+
+.help-hint .hint-text {
+  background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+  border-radius: 16rpx; /* Rounded corners */
+  padding: 25rpx 30rpx; /* Internal padding */
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  display: block; /* Ensure it takes full width within its container */
+  text-align: left; /* Explicitly left-align text */
+  color: #333; /* Darker text for readability */
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.help-hint .hint-text text:first-child {
+  font-weight: bold;
+  color: #E6A23C; /* Highlight the "💡 温馨提示" */
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: #333333;
+  line-height: 1.5;
+}
+
+/* 表单容器 */
+.form-container {
+  padding: 0 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 表单卡片 */
+.form-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #E6A23C 0%, #F56C6C 100%);
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.card-icon {
+  font-size: 36rpx;
+  margin-right: 15rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* 输入组 */
+.input-group {
+  margin-bottom: 30rpx;
+  width: 100%;
+}
+
+.input-label {
+  display: block;
+  font-size: 28rpx;
+  color: #34495e;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.required-mark {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+
+/* 表单控件 */
+.form-input, .form-textarea, .form-picker {
+  width: 100%;
+  padding: 24rpx;
+  border: 2rpx solid #e1e8ed;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  background: white;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  display: block;
+  min-height: 80rpx;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: #E6A23C;
+  box-shadow: 0 0 0 4rpx rgba(230, 162, 60, 0.1);
+  outline: none;
+}
+
+.form-textarea {
+  min-height: 150rpx;
+  resize: vertical;
+}
+
+.readonly-field {
+  display: flex;
+  align-items: center;
+  color: #666;
+  background-color: #f5f5f5;
+}
+
+/* Fixed Reasons Display */
+.fixed-reasons-display {
+  display: flex;
+  flex-direction: column; /* Stack reasons vertically */
+  align-items: flex-start; /* Align text to the left */
+  white-space: pre-wrap; /* Ensure text wraps naturally */
+  line-height: 1.6; /* Improve readability */
+}
+
+.fixed-reasons-display text {
+  display: block; /* Each text element on its own line */
+  margin-bottom: 8rpx; /* Spacing between reasons */
+}
+
+.fixed-reasons-display text:last-child {
+  margin-bottom: 0; /* No margin after the last reason */
+}
+
+.form-picker {
+  color: #333;
+  display: flex;
+  align-items: center;
+  min-height: 28rpx;
+}
+
+/* 按钮区域 */
+.button-section {
+  margin-top: 50rpx;
+  padding: 0 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.generate-button {
+  width: 100%;
+  height: 100rpx;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  background: linear-gradient(135deg, #E6A23C 0%, #F56C6C 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(230, 162, 60, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.generate-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.generate-button:hover::before {
+  left: 100%;
+}
+
+.generate-button:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 12rpx rgba(230, 162, 60, 0.3);
+}
+
+/* 预览容器 */
+.preview-container {
+  margin-top: 50rpx;
+  padding: 0 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.preview-header {
+  background: white;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx 40rpx 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #F7BA2A 0%, #FF9500 100%);
+}
+
+.preview-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.document-display {
+  background: white;
+  padding: 30rpx 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border-left: 1rpx solid rgba(255, 255, 255, 0.2);
+  border-right: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.document-text {
+  white-space: pre-wrap;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 操作按钮区域 */
+.action-section {
+  display: flex;
+  gap: 20rpx;
+  background: white;
+  padding: 30rpx 40rpx;
+  border-radius: 0 0 20rpx 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.copy-button, .share-button {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.copy-button {
+  background: linear-gradient(135deg, #E6A23C 0%, #F56C6C 100%);
+  color: white;
+  box-shadow: 0 4rpx 16rpx rgba(230, 162, 60, 0.3);
+}
+
+.copy-button:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(230, 162, 60, 0.2);
+}
+
+.share-button {
+  background: linear-gradient(135deg, #F7BA2A 0%, #FF9500 100%);
+  color: white;
+  box-shadow: 0 4rpx 16rpx rgba(247, 186, 42, 0.3);
+}
+
+.share-button:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(247, 186, 42, 0.2);
+}
+
+/* 投诉相关样式 */
+.complaint-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.complaint-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  transition: all 0.3s ease;
+}
+
+.complaint-item:hover {
+  background: #f0f0f0;
+}
+
+.complaint-item checkbox {
+  margin-right: 16rpx;
+  margin-top: 2rpx;
+}
+
+.complaint-label {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.section-subtitle {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #E6A23C;
+  margin: 30rpx 0 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+/* checkbox美化 */
+checkbox .wx-checkbox-input {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid #dcdfe6;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: linear-gradient(135deg, #E6A23C 0%, #F56C6C 100%);
+  border-color: #E6A23C;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 响应式设计 */
+@media (min-width: 750rpx) {
+  .form-card {
+    padding: 50rpx;
+  }
+  
+  .form-container {
+    padding: 0 40rpx;
+  }
+  
+  .button-section, .preview-container {
+    padding: 0 40rpx;
+  }
+}

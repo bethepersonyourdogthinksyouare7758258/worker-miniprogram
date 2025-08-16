@@ -1,0 +1,215 @@
+.container {
+  padding: 30rpx; /* 增加整体左右边距，使内容更宽 */
+  background-color: #FDF8E1; /* 与主页背景色一致 */
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center; /* 标题居中 */
+  padding: 40rpx 20rpx; /* 与主页header padding一致 */
+  margin-bottom: 30rpx; /* 与主页header margin-bottom一致 */
+  /* background-color: #fff; 移除背景色，与主页统一 */
+  /* border-bottom: 1rpx solid #eee; 移除底部边框 */
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 48rpx; /* 与主页title一致 */
+  font-weight: bold;
+  color: #000000; /* 与主页title一致 */
+  display: block; /* 确保独占一行 */
+  margin-bottom: 20rpx; /* 与主页title一致 */
+  line-height: 1.4;
+}
+
+.usage-tip {
+  font-size: 28rpx; /* 与主页subtitle一致 */
+  color: #666666; /* 与主页subtitle一致 */
+  display: block; /* 确保独占一行 */
+  line-height: 1.5;
+  margin-bottom: 30rpx; /* 提示与复制按钮的间距 */
+}
+
+.copy-bar {
+  /* 移除悬浮样式 */
+  text-align: center; /* 按钮居中 */
+  margin-bottom: 20rpx; /* 复制按钮与内容的间距 */
+}
+
+.copy-all {
+  width: 80%; /* 按钮宽度 */
+  max-width: 300rpx; /* 最大宽度限制 */
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); /* 与主页搜索按钮一致 */
+  color: white;
+  font-size: 28rpx;
+  margin: 0 auto; /* 居中 */
+  display: flex; /* 确保内容居中 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  border: none; /* 移除边框 */
+}
+
+.copy-all image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+.section-copy {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 20rpx;
+}
+
+.section-content {
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 30rpx 0; /* 调整padding */
+}
+
+.content-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.content-item:last-child {
+  margin-bottom: 0; /* 最后一个item没有底部间距 */
+}
+
+.content-item text {
+  flex: 1;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #666;
+}
+
+.subsection {
+  margin-top: 20rpx;
+  padding-left: 20rpx;
+  border-left: 2rpx solid #eee;
+}
+
+.subsection-title {
+  font-size: 28rpx; /* 调整字体大小 */
+  font-weight: bold; /* 调整字体粗细 */
+  color: #333; /* 调整颜色 */
+  margin-bottom: 15rpx;
+}
+
+/* 帮助提示 */
+.help-hint {
+  margin-top: 0; /* 移除顶部间距 */
+  margin-bottom: 30rpx; /* 提示与分类标签的间距 */
+  padding: 20rpx;
+  background: rgba(116, 185, 255, 0.05);
+  border-radius: 16rpx;
+  border-left: 4rpx solid #74b9ff;
+}
+
+.hint-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.4;
+}
+.section {
+  margin: 30rpx 0;
+  background-color: white; /* 与主页分类列表背景色一致 */
+  border-radius: 16rpx; /* 与主页分类列表圆角一致 */
+  padding: 0 30rpx; /* 与主页分类列表padding一致 */
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08); /* 与主页分类列表阴影一致 */
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 0; /* 调整padding */
+  border-bottom: 1rpx solid #f0f0f0; /* 与主页分类item底部边框一致 */
+}
+
+.section-title {
+  font-size: 30rpx; /* 与主页category-name一致 */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0;
+  /* padding-bottom: 10rpx; 移除 */
+  /* border-bottom: 1rpx solid #eee; 移除 */
+  flex: 1;
+}
+
+.section-copy {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 20rpx;
+}
+
+.subsection-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 15rpx;
+  padding: 10rpx 0;
+}
+
+.subsection-title image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 20rpx;
+  opacity: 0.7;
+}
+
+.section-content {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.subsection {
+  margin-top: 20rpx;
+  padding-left: 20rpx;
+  border-left: 2rpx solid #eee;
+}
+
+.subsection-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 15rpx;
+}
+
+.content-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.content-item text {
+  flex: 1;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #666;
+}
+
+.content-item image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 20rpx;
+  opacity: 0.7;
+}
+
+.content-item image:active {
+  opacity: 1;
+}

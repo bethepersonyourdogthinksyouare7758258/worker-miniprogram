@@ -1,0 +1,127 @@
+<view class="page-container">
+  <!-- 页面头部 -->
+  <view class="header-section">
+    <view class="header-bg">
+      <text class="header-title">关于我们</text>
+      <text class="header-subtitle">专业的劳动法律服务助手</text>
+    </view>
+  </view>
+
+  <!-- 小程序介绍 -->
+  <view class="intro-section">
+    <view class="section-card">
+      <view class="card-header">
+        <text class="card-icon">📱</text>
+        <text class="card-title">小程序介绍</text>
+      </view>
+      <view class="intro-content">
+        <view class="intro-item">
+          <text class="intro-icon">⚖️</text>
+          <view class="intro-text">
+            <text class="intro-title">专业法律工具</text>
+            <text class="intro-desc">提供劳动仲裁申请书、劳动监察投诉书等专业文书生成服务</text>
+          </view>
+        </view>
+        <view class="intro-item">
+          <text class="intro-icon">🔢</text>
+          <view class="intro-text">
+            <text class="intro-title">精准计算器</text>
+            <text class="intro-desc">涵盖加班费、赔偿金、工伤待遇等各类劳动法相关计算</text>
+          </view>
+        </view>
+        <view class="intro-item">
+          <text class="intro-icon">📚</text>
+          <view class="intro-text">
+            <text class="intro-title">法律知识库</text>
+            <text class="intro-desc">收录核心劳动法律法规，提供专业法律知识支持</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 特色功能 -->
+  <view class="features-section">
+    <view class="section-card">
+      <view class="card-header">
+        <text class="card-icon">✨</text>
+        <text class="card-title">特色功能</text>
+      </view>
+      <view class="features-grid">
+        <view class="feature-item">
+          <view class="feature-icon">🤖</view>
+          <text class="feature-name">智能生成</text>
+          <text class="feature-desc">一键生成专业文书</text>
+        </view>
+        <view class="feature-item">
+          <view class="feature-icon">🔐</view>
+          <text class="feature-name">隐私保护</text>
+          <text class="feature-desc">本地处理不上传</text>
+        </view>
+        <view class="feature-item">
+          <view class="feature-icon">📊</view>
+          <text class="feature-name">精确计算</text>
+          <text class="feature-desc">符合法律标准</text>
+        </view>
+        <view class="feature-item">
+          <view class="feature-icon">🎯</view>
+          <text class="feature-name">专业精准</text>
+          <text class="feature-desc">法律专家指导</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户反馈 -->
+  <view class="feedback-section">
+    <view class="section-card">
+      <view class="card-header">
+        <text class="card-icon">💬</text>
+        <text class="card-title">意见反馈</text>
+      </view>
+      <view class="feedback-content">
+        <textarea 
+          class="feedback-textarea" 
+          placeholder="您的建议是我们进步的动力，请告诉我们您的使用体验、遇到的问题或改进建议..." 
+          bindinput="onFeedbackInput" 
+          value="{{feedbackText}}"
+          maxlength="500"
+        />
+        <view class="textarea-footer">
+          <text class="char-count">{{feedbackText.length}}/500</text>
+        </view>
+        <button class="submit-button" bindtap="submitFeedback">
+          <text class="button-icon">📤</text>
+          <text class="button-text">提交反馈</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 常见问题 -->
+  <view class="faq-section">
+    <view class="section-card">
+      <view class="card-header">
+        <text class="card-icon">❓</text>
+        <text class="card-title">常见问题</text>
+      </view>
+      <view class="faq-list">
+        <view class="faq-item" wx:for="{{faqList}}" wx:key="index">
+          <view class="faq-question" bindtap="toggleFaq" data-index="{{index}}">
+            <text class="faq-q">Q: {{item.question}}</text>
+            <text class="faq-arrow">{{item.expanded ? '∧' : '∨'}}</text>
+          </view>
+          <view class="faq-answer" wx:if="{{item.expanded}}">
+            <text class="faq-a">A: {{item.answer}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 版权信息 -->
+  <view class="footer-section">
+    <text class="footer-text">五年四班劳动委员 版权所有</text>
+    <text class="footer-desc">让每一位劳动者的权益都得到保障</text>
+  </view>
+</view>
