@@ -1,0 +1,24 @@
+<!-- 沟通文本库样式组件 -->
+<view class="textlib-item">
+  <view class="textlib-header" bindtap="onItemTap">
+    <view class="textlib-title-section">
+      <text class="textlib-title">{{title}}</text>
+    </view>
+    <text class="textlib-expand-icon {{expanded ? 'expanded' : ''}}">▼</text>
+  </view>
+  
+  <view class="textlib-content" wx:if="{{expanded}}">
+    <view class="textlib-tips-section" wx:if="{{tips}}">
+      <text class="textlib-tips-label">💡 使用提示</text>
+      <text class="textlib-tips-content">{{tips}}</text>
+    </view>
+    
+    <view class="textlib-content-text">
+      <slot></slot>
+    </view>
+    
+    <button class="textlib-copy-btn" bindtap="onCopy" wx:if="{{copyText}}">
+      <text>复制内容</text>
+    </button>
+  </view>
+</view>

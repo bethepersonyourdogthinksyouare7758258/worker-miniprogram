@@ -1,142 +1,78 @@
-/* pages/calculator/calculator-common.wxss */
+/* 
+  计算器通用主题样式
+  - 背景色
+  - 卡片式导航 (.category-card)
+*/
 
-.container {
-  background-color: #f7f7f5;
-  min-height: 100vh;
-  padding: 30rpx;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* 页面通用背景色 */
+page {
+  background-color: #FDF8E1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.header {
+/* 单列卡片列表 */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* 卡片之间的间距 */
+}
+
+/* 卡片本身 */
+.category-card {
   display: flex;
   align-items: center;
-  gap: 20rpx;
-  padding: 40rpx 20rpx;
+  padding: 15px;
+  background-image: linear-gradient(to right, #FFFFFF, #FFF9E6);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #FFF1C1;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden; /* 防止内容溢出 */
 }
 
-.header-icon {
-  font-size: 56rpx;
+/* 点击时的交互效果 */
+.category-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-  font-size: 48rpx;
-  font-weight: 700;
-  color: #1e1e1e;
+/* 卡片图标 */
+.card-icon {
+  font-size: 24px;
+  margin-right: 15px;
 }
 
-.card {
-  background-color: #ffffff;
-  border-radius: 8rpx;
-  padding: 40rpx;
-  margin-bottom: 40rpx;
-  border: 1px solid #e9e9e7;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-
-.input-group {
-  margin-bottom: 30rpx;
-}
-
-.input-group:last-child {
-  margin-bottom: 0;
-}
-
-.label {
-  display: block;
-  font-size: 28rpx;
-  color: #7c7c7a;
-  margin-bottom: 16rpx;
-}
-
-.input {
-  width: 100%;
-  height: 88rpx;
-  padding: 0 24rpx;
-  border-radius: 6rpx;
-  background-color: #f7f7f5;
-  border: 1px solid #e9e9e7;
-  font-size: 32rpx;
-  color: #333;
-  box-sizing: border-box;
-}
-
-.input:focus {
-  background-color: #fff;
-  border-color: #007aff;
-}
-
-.btn-calculate {
-  width: 100%;
-  height: 96rpx;
-  line-height: 96rpx;
-  background-color: #007aff;
-  color: white;
-  font-size: 32rpx;
-  border-radius: 8rpx;
-  text-align: center;
-  margin-bottom: 40rpx;
-}
-
-.btn-calculate:active {
-  background-color: #0056b3;
-}
-
-.result-area {
-  margin-top: 40rpx;
-}
-
-.result-card, .detail-card {
-  background-color: #ffffff;
-  border-radius: 8rpx;
-  padding: 40rpx;
-  margin-bottom: 20rpx;
-  border: 1px solid #e9e9e7;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-
-.result-item {
+/* 卡片内容区域 */
+.card-content {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30rpx;
+  flex-direction: column;
+  min-width: 0; /* 解决flex布局内容溢出问题 */
 }
 
-.result-label {
-  font-size: 30rpx;
+/* 卡片标题 */
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
   color: #333;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.result-value {
-  font-size: 40rpx;
-  font-weight: 600;
-  color: #007aff;
+/* 卡片描述 */
+.card-desc {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.btn-copy {
-  width: 100%;
-  height: 80rpx;
-  line-height: 80rpx;
-  background-color: #f0f0ee;
-  color: #333;
-  font-size: 28rpx;
-  border-radius: 8rpx;
-  text-align: center;
-}
-
-.btn-copy:active {
-  background-color: #e0e0de;
-}
-
-.detail-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 28rpx;
-  color: #7c7c7a;
-  padding: 20rpx 0;
-}
-
-.detail-toggle-icon {
-  font-size: 24rpx;
+/* 卡片右侧箭头 */
+.card-arrow {
+  font-size: 20px;
+  color: #DDC686;
+  margin-left: 10px;
 }

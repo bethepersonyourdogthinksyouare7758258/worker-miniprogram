@@ -2,7 +2,8 @@ Page({
   data: {},
   navigateToOfferComparer: function() {
     wx.navigateTo({
-      url: '/pages/splash/splash'
+
+      url: '/pages/work-comparator/splash/splash'
     })
   },
   navigateToCalculator: function() {
@@ -12,7 +13,8 @@ Page({
   },
   navigateToTextPack: function() {
     wx.navigateTo({
-      url: '/pages/textpack/textpack'
+
+      url: '/pages/text-library/textpack/textpack'
     })
   },
   navigateToDocGen: function() {
@@ -27,7 +29,7 @@ Page({
   },
   navigateToCoreLaws: function() {
     wx.navigateTo({
-      url: '/pages/core-laws/core-laws'
+      url: '/pages/core-laws-pack/core-laws/core-laws'
     });
   },
   navigateToBackgroundCheckGuide: function() {

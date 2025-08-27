@@ -1,19 +1,20 @@
 <!--pages/calculator/index.wxml-->
 <view class="container">
   <view class="header">
-    <text class="title">劳动法速查</text>
+    <text class="title">🧮超有用计算器</text>
     <text class="subtitle">选择一个场景，快速找到你需要的工具</text>
   </view>
 
   <!-- Scene Navigation -->
-  <view class="scene-list">
+  <view class="category-list">
     <block wx:for="{{scenes}}" wx:key="id">
-      <view class="scene-item" bindtap="navigateToScene" data-scene-id="{{item.id}}">
-        <view class="scene-info">
-          <text class="scene-item-title">{{item.title}}</text>
-          <text class="scene-item-description">{{item.description}}</text>
+      <view class="category-card" bindtap="navigateToScene" data-scene-id="{{item.id}}">
+        <view class="card-icon">{{item.icon}}</view>
+        <view class="card-content">
+          <text class="card-title">{{item.title}}</text>
+          <text class="card-desc">{{item.description}}</text>
         </view>
-        <text class="scene-arrow">›</text>
+        <view class="card-arrow">›</view>
       </view>
     </block>
   </view>
@@ -23,12 +24,12 @@
     <text class="divider-text">或浏览全部工具</text>
   </view>
 
-  <!-- Original Calculator List (Kept for now) -->
-  <view class="calculator-list-all">
+  <!-- All Calculators Grid -->
+  <view class="tools-grid">
     <block wx:for="{{tools}}" wx:key="name">
-      <view class="tool-item" bindtap="navigateToCalculator" data-path="{{item.path}}">
-        <text class="tool-icon">{{item.icon}}</text>
-        <text class="tool-name">{{item.name}}</text>
+      <view class="tool-card" bindtap="navigateToCalculator" data-path="{{item.path}}">
+        <view class="card-icon">{{item.icon}}</view>
+        <view class="card-title">{{item.name}}</view>
       </view>
     </block>
   </view>

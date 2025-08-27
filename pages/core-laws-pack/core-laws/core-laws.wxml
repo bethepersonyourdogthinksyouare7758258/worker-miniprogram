@@ -1,0 +1,126 @@
+<!--pages/core-laws-pack/core-laws/core-laws.wxml-->
+<view class="container">
+  <!-- 标题区域 -->
+  <view class="header">
+    <text class="title">劳动法速查</text>
+  </view>
+
+  <!-- 搜索区域 -->
+  <view class="search-section">
+    <input class="search-input" 
+           placeholder="试用期/劳动合同/社保/体检/竞业..." 
+           value="{{searchText}}" 
+           bindinput="onSearchInput" />
+    <text class="search-tip">输入关键词或问题自动显示内容</text>
+  </view>
+
+  <!-- 模式切换按钮 -->
+  <view class="mode-tabs">
+    <view class="mode-tab {{currentMode === 'knowledge' ? 'active' : ''}}" 
+          bindtap="onModeChange" 
+          data-mode="knowledge">
+      按法条搜索
+    </view>
+    <view class="mode-tab {{currentMode === 'scenarios' ? 'active' : ''}}" 
+          bindtap="onModeChange" 
+          data-mode="scenarios">
+      按场景搜索
+    </view>
+  </view>
+
+  <!-- 阶段筛选标签 -->
+  <view class="filter-tabs">
+    <view class="filter-tab {{selectedCategory === 'all' ? 'active' : ''}}" 
+          bindtap="onCategoryChange" 
+          data-category="all">
+      全部
+    </view>
+    <view class="filter-tab {{selectedCategory === 'onboarding' ? 'active' : ''}}" 
+          bindtap="onCategoryChange" 
+          data-category="onboarding">
+      入职阶段
+    </view>
+    <view class="filter-tab {{selectedCategory === 'working' ? 'active' : ''}}" 
+          bindtap="onCategoryChange" 
+          data-category="working">
+      工作期间
+    </view>
+    <view class="filter-tab {{selectedCategory === 'departure' ? 'active' : ''}}" 
+          bindtap="onCategoryChange" 
+          data-category="departure">
+      离职阶段
+    </view>
+  </view>
+
+  <!-- 内容列表 -->
+  <view class="content-list">
+    <view wx:for="{{filteredData}}" wx:key="id" class="content-item">
+      <view class="item-main" bindtap="onItemTap" data-item="{{item}}">
+        <view class="item-header">
+          <text class="item-title">{{item.title}}</text>
+          <view class="item-indicator">
+            <image class="expand-icon" 
+                   src="{{item.expanded ? '/images/arrow-up.png' : '/images/arrow-down.png'}}" 
+                   wx:if="{{item.type === 'knowledge'}}" />
+            <image class="navigate-icon" 
+                   src="/images/arrow-right.png" 
+                   wx:if="{{item.type === 'scenario'}}" />
+          </view>
+        </view>
+        
+        <view class="item-tags">
+          <text class="tag tag-primary">{{item.tag}}</text>
+          <text class="tag tag-secondary">{{item.legalTag}}</text>
+        </view>
+        
+        <text class="item-summary">{{item.summary}}</text>
+      </view>
+
+      <!-- 展开内容区域 (仅法条知识) -->
+      <view class="item-expanded" wx:if="{{item.type === 'knowledge' && item.expanded}}">
+        <!-- 法条依据内容 -->
+        <view class="legal-basis-section">
+          <view class="section-header">
+            <text class="section-title">法律依据</text>
+            <button class="copy-btn" bindtap="onCopyLegalBasis" data-item="{{item}}">
+              复制
+            </button>
+          </view>
+          <view class="section-content">
+            <text class="legal-basis-text">{{item.legalBasis}}</text>
+          </view>
+        </view>
+        
+        <!-- 工具链接 (如果有) -->
+        <view class="tool-link-section" wx:if="{{item.toolLink}}">
+          <view class="section-header">
+            <text class="section-title">相关工具</text>
+          </view>
+          <view class="section-content">
+            <text class="tool-link-text">{{item.toolLink}}</text>
+          </view>
+        </view>
+        
+        <!-- 内容提供者信息 -->
+        <view class="provider-info">
+          <text class="provider-label">内容提供者：</text>
+          <text class="provider-name">{{item.provider || '待确认'}}</text>
+        </view>
+        
+        <view class="item-actions">
+          <button class="copy-all-btn" bindtap="onCopyAll" data-item="{{item}}">
+            复制所有
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态提示 -->
+  <view class="empty-state" wx:if="{{filteredData.length === 0}}">
+    <image class="empty-icon" src="/images/empty.png" />
+    <text class="empty-text">未找到相关内容</text>
+    <text class="empty-hint">请尝试其他关键词或选择不同分类</text>
+  </view>
+
+</view>

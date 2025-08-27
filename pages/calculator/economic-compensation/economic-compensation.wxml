@@ -1,0 +1,4 @@
+<!--pages/calculator/economic-compensation/economic-compensation.wxml-->
+<view class="container">
+  <text>经济补偿金(N)计算器</text>
+</view>

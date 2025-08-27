@@ -8,15 +8,5 @@ module.exports = {
       "path": "/pages/calculator/overtime-pay/overtime-pay",
       "icon": "🕒"
     },
-    {
-      "name": "标准工时加班费",
-      "path": "/pages/calculator/standard-overtime/standard-overtime",
-      "icon": "🕒"
-    },
-    {
-      "name": "综合工时加班费",
-      "path": "/pages/calculator/comprehensive-overtime/comprehensive-overtime",
-      "icon": "🕒"
-    }
   ]
 };

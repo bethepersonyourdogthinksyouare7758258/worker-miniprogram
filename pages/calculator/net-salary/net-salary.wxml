@@ -1,0 +1,4 @@
+<!--pages/calculator/net-salary/net-salary.wxml-->
+<view class="container">
+  <text>税后工资计算器</text>
+</view>

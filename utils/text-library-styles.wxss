@@ -1,0 +1,150 @@
+/* 可复用的沟通文本库样式组件 */
+
+/* 基础容器样式 */
+.textlib-container {
+  background-color: #FDF8E1;
+  min-height: 100vh;
+  padding: 50rpx 30rpx 80rpx;
+}
+
+/* 页面标题 */
+.textlib-page-header {
+  margin-bottom: 60rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}
+
+.textlib-page-title {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+/* 列表项样式 */
+.textlib-item {
+  margin-bottom: 32rpx;
+  border-radius: 20rpx;
+  border: 3rpx solid #f0e6cc;
+  overflow: hidden;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 4rpx 20rpx rgba(255, 204, 102, 0.15);
+}
+
+.textlib-item:active {
+  transform: translateY(2rpx);
+  border-color: #ffcc66;
+  box-shadow: 0 2rpx 15rpx rgba(255, 204, 102, 0.25);
+}
+
+/* 列表项头部 */
+.textlib-header {
+  padding: 32rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #fefbf3 100%);
+}
+
+.textlib-header:active {
+  background: linear-gradient(135deg, #fef9f0 0%, #fef3e2 100%);
+}
+
+.textlib-title-section {
+  flex: 1;
+}
+
+.textlib-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  line-height: 1.4;
+}
+
+/* 展开图标 */
+.textlib-expand-icon {
+  font-size: 32rpx;
+  color: #ff9966;
+  transition: transform 0.3s ease;
+  margin-left: 20rpx;
+}
+
+.textlib-expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+/* 内容区域 */
+.textlib-content {
+  border-top: 3rpx solid #f5ead6;
+  padding: 40rpx;
+  background: linear-gradient(135deg, #fefcf8 0%, #fef7ed 100%);
+}
+
+/* 提示区域 */
+.textlib-tips-section {
+  background: linear-gradient(135deg, #fff4e6 0%, #ffe4b3 30%, #ffd699 100%);
+  border: 3rpx solid #ffcc66;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.textlib-tips-label {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #d2691e;
+  display: block;
+  margin-bottom: 16rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.textlib-tips-content {
+  font-size: 28rpx;
+  color: #8b4513;
+  line-height: 1.6;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* 复制按钮 */
+.textlib-copy-btn {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 50%, #ff6b35 100%);
+  border: none;
+  border-radius: 12rpx;
+  padding: 16rpx 28rpx;
+  transition: all 0.2s ease;
+  box-shadow: 0 4rpx 15rpx rgba(255, 107, 107, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.textlib-copy-btn:active {
+  background: linear-gradient(135deg, #ff5252 0%, #ff7043 50%, #ff5722 100%);
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 10rpx rgba(255, 107, 107, 0.4);
+}
+
+.textlib-copy-btn text {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/* 内容文本样式 */
+.textlib-content-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.8;
+  word-break: break-all;
+  display: block;
+}

@@ -13,6 +13,7 @@
     "minified": true,
     "enhance": true,
     "showShadowRootInWxmlPanel": true,
+    "lazyCodeLoading": true,
     "packNpmRelationList": [],
     "babelSetting": {
       "ignore": [],

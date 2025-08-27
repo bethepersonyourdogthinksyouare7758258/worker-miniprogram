@@ -1,0 +1,306 @@
+/* 维权场景详情页样式 */
+
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 0 0 120rpx 0;
+}
+
+/* 页面头部 */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40rpx 30rpx 30rpx 30rpx;
+  color: white;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.tag-group {
+  display: flex;
+  gap: 15rpx;
+  flex-wrap: wrap;
+}
+
+.subject-tag {
+  background-color: rgba(255, 165, 0, 0.9);
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.legal-tag {
+  background-color: rgba(76, 175, 80, 0.9);
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 内容区块 */
+.content-section {
+  background-color: white;
+  margin: 20rpx 30rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 2rpx solid #e0e0e0;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.copy-btn {
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 20rpx;
+  padding: 8rpx 20rpx;
+  font-size: 24rpx;
+  min-height: auto;
+  line-height: 1.4;
+}
+
+.copy-btn:active {
+  background-color: #5a6fd8;
+}
+
+.copy-btn::after {
+  border: none;
+}
+
+/* 文本内容样式 */
+.content-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  word-break: break-all;
+}
+
+/* 条件内容 */
+.condition-content {
+  background-color: #fff3e0;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #ff9800;
+}
+
+/* 步骤内容 */
+.steps-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.step-item {
+  background-color: #f8f9ff;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #667eea;
+  position: relative;
+}
+
+.step-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  word-break: break-all;
+}
+
+/* 法条依据内容 */
+.legal-content {
+  background-color: #e8f5e8;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #4caf50;
+}
+
+/* 法条解释内容 */
+.explanation-content {
+  background-color: #fafafa;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid #e0e0e0;
+}
+
+/* 底部操作按钮 */
+.footer-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 20rpx 30rpx;
+  display: flex;
+  gap: 20rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn.primary {
+  background-color: #667eea;
+  color: white;
+}
+
+.action-btn.primary:active {
+  background-color: #5a6fd8;
+}
+
+.action-btn.secondary {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 2rpx solid #e0e0e0;
+}
+
+.action-btn.secondary:active {
+  background-color: #e0e0e0;
+}
+
+/* 提供者信息 */
+.provider-info {
+  margin: 20rpx 30rpx;
+  padding: 20rpx;
+  background-color: white;
+  border-radius: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+
+.provider-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.status-text {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 加载状态 */
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30rpx;
+}
+
+.loading-text {
+  font-size: 32rpx;
+  color: #666;
+}
+
+/* 错误状态 */
+.error-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 60rpx;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30rpx;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 80rpx;
+}
+
+.error-message {
+  font-size: 30rpx;
+  color: #666;
+  line-height: 1.4;
+}
+
+.retry-btn {
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 40rpx;
+  padding: 15rpx 40rpx;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+
+.retry-btn:active {
+  background-color: #5a6fd8;
+}
+
+.retry-btn::after {
+  border: none;
+}
+
+/* 响应式适配 */
+@media (max-width: 375px) {
+  .page-title {
+    font-size: 32rpx;
+  }
+  
+  .section-title {
+    font-size: 28rpx;
+  }
+  
+  .content-text {
+    font-size: 26rpx;
+  }
+  
+  .step-text {
+    font-size: 26rpx;
+  }
+}

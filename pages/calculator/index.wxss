@@ -1,130 +1,77 @@
+/* 引入通用样式 */
+@import "./calculator-common.wxss";
+
+/* 页面特定布局 */
 .container {
-  background-color: #f7f7f5; /* Notion-like background */
-  min-height: 100vh;
-  padding: 30rpx;
-  box-sizing: border-box;
+  padding: 20px;
 }
 
 .header {
-  padding: 40rpx 20rpx;
-  text-align: left;
-  margin-bottom: 20rpx;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .title {
-  font-size: 56rpx;
-  font-weight: 700;
-  color: #1e1e1e;
+  display: block; /* 让标题独占一行 */
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
 }
 
 .subtitle {
-  font-size: 28rpx;
-  color: #7c7c7a;
-  margin-top: 10rpx;
+  display: block; /* 让副标题独占一行 */
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
 }
 
-/* Scene Section Styles */
-.scene-section {
-  margin-bottom: 50rpx;
+/* 场景导航列表保持单列 */
+.category-list {
+  margin-bottom: 30px;
 }
 
-.section-title {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: #1e1e1e;
-  margin-bottom: 24rpx;
-  padding-left: 10rpx;
+.divider {
+  text-align: center;
+  color: #aaa;
+  margin: 20px 0;
+  font-size: 14px;
 }
 
-.scene-list {
+/* 新的双列网格布局 */
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 两列，等宽 */
+  gap: 15px; /* 网格间距 */
+}
+
+/* 网格中的卡片项样式 */
+.tool-card {
   display: flex;
-  flex-direction: column;
-  gap: 20rpx;
+  align-items: center; /* 保持内容垂直居中 */
+  padding: 12px;
+  background-image: linear-gradient(to right, #FFFFFF, #FFF9E6);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #FFF1C1;
+  transition: all 0.2s ease-in-out;
 }
 
-.scene-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 32rpx;
-  border-radius: 12rpx;
-  border: 1px solid #e9e9e7;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+.tool-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.scene-item:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+/* 网格卡片内的图标 */
+.tool-card .card-icon {
+  font-size: 20px;
+  margin-right: 10px;
 }
 
-.scene-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.scene-title {
-  font-size: 32rpx;
-  font-weight: 600;
+/* 网格卡片内的标题 */
+.tool-card .card-title {
+  font-size: 14px;
+  font-weight: normal;
   color: #333;
-}
-
-.scene-description {
-  font-size: 26rpx;
-  color: #7c7c7a;
-  margin-top: 8rpx;
-}
-
-.scene-arrow {
-  width: 36rpx;
-  height: 36rpx;
-}
-
-/* All Tools Section */
-.all-tools-section {
-  margin-top: 50rpx;
-}
-
-.calculator-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
-}
-
-.calculator-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 28rpx 32rpx;
-  border-radius: 8rpx;
-  transition: background-color 0.2s ease-in-out;
-  border: 1px solid #e9e9e7;
-}
-
-.calculator-item:active {
-  background-color: #f0f0ee;
-}
-
-.calc-info {
-  display: flex;
-  align-items: center;
-  gap: 24rpx;
-}
-
-.calc-icon {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.calc-name {
-  font-size: 30rpx;
-  color: #333;
-  font-weight: 500;
-}
-
-.arrow {
-  width: 32rpx;
-  height: 32rpx;
+  /* 允许标题换行 */
+  white-space: normal;
 }

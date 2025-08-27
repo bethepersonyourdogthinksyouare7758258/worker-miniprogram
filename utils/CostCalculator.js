@@ -250,6 +250,56 @@ class CostCalculator {
     
     return targetAnnualSalary;
   }
+1
+  calculateDoubleSalary(inputs) {
+    const { startDate, arbitrationDate, salary } = inputs;
+
+    // Basic validation
+    if (!startDate || !arbitrationDate || !salary || parseFloat(salary) <= 0) {
+      return { error: '请输入所有有效信息' };
+    }
+
+    const startDateObj = new Date(startDate);
+    const arbitrationDateObj = new Date(arbitrationDate);
+
+    if (startDateObj >= arbitrationDateObj) {
+      return { error: '开始时间应早于仲裁时间' };
+    }
+
+    const calculateWorkMonths = (start, end) => {
+      let months = (end.getFullYear() - start.getFullYear()) * 12;
+      months -= start.getMonth();
+      months += end.getMonth();
+      if (end.getDate() >= start.getDate()) {
+        months++;
+      }
+      return months > 0 ? months : 0;
+    };
+
+    const workMonths = calculateWorkMonths(startDateObj, arbitrationDateObj);
+    const salaryVal = parseFloat(salary);
+    const dailySalary = salaryVal / 21.75;
+    let doubleSalary = 0;
+
+    if (workMonths <= 1) {
+      doubleSalary = 0;
+    } else if (workMonths > 1 && workMonths <= 12) {
+      const oneDay = 24 * 60 * 60 * 1000;
+      const workDays = Math.round(Math.abs((arbitrationDateObj - startDateObj) / oneDay));
+      doubleSalary = dailySalary * workDays;
+    } else if (workMonths === 13) {
+      doubleSalary = salaryVal * 11;
+    } else if (workMonths > 13 && workMonths <= 23) {
+      const months = 23 - workMonths;
+      doubleSalary = salaryVal * months;
+    } else {
+      doubleSalary = 0;
+    }
+
+    return {
+      result: doubleSalary.toFixed(2)
+    };
+  }
 }
 
 module.exports = CostCalculator;

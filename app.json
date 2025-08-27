@@ -1,46 +1,97 @@
 {
   "pages": [
-    "pages/home/home",
-    "pages/calculator/index",
-    "pages/calculator/scene/scene",
-    "pages/textpack/textpack",
-    "pages/textpack/list/list",
-    "pages/index/index",
-    "pages/docgen/docgen-list/docgen-list",
-    "pages/docgen/docgen-form/docgen-form",
-    "pages/calculator/standard-overtime/standard-overtime",
-    "pages/calculator/comprehensive-overtime/comprehensive-overtime",
-    "pages/calculator/piecework-overtime/piecework-overtime",
-    "pages/calculator/severance-pay/severance-pay",
-    "pages/calculator/sick-pay/sick-pay",
-    "pages/calculator/social-base/social-base",
-    "pages/calculator/injury-compensation/injury-compensation",
-    "pages/calculator/death-compensation/death-compensation",
-    "pages/calculator/net-salary/net-salary",
-    "pages/calculator/individual-income-tax/individual-income-tax",
-    "pages/calculator/overtime-pay/overtime-pay",
-    "pages/calculator/annual-leave-compensation/annual-leave-compensation",
-    "pages/calculator/double-salary/double-salary",
-    "pages/calculator/economic-bcj/economics-bcj",
-    "pages/calculator/after-tax-salary/after-tax-salary",
-    "pages/calculator/social-insurance/social-insurance",
-    "pages/calculator/labor-arbitration/labor-arbitration",
-    "pages/calculator/economic-compensation/economic-compensation",
-    "pages/calculator/merged-overtime/merged-overtime",
-    "pages/calculator/documentation/documentation",
-    "pages/splash/splash",
-    "pages/select/select",
-    "pages/rating/rating",
-    "pages/rating-two/rating-two",
-    "pages/dataInput/dataInput",
-    "pages/dataInput-two/dataInput-two",
-    "pages/result/result",
-    "pages/result-two/result-two",
-    "pages/city-compare/city-compare",
-    "pages/core-laws/core-laws",
-    "pages/core-laws-detail/core-laws-detail",
-    "pages/background-check-guide/background-check-guide",
-    "pages/contact/contact"
+
+
+    "pages/home/home"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/work-comparator",
+      "name": "工作对比器",
+      "pages": [
+        "splash/splash",
+        "select/select",
+        "rating/rating",
+        "rating-two/rating-two",
+        "dataInput/dataInput",
+        "dataInput-two/dataInput-two",
+        "result/result",
+        "result-two/result-two"
+      ]
+    },
+    {
+      "root": "pages/calculator",
+      "name": "超有用计算器",
+      "pages": [
+        "index",
+        "scene/scene",
+        "standard-overtime/standard-overtime",
+        "comprehensive-overtime/comprehensive-overtime",
+        "piecework-overtime/piecework-overtime",
+        "severance-pay/severance-pay",
+        "sick-pay/sick-pay",
+        "social-base/social-base",
+        "injury-compensation/injury-compensation",
+        "death-compensation/death-compensation",
+        "net-salary/net-salary",
+        "individual-income-tax/individual-income-tax",
+        "overtime-pay/overtime-pay",
+        "annual-leave-compensation/annual-leave-compensation",
+        "double-salary/double-salary",
+        "economic-bcj/economics-bcj",
+        "after-tax-salary/after-tax-salary",
+        "social-insurance/social-insurance",
+        "labor-arbitration/labor-arbitration",
+        "economic-compensation/economic-compensation",
+        "merged-overtime/merged-overtime"
+      ]
+    },
+    {
+      "root": "pages/text-library",
+      "name": "沟通文本库",
+      "pages": [
+        "textpack/textpack",
+        "textpack/list/list"
+      ]
+    },
+    {
+      "root": "pages/docgen",
+      "name": "文书自动生成器",
+      "pages": [
+        "docgen-list/docgen-list",
+        "docgen-form/docgen-form"
+      ]
+    },
+    {
+      "root": "pages/city-compare",
+      "name": "城市横向对比",
+      "pages": [
+        "city-compare"
+      ]
+    },
+    {
+      "root": "pages/core-laws-pack",
+      "name": "核心法条",
+      "pages": [
+        "core-laws/core-laws",
+        "core-laws-detail/core-laws-detail",
+        "scenario-detail/scenario-detail"
+      ]
+    },
+    {
+      "root": "pages/background-check-guide",
+      "name": "背调公司指南",
+      "pages": [
+        "background-check-guide"
+      ]
+    },
+    {
+      "root": "pages/contact",
+      "name": "联系我们",
+      "pages": [
+        "contact"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "light",

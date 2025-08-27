@@ -4,22 +4,26 @@ Page({
       {
         id: 'salary',
         title: '这个工资合理么？',
-        description: '计算到手工资、个税和理想薪资'
+        description: '计算到手工资、个税和理想薪资',
+        icon: '💰'
       },
       {
         id: 'overtime',
         title: '怎么计算我的加班费用',
-        description: '不同工时制度下的加班费计算'
+        description: '不同工时制度下的加班费计算',
+        icon: '🕒'
       },
       {
         id: 'social_insurance',
         title: '五险一金缴对了么',
-        description: '社保、公积金基数与缴纳计算'
+        description: '社保、公积金基数与缴纳计算',
+        icon: '📄'
       },
       {
         id: 'severance',
         title: '我离职了 钱给齐了么？',
-        description: '经济补偿、赔偿与未休年假工资'
+        description: '经济补偿、赔偿与未休年假工资',
+        icon: '🚪'
       }
     ],
     tools: [
