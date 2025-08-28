@@ -1,83 +1,163 @@
 <view class="container">
+  <!-- 1. 页面标题 -->
   <view class="header">
-    <text class="header-icon">🤕</text>
     <text class="title">工伤赔偿计算器</text>
+    <text class="subtitle">根据《工伤保险条例》，计算因工受伤后应得的各项赔偿金。</text>
   </view>
 
+  <!-- 2. 重要提示（可折叠部分） -->
+  <view class="important-notice-card">
+    <view class="notice-header" bindtap="toggleNotice">
+      <text>重要提示</text>
+      <text class="arrow-icon">{{showNotice ? '▲' : '▼'}}</text>
+    </view>
+    <view class="notice-content" wx:if="{{showNotice}}">
+      <text>本计算器提供的结果，是基于《工伤保险条例》和普遍适用的最低标准。实际金额会受到当地社会平均工资、具体伤残鉴定结果等因素影响，仅供参考。</text>
+    </view>
+  </view>
+
+  <!-- 3. 核心输入区域 -->
   <view class="card">
+    <!-- 伤残等级选择 -->
     <view class="input-group">
-      <text class="label">一次性工伤赔偿金</text>
-      <text class="label-sub">伤残等级</text>
-      <radio-group class="disability-selection" bindchange="bindDisabilityChange">
-        <view class="disability-item" wx:for="{{disabilityData}}" wx:key="level">
-          <radio value="{{item.level}}" checked="{{item.checked}}"></radio>
-          <text class="disability-label">{{item.level}}级伤残 ({{item.coefficient}}倍前12个月平均月缴费工资)</text>
+      <text class="label">伤残等级</text>
+      <text class="description">第一步：申请工伤认定。向当地人社部门提交工伤认定申请。</text>
+      <text class="description">第二步：申请劳动能力鉴定。在工伤认定通过后，向当地劳动能力鉴定委员会提出劳动能力鉴定申请。这将由专家组根据伤情出具正式的伤残等级鉴定结论。</text>
+      <picker mode="selector" range="{{disabilityLevels}}" value="{{selectedDisabilityIndex}}" bindchange="bindDisabilityChange">
+        <view class="picker">
+          {{disabilityLevels[selectedDisabilityIndex] || '请选择伤残等级'}}
         </view>
-      </radio-group>
+      </picker>
     </view>
 
+    <!-- 本人平均月工资 -->
     <view class="input-group">
-      <text class="label">本人工资 (月)</text>
-      <input type="digit" class="input" placeholder="请输入本人工资" bindinput="bindKeyInput" data-field="p" />
+      <text class="label">本人平均月工资 (元)</text>
+      <text class="description">请填写受伤前12个月的应发工资，即税前总收入（包括基本工资、奖金、津贴等）</text>
+      <input type="digit" class="input" placeholder="请输入本人平均月工资" bindinput="bindKeyInput" data-field="monthlySalary" />
     </view>
+
+    <!-- 所在地社会平均工资 -->
+    <view class="input-group">
+      <text class="label">所在地社会平均工资 (元)</text>
+      <text class="description">通常在每年下半年才能查询到上一年度的官方数据</text>
+      <view class="copyable-text" bindtap="copySalaryText">
+        <text>[所在城市] xxxx年城镇非私营单位、城镇私营单位就业人员年平均工资</text>
+        <text class="copy-icon">复制后前往微信公众号搜索</text>
+      </view>
+      <input type="digit" class="input" placeholder="请填写所在地的上年度社会平均工资" bindinput="bindKeyInput" data-field="socialAverageSalary" />
+    </view>
+
+    <!-- 计算按钮 -->
+    <button class="btn-calculate" bindtap="calculate">计算</button>
   </view>
 
-  <button class="btn-calculate" bindtap="calculate">开始计算</button>
-
-  <view class="result-area" wx:if="{{result !== null}}">
-    <view class="result-card">
-      <view class="result-item">
-        <text class="result-label">一次性补助金</text>
-        <text class="result-value">{{result}} 元</text>
-      </view>
-      <view class="result-item" wx:if="{{disabilityAllowance !== null}}">
-        <text class="result-label">伤残津贴</text>
-        <text class="result-value">{{disabilityAllowance}} 元/月</text>
-      </view>
+  <!-- 4. 结果显示区域 -->
+  <view class="result-card" wx:if="{{result !== null}}">
+    <view class="result-header">赔偿总金额</view>
+    <view class="result-item">
+      <text class="result-value">{{result}} 元</text>
       <button class="btn-copy" bindtap="copyResult">复制结果</button>
     </view>
-
-    <view class="detail-card" wx:if="{{detailProcess}}">
-      <view class="detail-toggle" bindtap="toggleDetail">
-        <text>详细计算过程</text>
-        <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
-      </view>
-      <view class="detail-process" wx:if="{{showDetail}}">
-        <text class="detail-content">{{detailProcess}}</text>
-      </view>
-    </view>
   </view>
 
-  <view class="legal-info card">
-    <view class="legal-title">1-6级伤残津贴（按月享受）</view>
-    <radio-group class="allowance-selection" bindchange="bindAllowanceLevelChange">
-      <view class="allowance-item">
-        <radio value="1" checked="{{selectedAllowanceLevel === 1}}"></radio>
-        <text class="allowance-label">一级伤残: 本人工资×90％</text>
+  <!-- 5. 详细说明与法律须知（可折叠部分） -->
+  <view class="details-card" wx:if="{{result !== null}}">
+    <view class="details-header" bindtap="toggleDetails">
+      <text>详细说明与法律须知</text>
+      <text class="arrow-icon">{{showDetails ? '▲' : '▼'}}</text>
+    </view>
+    <view class="details-content" wx:if="{{showDetails}}">
+
+      <view class="section">
+        <view class="section-title">1. 工伤赔偿项目详解</view>
+        <text>一次性伤残补助金：根据伤残等级和职工本人工资，由工伤保险基金支付。</text>
+        <text>一次性工伤医疗补助金 & 一次性伤残就业补助金：在劳动关系解除或终止时支付，金额与伤残等级和当地社会平均工资相关。</text>
+        <text>停工留薪期工资：在受伤停工期间，原工资待遇不变，由用人单位支付，最长不超过12个月。</text>
+        <text>其他项目：还包括医疗费、住院伙食补助费等，这些通常由工伤保险基金直接支付，不计入本计算器。</text>
       </view>
-      <view class="allowance-item">
-        <radio value="2" checked="{{selectedAllowanceLevel === 2}}"></radio>
-        <text class="allowance-label">二级伤残: 本人工资×85％</text>
+      <view class="section">
+        <view class="section-title">2. 详细计算过程</view>
+        <text>计算公式：根据选择的伤残等级，系统将调用相应的计算公式。</text>
+        <view class="table-container">
+          <view class="table-row header">
+            <text class="table-cell">伤残等级</text>
+            <text class="table-cell">一次性伤残补助金 (月平均工资)</text>
+            <text class="table-cell">一次性工伤医疗补助金 (社会平均工资)</text>
+            <text class="table-cell">一次性伤残就业补助金 (社会平均工资)</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">一级</text>
+            <text class="table-cell">27个月</text>
+            <text class="table-cell">-</text>
+            <text class="table-cell">-</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">二级</text>
+            <text class="table-cell">25个月</text>
+            <text class="table-cell">-</text>
+            <text class="table-cell">-</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">三级</text>
+            <text class="table-cell">23个月</text>
+            <text class="table-cell">-</text>
+            <text class="table-cell">-</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">四级</text>
+            <text class="table-cell">21个月</text>
+            <text class="table-cell">-</text>
+            <text class="table-cell">-</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">五级</text>
+            <text class="table-cell">18个月</text>
+            <text class="table-cell">-</text>
+            <text class="table-cell">-</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">六级</text>
+            <text class="table-cell">16个月</text>
+            <text class="table-cell">-</text>
+            <text class="table-cell">-</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">七级</text>
+            <text class="table-cell">13个月</text>
+            <text class="table-cell">13个月</text>
+            <text class="table-cell">13个月</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">八级</text>
+            <text class="table-cell">11个月</text>
+            <text class="table-cell">11个月</text>
+            <text class="table-cell">11个月</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">九级</text>
+            <text class="table-cell">9个月</text>
+            <text class="table-cell">9个月</text>
+            <text class="table-cell">9个月</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">十级</text>
+            <text class="table-cell">7个月</text>
+            <text class="table-cell">7个月</text>
+            <text class="table-cell">7个月</text>
+          </view>
+        </view>
+        <view class="section-subtitle">说明：</view>
+        <text>一次性伤残补助金：由工伤保险基金支付，计算基数为本人平均月工资。</text>
+        <text>一次性工伤医疗补助金：由工伤保险基金支付，计算基数为所在地社会平均工资。</text>
+        <text>一次性伤残就业补助金：由用人单位支付，计算基数为所在地社会平均工资。</text>
       </view>
-      <view class="allowance-item">
-        <radio value="3" checked="{{selectedAllowanceLevel === 3}}"></radio>
-        <text class="allowance-label">三级伤残: 本人工资×80％</text>
+      <view class="section">
+        <view class="section-title">3. 相关法律条文</view>
+        <text>《工伤保险条例》：明确了工伤保险的范围、工伤认定、待遇支付等。</text>
+        <text>《工伤保险条例》第三十六条、三十七条：详细规定了不同伤残等级的一次性伤残补助金、一次性工伤医疗补助金和一次性伤残就业补助金的计算标准。</text>
+        <text>地方性法规：请注意，各地方对工伤赔偿的具体标准可能有所不同，如一次性工伤医疗补助金和就业补助金的计算系数。本计算器提供的是通用参考，具体以当地法规为准。</text>
       </view>
-      <view class="allowance-item">
-        <radio value="4" checked="{{selectedAllowanceLevel === 4}}"></radio>
-        <text class="allowance-label">四级伤残: 本人工资×75％</text>
-      </view>
-      <view class="allowance-item">
-        <radio value="5" checked="{{selectedAllowanceLevel === 5}}"></radio>
-        <text class="allowance-label">五级伤残: 本人工资×70％</text>
-      </view>
-      <view class="allowance-item">
-        <radio value="6" checked="{{selectedAllowanceLevel === 6}}"></radio>
-        <text class="allowance-label">六级伤残: 本人工资×60％</text>
-      </view>
-    </radio-group>
-    <view class="legal-content">
-      <text>依据《工伤保险条例》第三十五条、第三十六条规定，职工因工致残被鉴定为一级至六级伤残的，按月支付伤残津贴。</text>
     </view>
   </view>
 </view>

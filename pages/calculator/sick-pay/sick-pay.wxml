@@ -1,44 +1,156 @@
 <view class="container">
+  <!-- 1. 页面标题 -->
   <view class="header">
-    <text class="header-icon">🤒</text>
     <text class="title">病假工资计算器</text>
+    <text class="subtitle">根据《企业职工患病或非因工负伤医疗期规定》，计算病假期间应得的工资收入。</text>
   </view>
 
+  <!-- 2. 重要提示（可折叠部分） -->
+  <view class="important-notice-card">
+    <view class="notice-header" bindtap="toggleNotice">
+      <text>重要提示</text>
+      <text class="arrow-icon">{{showNotice ? '▲' : '▼'}}</text>
+    </view>
+    <view class="notice-content" wx:if="{{showNotice}}">
+      <text>本计算器提供的结果，是基于劳动法规定的最低标准。具体金额可能因各地政策或公司规定而有所不同，仅供参考。</text>
+    </view>
+  </view>
+
+  <!-- 3. 表单区域 -->
   <view class="card">
+    <!-- 工资输入框 -->
+    <view class="input-group">
+      <text class="label">月工资 (元/月)</text>
+      <text class="description">即税前总收入（包括基本工资、奖金、津贴等）</text>
+      <input type="digit" class="input" placeholder="请填写税前应发工资" bindinput="bindKeyInput" data-field="monthlySalary" />
+    </view>
+
+    <!-- 工作年限输入 -->
+    <view class="input-group">
+      <text class="label">累计工作年限（年）</text>
+      <input type="digit" class="input" placeholder="请输入累计工作年限" bindinput="bindKeyInput" data-field="totalWorkYears" />
+    </view>
+
+    <view class="input-group">
+      <text class="label">在本单位工作年限（年）</text>
+      <input type="digit" class="input" placeholder="请输入在本单位工作年限" bindinput="bindKeyInput" data-field="currentWorkYears" />
+    </view>
+
+    <text class="description">不足一年的部分，不计入整年。</text>
+
+    <!-- 病假天数选择 -->
     <view class="input-group">
       <text class="label">病假天数</text>
-      <input type="digit" class="input" placeholder="请输入病假天数" bindinput="bindKeyInput" data-field="y" />
+      <text class="description">支持按天数填写或按日期选择</text>
+      <view class="input-switch">
+        <view class="switch-item {{inputType === 'days' ? 'active' : ''}}" bindtap="switchInputType" data-type="days">按天数填写</view>
+        <view class="switch-item {{inputType === 'date' ? 'active' : ''}}" bindtap="switchInputType" data-type="date">按日期选择</view>
+      </view>
+
+      <block wx:if="{{inputType === 'days'}}">
+        <input type="number" class="input" placeholder="请输入累计病假天数" value="{{sickDays}}" bindinput="bindKeyInput" data-field="sickDays" />
+      </block>
+      
+      <block wx:if="{{inputType === 'date'}}">
+        <picker mode="date" value="{{startDate}}" bindchange="bindDateChange" data-field="startDate">
+          <view class="picker">
+            病假起始日: {{startDate || '请选择'}}
+          </view>
+        </picker>
+        <picker mode="date" value="{{endDate}}" bindchange="bindDateChange" data-field="endDate">
+          <view class="picker">
+            病假结束日: {{endDate || '请选择'}}
+          </view>
+        </picker>
+        <text class="description">系统将自动计算病假天数。</text>
+      </block>
     </view>
 
-    <view class="input-group">
-      <text class="label">医疗期</text>
-      <input type="digit" class="input" placeholder="请输入医疗期天数" bindinput="bindKeyInput" data-field="d" />
-    </view>
+    <!-- 计算按钮 -->
+    <button class="btn-calculate" bindtap="calculate">计算</button>
+  </view>
 
-    <view class="input-group">
-      <text class="label">最低月工资标准</text>
-      <input type="digit" class="input" placeholder="请输入最低月工资标准" bindinput="bindKeyInput" data-field="pm" />
+  <!-- 4. 结果显示区域 -->
+  <view class="result-card" wx:if="{{result !== null}}">
+    <view class="result-header">应得病假工资数额</view>
+    <view class="result-item">
+      <text class="result-value">{{result}} 元</text>
+      <button class="btn-copy" bindtap="copyResult">复制结果</button>
     </view>
   </view>
 
-  <button class="btn-calculate" bindtap="calculate">开始计算</button>
-
-  <view class="result-area" wx:if="{{result !== null}}">
-    <view class="result-card">
-      <view class="result-item">
-        <text class="result-label">病假工资</text>
-        <text class="result-value">{{result}} 元</text>
-      </view>
-      <button class="btn-copy" bindtap="copyResult">复制结果</button>
+  <!-- 5. 详细说明与法律须知（可折叠部分） -->
+  <view class="details-card" wx:if="{{result !== null}}">
+    <view class="details-header" bindtap="toggleDetails">
+      <text>详细说明与法律须知</text>
+      <text class="arrow-icon">{{showDetails ? '▲' : '▼'}}</text>
     </view>
-
-    <view class="detail-card" wx:if="{{detailProcess}}">
-      <view class="detail-toggle" bindtap="toggleDetail">
-        <text>详细计算过程</text>
-        <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
+    <view class="details-content" wx:if="{{showDetails}}">
+      <view class="section">
+        <view class="section-title">1. 病假工资的计算依据</view>
+        <text>工资标准：病假工资通常按职工本人患病前12个月的平均工资为基数计算。具体支付标准由企业根据工龄和病假时长确定。</text>
+        <text>法律底线：企业支付的病假工资不得低于当地最低工资标准的80%。</text>
+        <view class="section-subtitle">常见标准：</view>
+        <text>病假未超过医疗期：病假工资通常为本人月工资的60%至100%。</text>
+        <text>病假已超过医疗期：病假工资通常为本人月工资的40%至60%，且不得低于当地最低工资。</text>
       </view>
-      <view class="detail-process" wx:if="{{showDetail}}">
-        <text class="detail-content">{{detailProcess}}</text>
+      <view class="section">
+        <view class="section-title">2. 详细计算过程</view>
+        <view class="section-subtitle">第一步：确定医疗期</view>
+        <text>根据输入的"累计工作年限"和"在本单位工作年限"，系统判断职工享有的医疗期。</text>
+        <view class="section-subtitle">医疗期标准</view>
+        <view class="table-container">
+          <view class="table-row header">
+            <text class="table-cell">累计工作年限（年）</text>
+            <text class="table-cell">在本单位工作年限（年）</text>
+            <text class="table-cell">医疗期（月）</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以下</text>
+            <text class="table-cell">5年以下</text>
+            <text class="table-cell">3</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以下</text>
+            <text class="table-cell">5年以上</text>
+            <text class="table-cell">6</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以上</text>
+            <text class="table-cell">5年以下</text>
+            <text class="table-cell">9</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以上</text>
+            <text class="table-cell">5年以上10年以下</text>
+            <text class="table-cell">12</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以上</text>
+            <text class="table-cell">10年以上15年以下</text>
+            <text class="table-cell">18</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以上</text>
+            <text class="table-cell">15年以上20年以下</text>
+            <text class="table-cell">24</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell">10年以上</text>
+            <text class="table-cell">20年以上</text>
+            <text class="table-cell">30</text>
+          </view>
+        </view>
+        <view class="section-subtitle">第二步：确定病假工资比例</view>
+        <text>根据病假天数是否超过医疗期，以及具体的工龄，系统判断适用的病假工资比例。</text>
+        <view class="section-subtitle">第三步：计算病假工资总额</view>
+        <text>病假工资总额 = (月工资 ÷ 21.75) × 病假天数 × 病假工资比例。</text>
+      </view>
+      <view class="section">
+        <view class="section-title">3. 相关法律条文</view>
+        <text>《企业职工患病或非因工负伤医疗期规定》：明确了职工在患病或非因工负伤时，依法享有的医疗期。</text>
+        <text>医疗期与工龄：医疗期的长短与职工的累计工作年限和本单位工作年限相关。</text>
+        <text>地方性法规：请注意，各地方对病假工资的具体规定可能有所不同。本计算器提供的是通用参考，具体以当地法规和公司规章制度为准。</text>
       </view>
     </view>
   </view>

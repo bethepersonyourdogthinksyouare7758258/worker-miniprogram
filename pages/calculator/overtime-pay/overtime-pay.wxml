@@ -1,32 +1,381 @@
 <view class="container">
+  <!-- 1. 页面标题区域 -->
   <view class="header">
-    <text class="header-icon">🕒</text>
     <text class="title">加班费计算器</text>
   </view>
+  <view class="subtitle">根据《劳动法》规定，计算您的加班工资。</view>
+  
+  <!-- 重要说明折叠区域 -->
+  <view class="important-notice-card">
+    <view class="notice-toggle" bindtap="toggleImportantNotice">
+      <text class="notice-title">重要说明与法律须知</text>
+      <text class="notice-toggle-icon">{{showImportantNotice ? '▲' : '▼'}}</text>
+    </view>
+    <view wx:if="{{showImportantNotice}}" class="notice-content">
+      <!-- 1. 自愿加班与安排加班区别 -->
+      <view class="notice-section">
+        <text class="notice-section-title">1. "自愿加班"与"安排加班"的区别</text>
+        <view class="comparison-table">
+          <view class="table-header">
+            <text class="table-cell header">自愿加班</text>
+            <text class="table-cell header">安排加班</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell label">前提</text>
+            <text class="table-cell">个人意愿，或为完成自身工作而延长工时</text>
+            <text class="table-cell">用人单位明确要求、指示或批准</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell label">法律责任</text>
+            <text class="table-cell">用人单位无需支付加班费</text>
+            <text class="table-cell">用人单位必须支付加班费</text>
+          </view>
+          <view class="table-row">
+            <text class="table-cell label">证据</text>
+            <text class="table-cell">通常没有书面记录或批准</text>
+            <text class="table-cell">有书面审批、邮件、聊天记录等证据</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 2. 实操建议 -->
+      <view class="notice-section">
+        <text class="notice-section-title">2. 实操建议</text>
+        <text class="notice-text">为了保护自己的权益，如果你需要加班，务必提前向你的上级提出申请并获得书面批准。保留好这些批准记录，这是你在劳动仲裁中要求加班费的最有力证据。如果公司没有加班审批制度，可以通过微信、邮件等方式与上级确认，留下沟通记录。</text>
+      </view>
+      
+      <!-- 3. 加班时长法定标准 -->
+      <view class="notice-section">
+        <text class="notice-section-title">3. 加班时长的法定标准</text>
+        <text class="notice-subtitle">日标准：</text>
+        <text class="notice-text">一天超过8小时算加班。</text>
+        <text class="notice-subtitle">周标准：</text>
+        <text class="notice-text">一周超过40小时算加班。</text>
+        <text class="notice-subtitle">月标准：</text>
+        <text class="notice-text">一个月超过166.64小时算加班。</text>
+        <text class="notice-text">根据《劳动法》规定，用人单位安排加班，一般每日不得超过1小时；因特殊原因需要延长工作时间的，在保障劳动者身体健康的条件下，每日不得超过3小时，但每月不得超过36小时。（也就是超出部分属于违反而且不可调休，如果用人单位的违法加班行为被劳动监察部门发现或被你举报，可能会面临警告、责令改正，甚至被处以罚款。）</text>
+        <text class="notice-subtitle">关于"调休"：</text>
+        <text class="notice-text">根据《劳动法》规定，只有在休息日加班时，用人单位才能与您协商选择安排补休来代替支付200%的加班费。如果已经安排了调休，则不应再支付加班费。法定节假日加班，用人单位必须支付300%的加班费，不能以补休代替。</text>
+      </view>
+    </view>
+  </view>
 
+  <!-- 2. 工资类型选择 -->
   <view class="card">
     <view class="input-group">
-      <text class="label">所在省份</text>
-      <picker bindchange="bindRegionChange" value="{{regionIndex}}" range="{{regions}}" class="picker">
-        <view class="picker-input">
-          <text>{{regions[regionIndex]}}</text>
-          <text class="picker-arrow">▼</text>
-        </view>
-      </picker>
-    </view>
-
-    <view class="input-group">
-      <text class="label">工时制度</text>
+      <text class="label">工资类型</text>
       <view class="radio-group">
-        <view class="radio-item {{selectedSystem === 'standard' ? 'selected' : ''}}" bindtap="selectWorkSystem" data-system="standard">
-          <text>标准工时工作制</text>
+        <view class="radio-item {{salaryType === 'time' ? 'selected' : ''}}" bindtap="selectSalaryType" data-type="time">
+          <text>计时工资</text>
         </view>
-        <view class="radio-item {{selectedSystem === 'comprehensive' ? 'selected' : ''}}" bindtap="selectWorkSystem" data-system="comprehensive">
-          <text>综合工时工作制</text>
+        <view class="radio-item {{salaryType === 'piece' ? 'selected' : ''}}" bindtap="selectSalaryType" data-type="piece">
+          <text>计件工资</text>
         </view>
       </view>
     </view>
   </view>
 
-  <button class="btn-calculate" bindtap="navigateToCalculator" disabled="{{selectedSystem === null}}">下一步</button>
+  <!-- 3. 计时工资输入区域 -->
+  <view class="card" wx:if="{{salaryType === 'time'}}">
+    <view class="input-group">
+      <text class="label">月工资 (元/月)</text>
+      <text class="description">请填写税前应发工资，不含加班费。</text>
+      <input type="digit" class="input" placeholder="请输入月工资" bindinput="bindKeyInput" data-field="monthlySalary" />
+    </view>
+
+    <!-- 加班记录方式选择 -->
+    <view class="input-group">
+      <text class="label">加班记录方式</text>
+      <view class="radio-group">
+        <view class="radio-item {{recordType === 'manual' ? 'selected' : ''}}" bindtap="selectRecordType" data-type="manual">
+          <text>手动输入</text>
+        </view>
+        <view class="radio-item {{recordType === 'calendar' ? 'selected' : ''}}" bindtap="selectRecordType" data-type="calendar">
+          <text>日历记录</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 手动输入方式 -->
+    <view wx:if="{{recordType === 'manual'}}">
+      <text class="description">为确保计算精确，请精确到分钟（如：2.5小时）。</text>
+      
+      <view class="input-group">
+        <text class="label">工作日加班小时数</text>
+        <input type="digit" class="input" placeholder="请输入工作日加班小时数" bindinput="bindKeyInput" data-field="workdayHours" />
+      </view>
+
+      <view class="input-group">
+        <text class="label">休息日加班小时数</text>
+        <input type="digit" class="input" placeholder="请输入休息日加班小时数" bindinput="bindKeyInput" data-field="weekendHours" />
+      </view>
+
+      <view class="input-group">
+        <text class="label">法定节假日加班小时数</text>
+        <input type="digit" class="input" placeholder="请输入法定节假日加班小时数" bindinput="bindKeyInput" data-field="holidayHours" />
+      </view>
+    </view>
+
+    <!-- 日历记录方式 -->
+    <view wx:if="{{recordType === 'calendar'}}">
+             <!-- 日历选择按钮 -->
+       <view class="input-group">
+         <text class="label">选择加班日期和时间</text>
+         <text class="description">系统会自动识别工作日、周末、节假日，并剔除正常上班时间</text>
+         <view class="work-time-settings">
+           <text class="work-time-label">正常上班时间：{{workStartTime}} - {{workEndTime}}</text>
+           <text class="work-time-edit" bindtap="showWorkTimeSettings">修改</text>
+         </view>
+         <button class="btn-calendar" bindtap="showCalendar">打开日历选择</button>
+       </view>
+      
+      <!-- 汇总显示 -->
+      <view class="summary-card" wx:if="{{hasCalendarData}}">
+        <text class="summary-title">加班时间汇总</text>
+        <view class="summary-item">
+          <text class="summary-label">工作日加班：</text>
+          <text class="summary-value">{{calendarWorkdayHours}} 小时</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">休息日加班：</text>
+          <text class="summary-value">{{calendarWeekendHours}} 小时</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">法定节假日加班：</text>
+          <text class="summary-value">{{calendarHolidayHours}} 小时</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">总加班天数：</text>
+          <text class="summary-value">{{overtimeRecords.length}} 天</text>
+        </view>
+      </view>
+      
+      <!-- 已记录的加班时间列表 -->
+      <view class="overtime-list" wx:if="{{overtimeRecords.length > 0}}">
+        <view class="overtime-list-header">
+          <text class="overtime-list-title">已记录的加班时间 ({{overtimeRecords.length}}天)</text>
+          <text class="overtime-clear-all" bindtap="clearAllOvertimeRecords">清空全部</text>
+        </view>
+                 <view class="overtime-item" wx:for="{{overtimeRecords}}" wx:key="date">
+           <view class="overtime-info">
+             <text class="overtime-date">{{item.date}}</text>
+             <text class="overtime-time">{{item.startTime}} - {{item.endTime}}</text>
+             <text class="overtime-type-tag {{item.type === '工作日' ? 'workday' : item.type === '休息日' ? 'weekend' : 'holiday'}}">{{item.type}}</text>
+           </view>
+           <view class="overtime-details">
+             <text class="overtime-hours">加班：{{item.hours}}小时</text>
+             <text class="overtime-original" wx:if="{{item.originalHours !== item.hours}}">原时长：{{item.originalHours}}小时</text>
+             <text class="overtime-deducted" wx:if="{{item.normalWorkHours > 0}}">已剔除：{{item.normalWorkHours}}小时</text>
+           </view>
+           <text class="overtime-delete" bindtap="deleteOvertimeRecord" data-index="{{index}}">删除</text>
+         </view>
+      </view>
+    </view>
+
+    <!-- 日历模态框 -->
+    <view class="calendar-modal" wx:if="{{showCalendarModal}}">
+      <view class="calendar-overlay" bindtap="hideCalendar"></view>
+      <view class="calendar-container">
+        <!-- 日历头部 -->
+        <view class="calendar-header">
+          <text class="calendar-title">{{currentYear}}年{{currentMonth}}月</text>
+          <view class="calendar-nav">
+            <text class="nav-btn" bindtap="prevMonth">‹</text>
+            <text class="nav-btn" bindtap="nextMonth">›</text>
+          </view>
+        </view>
+        
+        <!-- 星期标题 -->
+        <view class="calendar-weekdays">
+          <text class="weekday">日</text>
+          <text class="weekday">一</text>
+          <text class="weekday">二</text>
+          <text class="weekday">三</text>
+          <text class="weekday">四</text>
+          <text class="weekday">五</text>
+          <text class="weekday">六</text>
+        </view>
+        
+        <!-- 日历网格 -->
+        <view class="calendar-grid">
+          <view class="calendar-day {{item.isCurrentMonth ? '' : 'other-month'}} {{item.isSelected ? 'selected' : ''}} {{item.hasOvertime ? 'has-overtime' : ''}}" 
+                wx:for="{{calendarDays}}" wx:key="date" bindtap="selectDate" data-date="{{item.date}}">
+            <text class="day-number">{{item.day}}</text>
+            <view class="overtime-indicator" wx:if="{{item.hasOvertime}}"></view>
+          </view>
+        </view>
+        
+                 <!-- 时间选择区域 -->
+         <view class="time-selection" wx:if="{{selectedCalendarDate}}">
+           <text class="time-selection-title">{{selectedCalendarDate}} 加班时间</text>
+           <text class="time-selection-tip">时间选择从早上6:00开始</text>
+                     <view class="time-input-row">
+             <text class="time-label">开始时间：</text>
+             <picker mode="time" value="{{calendarStartTime}}" start="06:00" bindchange="bindCalendarStartTimeChange">
+               <view class="time-picker">{{calendarStartTime || '请选择'}}</view>
+             </picker>
+           </view>
+           <view class="time-input-row">
+             <text class="time-label">结束时间：</text>
+             <picker mode="time" value="{{calendarEndTime}}" start="06:00" bindchange="bindCalendarEndTimeChange">
+               <view class="time-picker">{{calendarEndTime || '请选择'}}</view>
+             </picker>
+           </view>
+          <view class="time-input-row">
+            <text class="time-label">加班时长：</text>
+            <text class="calculated-hours">{{calendarCalculatedHours}} 小时</text>
+          </view>
+                     <view class="calendar-btn-group">
+             <button class="btn-save-calendar" bindtap="saveCalendarOvertime">保存</button>
+             <button class="btn-clear-day" bindtap="clearDayOvertime">清空当日</button>
+             <button class="btn-cancel-calendar" bindtap="cancelCalendarSelection">取消</button>
+           </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4. 计件工资输入区域 -->
+  <view class="card" wx:if="{{salaryType === 'piece'}}">
+    <view class="input-group">
+      <text class="label">标准件单价 (元/件)</text>
+      <input type="digit" class="input" placeholder="请输入标准件单价" bindinput="bindKeyInput" data-field="piecePrice" />
+    </view>
+
+    <view class="input-group">
+      <text class="label">工作日加班件数</text>
+      <input type="digit" class="input" placeholder="请输入工作日加班件数" bindinput="bindKeyInput" data-field="workdayPieces" />
+    </view>
+
+    <view class="input-group">
+      <text class="label">休息日加班件数</text>
+      <input type="digit" class="input" placeholder="请输入休息日加班件数" bindinput="bindKeyInput" data-field="weekendPieces" />
+    </view>
+
+    <view class="input-group">
+      <text class="label">法定节假日加班件数</text>
+      <input type="digit" class="input" placeholder="请输入法定节假日加班件数" bindinput="bindKeyInput" data-field="holidayPieces" />
+    </view>
+  </view>
+
+  <!-- 5. 计算按钮 -->
+  <button class="btn-calculate" bindtap="calculate">计算</button>
+
+  <!-- 6. 结果显示区域 -->
+  <view class="result-area" wx:if="{{result !== null}}">
+    <view class="result-card">
+      <text class="result-label-main">加班费明细</text>
+      
+      <view class="result-item" wx:if="{{salaryType === 'time'}}">
+        <text class="result-label">工作日加班费</text>
+        <text class="result-value">{{workdayOvertime}} 元</text>
+      </view>
+      
+      <view class="result-item" wx:if="{{salaryType === 'time'}}">
+        <text class="result-label">休息日加班费</text>
+        <text class="result-value">{{weekendOvertime}} 元</text>
+      </view>
+      
+      <view class="result-item" wx:if="{{salaryType === 'time'}}">
+        <text class="result-label">法定节假日加班费</text>
+        <text class="result-value">{{holidayOvertime}} 元</text>
+      </view>
+      
+      <view class="result-item" wx:if="{{salaryType === 'piece'}}">
+        <text class="result-label">工作日加班费</text>
+        <text class="result-value">{{workdayOvertime}} 元</text>
+      </view>
+      
+      <view class="result-item" wx:if="{{salaryType === 'piece'}}">
+        <text class="result-label">休息日加班费</text>
+        <text class="result-value">{{weekendOvertime}} 元</text>
+      </view>
+      
+      <view class="result-item" wx:if="{{salaryType === 'piece'}}">
+        <text class="result-label">法定节假日加班费</text>
+        <text class="result-value">{{holidayOvertime}} 元</text>
+      </view>
+      
+      <view class="result-total">
+        <text class="result-label">总计加班费</text>
+        <text class="result-value-total">{{result}} 元</text>
+      </view>
+      
+      <button class="btn-copy" bindtap="copyResult">复制结果</button>
+    </view>
+
+    <!-- 7. 详细说明与法律须知 -->
+    <view class="detail-card">
+      <view class="detail-toggle" bindtap="toggleDetail">
+        <text>详细说明与法律须知</text>
+        <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
+      </view>
+      <view wx:if="{{showDetail}}" class="detail-content">
+        <view class="detail-section">
+          <text class="detail-title">1. 加班费计算标准</text>
+          <text class="detail-subtitle">计时工资：</text>
+          <text class="detail-text">工作日：不低于150%的工资报酬。</text>
+          <text class="detail-text">休息日：不低于200%的工资报酬。</text>
+          <text class="detail-text">法定节假日：不低于300%的工资报酬。</text>
+          
+          <text class="detail-subtitle">计件工资：</text>
+          <text class="detail-text">工作日：在完成计件定额后，对超额完成部分，应支付不低于其基本计件单价150%的报酬。</text>
+          <text class="detail-text">休息日：在完成计件定额后，对超额完成部分，应支付不低于其基本计件单价200%的报酬。</text>
+          <text class="detail-text">法定节假日：在完成计件定额后，对超额完成部分，应支付不低于其基本计件单价300%的报酬。</text>
+        </view>
+
+        <view class="detail-section">
+          <text class="detail-title">2. 加班工资计算公式</text>
+          <text class="detail-subtitle">计时工资计算：</text>
+          <text class="detail-text">日工资 = 月工资 ÷ 21.75</text>
+          <text class="detail-text">小时工资 = 日工资 ÷ 8</text>
+          <text class="detail-text">总加班费 = (小时工资 × 工作日加班小时数 × 150%) + (小时工资 × 休息日加班小时数 × 200%) + (小时工资 × 节假日加班小时数 × 300%)</text>
+          
+          <text class="detail-subtitle">计件工资计算：</text>
+          <text class="detail-text">总加班费 = (工作日加班件数 × 单价 × 50%) + (休息日加班件数 × 单价 × 100%) + (节假日加班件数 × 单价 × 200%)</text>
+          <text class="detail-text">说明：计件工资的加班费是在正常单价的基础上额外支付的倍数。</text>
+        </view>
+
+        <view class="detail-section">
+          <text class="detail-title">3. 重要提示</text>
+          <text class="detail-text">休息日：经协商同意，用人单位可以选择安排补休代替支付200%的加班费。</text>
+          <text class="detail-text">法定节假日：用人单位必须支付300%的加班费，不能以补休代替。</text>
+        </view>
+
+        <view class="detail-section">
+          <text class="detail-title">4. 相关法律条文</text>
+          <text class="detail-text">《劳动法》第四十四条：详细规定了不同情况下的加班工资支付标准。</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工作时间设置模态框 -->
+  <view class="work-time-modal" wx:if="{{showWorkTimeModal}}">
+    <view class="work-time-overlay" bindtap="hideWorkTimeSettings"></view>
+    <view class="work-time-container">
+      <view class="work-time-header">
+        <text class="work-time-title">设置正常上班时间</text>
+      </view>
+      <view class="work-time-content">
+        <view class="work-time-input-group">
+          <text class="work-time-label">开始时间：</text>
+          <picker mode="time" value="{{workStartTime}}" bindchange="bindWorkStartTimeChange">
+            <view class="work-time-picker">{{workStartTime}}</view>
+          </picker>
+        </view>
+        <view class="work-time-input-group">
+          <text class="work-time-label">结束时间：</text>
+          <picker mode="time" value="{{workEndTime}}" bindchange="bindWorkEndTimeChange">
+            <view class="work-time-picker">{{workEndTime}}</view>
+          </picker>
+        </view>
+        <text class="work-time-tip">系统将自动剔除正常上班时间，只计算加班时间</text>
+      </view>
+      <view class="work-time-buttons">
+        <button class="btn-cancel" bindtap="hideWorkTimeSettings">取消</button>
+        <button class="btn-save" bindtap="saveWorkTimeSettings">保存</button>
+      </view>
+    </view>
+  </view>
 </view>

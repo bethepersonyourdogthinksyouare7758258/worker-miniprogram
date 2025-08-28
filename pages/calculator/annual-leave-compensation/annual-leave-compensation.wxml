@@ -1,30 +1,32 @@
 <view class="container">
   <view class="header">
-    <text class="header-icon">🌴</text>
-    <text class="title">未休年假补偿计算器</text>
+    <text class="title">未休年假补偿计算</text>
   </view>
 
   <view class="card">
     <view class="input-group">
-      <text class="label">应发工资 (元/月)</text>
-      <input type="digit" class="input" placeholder="请输入月应发工资" bindinput="bindKeyInput" data-field="basicSalary" />
+      <text class="label">月平均工资 (元/月)</text>
+      <text class="description">请填写过去12个月的平均工资总额（包括基本工资、奖金、津贴等），不含加班费。</text>
+      <input type="digit" class="input" placeholder="请输入月平均工资" bindinput="bindKeyInput" data-field="basicSalary" />
     </view>
 
     <view class="input-group">
       <text class="label">未休年假天数</text>
+      <text class="description">请输入你应该休但未休的年假天数。</text>
       <input type="digit" class="input" placeholder="请输入未休年假天数" bindinput="bindKeyInput" data-field="unusedLeaveDays" />
     </view>
+    <button class="btn-calculate" bindtap="calculate">开始计算</button>
   </view>
-
-  <button class="btn-calculate" bindtap="calculate">开始计算</button>
 
   <view class="result-area" wx:if="{{result !== null}}">
     <view class="result-card">
-      <view class="result-item">
-        <text class="result-label">未休年假补偿金额</text>
-        <text class="result-value">{{result}} 元</text>
+      <view class="result-item-new">
+        <text class="result-label-main">未休补偿补偿金合计</text>
+        <view class="result-value-container">
+          <text class="result-value">{{result}} 元</text>
+          <button class="btn-copy-inline" bindtap="copyResult">复制</button>
+        </view>
       </view>
-      <button class="btn-copy" bindtap="copyResult">复制结果</button>
     </view>
 
     <view class="detail-card" wx:if="{{detailProcess}}">
@@ -34,6 +36,19 @@
       </view>
       <view class="detail-process" wx:if="{{showDetail}}">
         <text class="detail-content">{{detailProcess}}</text>
+      </view>
+    </view>
+
+    <view class="detail-card">
+      <view class="detail-toggle" bindtap="toggleLegalBasis">
+        <text>法律依据</text>
+        <text class="detail-toggle-icon">{{showLegalBasis ? '▲' : '▼'}}</text>
+      </view>
+      <view wx:if="{{showLegalBasis}}">
+        <view class="detail-subtitle">计算公式依据</view>
+        <text class="detail-content">{{calculationBasis}}</text>
+        <view class="detail-subtitle">年假累积依据</view>
+        <text class="detail-content">{{accrualBasis}}</text>
       </view>
     </view>
   </view>

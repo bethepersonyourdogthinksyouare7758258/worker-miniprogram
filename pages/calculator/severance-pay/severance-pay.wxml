@@ -1,44 +1,131 @@
 <view class="container">
+  <!-- 1. 顶部区域 -->
   <view class="header">
-    <text class="header-icon">📄</text>
     <text class="title">经济赔偿金计算器</text>
+    <view class="subtitle" bindtap="toggleCompensationDetails">
+      <text>"2N"赔偿金适用条件 →</text>
+    </view>
   </view>
 
+
+
+  <!-- 赔偿金详情展开区域 -->
+  <view class="compensation-details-card" wx:if="{{showCompensationDetails}}">
+    <view class="compensation-details-content">
+      <text class="compensation-details-title">"2N"赔偿金说明</text>
+      <text class="compensation-details-text">"2N"赔偿金，也叫违法解除劳动合同赔偿金，是《劳动合同法》为保护劳动者合法权益而设立的惩罚性赔偿，我们这里的计算方式采取的是较全面、较高金额标准的赔付方式。</text>
+      
+      <view class="compensation-section">
+        <text class="compensation-section-title">以下是所有适用"2N"赔偿金的条件：</text>
+        
+        <view class="compensation-subsection">
+          <text class="compensation-subtitle">1. 用人单位违法单方解除劳动合同</text>
+          <text class="compensation-details-text">这是最常见的适用情况。当用人单位在没有法定事由的情况下，单方面解除与劳动者的劳动合同，就属于违法解除。具体包括：</text>
+          <text class="compensation-details-text">无故解雇：用人单位没有法律依据，直接解除劳动合同。</text>
+          <text class="compensation-details-text">非法解雇特殊人群：在劳动者处于法定保护期内，用人单位仍解除劳动合同，例如：</text>
+          <text class="compensation-details-text">医疗期内：劳动者患病或非因工负伤，在规定的医疗期内。</text>
+          <text class="compensation-details-text">"三期"内：女职工在孕期、产期、哺乳期内。</text>
+          <text class="compensation-details-text">工伤期内：劳动者因工负伤或患职业病，在依法接受治疗期间。</text>
+          <text class="compensation-details-text">未提前通知：用人单位在合法解除劳动合同时，未提前30天书面通知劳动者或额外支付一个月工资。</text>
+        </view>
+
+        <view class="compensation-subsection">
+          <text class="compensation-subtitle">2. 用人单位违法终止劳动合同</text>
+          <text class="compensation-details-text">劳动合同到期后，用人单位在应当续签的情况下，却违法终止劳动合同。</text>
+          <text class="compensation-details-text">拒签无固定期限合同：劳动者在用人单位连续工作满十年，或连续两次签订固定期限合同，符合法定条件，要求签订无固定期限劳动合同时，用人单位拒绝。</text>
+          <text class="compensation-details-text">非法终止特殊人群合同：劳动合同到期，但劳动者处于"三期"或医疗期内，用人单位仍终止劳动合同。</text>
+        </view>
+
+        <view class="compensation-subsection">
+          <text class="compensation-subtitle">3. 用人单位强迫劳动者辞职</text>
+          <text class="compensation-details-text">这是一种变相的违法解除。当用人单位通过以下违法手段迫使劳动者辞职时，也适用"2N"赔偿金：</text>
+          <text class="compensation-details-text">未足额支付劳动报酬。</text>
+          <text class="compensation-details-text">未依法缴纳社会保险费。</text>
+          <text class="compensation-details-text">未提供劳动保护或劳动条件。</text>
+          <text class="compensation-details-text">强迫劳动者违背意愿，从事违法或有毒害的工作。这部分如何正确辞职操作，请看文书部分。</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 表单区域 -->
   <view class="card">
+    <!-- 字段一：工作月数 -->
     <view class="input-group">
       <text class="label">工作月数</text>
-      <input type="digit" class="input" placeholder="请输入工作月数" bindinput="bindKeyInput" data-field="n" />
+      <text class="description">连续工作月数 / 不连续工作情况，支持日期格式或直接填月数。</text>
+      <view class="input-switch">
+        <view class="switch-item {{inputType === 'months' ? 'active' : ''}}" bindtap="switchInputType" data-type="months">输入月数</view>
+        <view class="switch-item {{inputType === 'date' ? 'active' : ''}}" bindtap="switchInputType" data-type="date">选择日期</view>
+      </view>
+
+      <block wx:if="{{inputType === 'months'}}">
+        <input type="number" class="input" placeholder="请直接输入工作月数" value="{{workMonths}}" bindinput="bindKeyInput" data-field="workMonths" />
+      </block>
+      
+      <block wx:if="{{inputType === 'date'}}">
+        <picker mode="date" value="{{startDate}}" bindchange="bindDateChange" data-field="startDate">
+          <view class="picker">
+            起始日期: {{startDate || '请选择'}}
+          </view>
+        </picker>
+        <picker mode="date" value="{{endDate}}" bindchange="bindDateChange" data-field="endDate">
+          <view class="picker">
+            结束日期: {{endDate || '请选择'}}
+          </view>
+        </picker>
+      </block>
     </view>
 
+    <!-- 字段二：月工资 -->
     <view class="input-group">
-      <text class="label">月工资</text>
-      <input type="digit" class="input" placeholder="请输入月工资" bindinput="bindKeyInput" data-field="w" />
+      <text class="label">月工资 (元/月)</text>
+      <text class="description">税前工资，包括基本工资、岗位工资、奖金、津贴、补贴等，含加班费。</text>
+      <input type="digit" class="input" placeholder="请输入月工资" bindinput="bindKeyInput" data-field="monthlySalary" />
     </view>
 
-    <view class="input-group">
-      <text class="label">上年度平均工资</text>
-      <input type="digit" class="input" placeholder="请输入上年度平均工资" bindinput="bindKeyInput" data-field="aw" />
+
+
+    <!-- 3. 计算按钮 -->
+    <button class="btn-calculate" bindtap="calculate">计算</button>
+  </view>
+
+  <!-- 结果显示区域 -->
+  <view class="result-card" wx:if="{{result !== null}}">
+    <view class="result-header">计算结果</view>
+    <view class="result-item">
+      <text class="result-label">经济赔偿金</text>
+      <view class="result-value-container">
+        <text class="result-value">{{result}} 元</text>
+        <button class="btn-copy" bindtap="copyResult">复制</button>
+      </view>
+    </view>
+    <view class="result-item" wx:if="{{compensationMonths !== null}}">
+      <text class="result-label">计算月数</text>
+      <text class="result-value">{{compensationMonths}} 个月</text>
     </view>
   </view>
 
-  <button class="btn-calculate" bindtap="calculate">开始计算</button>
-
-  <view class="result-area" wx:if="{{result !== null}}">
-    <view class="result-card">
-      <view class="result-item">
-        <text class="result-label">经济赔偿金</text>
-        <text class="result-value">{{result}} 元</text>
-      </view>
-      <button class="btn-copy" bindtap="copyResult">复制结果</button>
+  <!-- 详细说明与法律须知 -->
+  <view class="details-card" wx:if="{{result !== null}}">
+    <view class="details-header" bindtap="toggleDetails">
+      <text>详细说明与法律须知</text>
+      <text class="arrow-icon">{{showDetails ? '▲' : '▼'}}</text>
     </view>
-
-    <view class="detail-card" wx:if="{{detailProcess}}">
-      <view class="detail-toggle" bindtap="toggleDetail">
-        <text>详细计算过程</text>
-        <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
+    <view class="details-content" wx:if="{{showDetails}}">
+      <view class="section">
+        <view class="section-title">1. 详细计算过程</view>
+        <view class="section-subtitle">第一步：确定计算月数</view>
+        <text>计算方式：通过"申请仲裁或签订合同的日期"减去"未签劳动合同的起始工作日"来计算总天数。</text>
+        <text>时效提醒：根据法律规定，双倍工资的计算最长为11个月。计算总天数时，将自动扣除第一个月（30天），并且如果总时长超过11个月，也按11个月计算。</text>
+        <view class="section-subtitle">第二步：计算补偿金额</view>
+        <text>计算公式：补偿金额 = 你的月工资 × 未签订合同的月数。</text>
+        <text>（注：超过一个月不满一年的时间，按月支付；不满一个月的，按日工资计算。月工资包括基本工资、奖金、津贴等，含加班费。）</text>
       </view>
-      <view class="detail-process" wx:if="{{showDetail}}">
-        <text class="detail-content">{{detailProcess}}</text>
+      <view class="section">
+        <view class="section-title">2. 相关法律条文</view>
+        <text>《劳动合同法》第八十二条：用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当向劳动者每月支付二倍的工资。</text>
+        <text>最高人民法院司法解释：用人单位与劳动者均已同意不订立书面劳动合同，但劳动者要求支付二倍工资的，人民法院不予支持。</text>
       </view>
     </view>
   </view>

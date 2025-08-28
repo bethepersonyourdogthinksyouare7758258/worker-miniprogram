@@ -1,55 +1,98 @@
 <view class="container">
   <view class="header">
-    <text class="header-icon">💸</text>
     <text class="title">经济补偿金计算器</text>
+  </view>
+  <view class="explanation-toggle" bindtap="toggleExplanation">
+    <text>经济补偿金适用情况说明（{{showExplanation ? '收起 ▴' : '展开 ▾'}}）</text>
+  </view>
+  <view class="explanation-content" wx:if="{{showExplanation}}">
+    <view class="explanation-section">
+      <view class="explanation-title">适用条件</view>
+      <text>1. 用人单位提出，双方协商解除劳动合同的；</text>
+      <text>2. 劳动者患病或者非因工负伤，在规定的医疗期满后不能从事原工作，也不能从事由用人单位另行安排的工作，用人单位解除劳动合同的；</text>
+      <text>3. 劳动者不能胜任工作，经过培训或者调整工作岗位，仍不能胜任工作，用人单位解除劳动合同的；</text>
+      <text>4. 劳动合同订立时所依据的客观情况发生重大变化，致使劳动合同无法履行，经用人单位与劳动者协商，未能就变更劳动合同内容达成协议，用人单位解除劳动合同的；</text>
+      <text>5. 用人单位依照企业破产法规定进行重整，依法裁减人员的；</text>
+      <text>6. 劳动合同期满，用人单位不愿意续订劳动合同，或者降低劳动合同约定条件续订劳动合同，劳动者不同意续订的；</text>
+      <text>7. 因用人单位被依法宣告破产、被吊销营业执照、责令关闭、撤销或者用人单位决定提前解散，劳动合同终止的。</text>
+    </view>
+    <view class="explanation-section">
+      <view class="explanation-title">不适用情况</view>
+      <text>1. 劳动者在试用期间被证明不符合录用条件的；</text>
+      <text>2. 劳动者严重违反用人单位的规章制度的；</text>
+      <text>3. 劳动者严重失职，营私弊舞，给用人单位造成重大损害的；</text>
+      <text>4. 劳动者同时与其他用人单位建立劳动关系，对完成本单位的工作任务造成严重影响，或者经用人单位提出，拒不改正的；</text>
+      <text>5. 因欺诈、胁迫的手段或者乘人之危，使用人单位在违背真实意思的情况下订立或者变更劳动合同，致使劳动合同无效的；</text>
+      <text>6. 劳动者被依法追究刑事责任的。</text>
+    </view>
   </view>
 
   <view class="card">
     <view class="input-group">
       <text class="label">实际工作月数</text>
-      <input type="digit" class="input" placeholder="请输入实际工作月数" bindinput="bindKeyInput" data-field="n" />
+      <text class="description">连续工作月数 / 不连续工作情况，支持日期格式或直接填月数。</text>
+      <view class="input-switch">
+        <view class="switch-item {{inputType === 'months' ? 'active' : ''}}" bindtap="switchInputType" data-type="months">输入月数</view>
+        <view class="switch-item {{inputType === 'date' ? 'active' : ''}}" bindtap="switchInputType" data-type="date">选择日期</view>
+      </view>
+
+      <block wx:if="{{inputType === 'months'}}">
+        <input type="number" class="input" placeholder="请输入实际工作月数" value="{{workMonths}}" bindinput="bindKeyInput" data-field="workMonths" />
+      </block>
+      
+      <block wx:if="{{inputType === 'date'}}">
+        <picker mode="date" value="{{startDate}}" bindchange="bindDateChange" data-field="startDate">
+          <view class="picker">
+            起始日期: {{startDate || '请选择'}}
+          </view>
+        </picker>
+        <picker mode="date" value="{{endDate}}" bindchange="bindDateChange" data-field="endDate">
+          <view class="picker">
+            结束日期: {{endDate || '请选择'}}
+          </view>
+        </picker>
+      </block>
     </view>
 
     <view class="input-group">
       <text class="label">离职前十二个月平均应得工资</text>
-      <input type="digit" class="input" placeholder="请输入离职前十二个月平均应得工资" bindinput="bindKeyInput" data-field="w" />
+      <text class="description">即税前总收入（包括基本工资、奖金、津贴等，含加班费），不足十二个月的，按离职前月数平均工资计算</text>
+      <input type="digit" class="input" placeholder="请输入月工资" bindinput="bindKeyInput" data-field="monthlySalary" />
     </view>
-
-    <view class="input-group">
-      <text class="label">上年度职工平均工资</text>
-      <input type="digit" class="input" placeholder="请输入上年度职工平均工资" bindinput="bindKeyInput" data-field="aw" />
-    </view>
+    <button class="btn-calculate" bindtap="calculate">计算</button>
   </view>
-
-  <button class="btn-calculate" bindtap="calculate">开始计算</button>
 
   <view class="result-area" wx:if="{{result !== null}}">
     <view class="result-card">
-      <view class="result-item">
-        <text class="result-label">经济补偿金</text>
-        <text class="result-value">{{result}} 元</text>
-      </view>
-      <button class="btn-copy" bindtap="copyResult">复制结果</button>
-    </view>
-
-    <view class="detail-card" wx:if="{{detailProcess}}">
-      <view class="detail-toggle" bindtap="toggleDetail">
-        <text>详细计算过程</text>
-        <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
-      </view>
-      <view class="detail-process" wx:if="{{showDetail}}">
-        <text class="detail-content">{{detailProcess}}</text>
+      <text class="result-label-main">经济补偿金</text>
+      <view class="result-value-container">
+        <text class="result-value highlight">{{result}} 元</text>
+        <button class="btn-copy" bindtap="copyResult">复制</button>
       </view>
     </view>
   </view>
 
-  <view class="explanation card">
-    <view class="explanation-header" bindtap="toggleExplanation">
-      <text class="explanation-title">经济补偿金适用情况说明</text>
-      <text class="explanation-toggle">{{showExplanation ? '收起' : '展开'}}</text>
+  <!-- 详细说明与法律须知 -->
+  <view class="details-card" wx:if="{{result !== null}}">
+    <view class="details-header" bindtap="toggleDetails">
+      <text>详细说明与法律须知</text>
+      <text class="arrow-icon">{{showDetails ? '▲' : '▼'}}</text>
     </view>
-    <view class="explanation-content" wx:if="{{showExplanation}}">
-      <text>此处为详细说明内容...</text>
+    <view class="details-content" wx:if="{{showDetails}}">
+      <view class="section">
+        <view class="section-title">1. 详细计算过程</view>
+        <view class="section-subtitle">第一步：确定计算月数</view>
+        <text>计算方式：补偿月数根据"签订合同日或申请仲裁日"与"用工起始日"之间的总天数来计算。</text>
+        <text>法律规定时限：补偿期限从用工之日起满一个月的次日开始计算，最长不超过11个月。</text>
+        <view class="section-subtitle">第二步：计算补偿金额</view>
+        <text>计算公式：补偿金额 = 你的月工资 × 法律支持的月数。</text>
+        <text>（注：不足一个月的，按照日工资标准计算。）</text>
+      </view>
+      <view class="section">
+        <view class="section-title">2. 相关法律条文</view>
+        <text>《劳动合同法》第八十二条：用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当向劳动者每月支付二倍的工资。</text>
+        <text>最高人民法院司法解释：用人单位与劳动者均已同意不订立书面劳动合同，但劳动者要求支付二倍工资的，人民法院不予支持。</text>
+      </view>
     </view>
   </view>
 </view>

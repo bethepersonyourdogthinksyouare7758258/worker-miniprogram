@@ -1,4 +1,0 @@
-<!--pages/calculator/comprehensive-overtime/comprehensive-overtime.wxml-->
-<view class="container">
-  <text>综合工时加班费计算器</text>
-</view>

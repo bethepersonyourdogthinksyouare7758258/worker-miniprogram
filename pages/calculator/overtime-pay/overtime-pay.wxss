@@ -1,45 +1,894 @@
 @import "../calculator-common.wxss";
 
-.picker-input {
+/* 页面标题和副说明样式 */
+.subtitle {
+  font-size: 28rpx;
+  color: #7c7c7a;
+  margin: -20rpx 20rpx 30rpx 20rpx;
+  text-align: center;
+}
+
+/* 重要说明卡片样式 */
+.important-notice-card {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  margin: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.notice-toggle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 88rpx;
-  padding: 0 24rpx;
-  border-radius: 6rpx;
-  background-color: #f7f7f5;
-  border: 1px solid #e9e9e7;
-  font-size: 32rpx;
-  color: #333;
-  box-sizing: border-box;
+  padding: 25rpx 30rpx;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
 }
 
-.picker-arrow {
+.notice-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.notice-toggle-icon {
   font-size: 24rpx;
-  color: #b3b3b1;
+  color: #007aff;
 }
 
+.notice-content {
+  padding: 30rpx;
+}
+
+.notice-section {
+  margin-bottom: 35rpx;
+}
+
+.notice-section:last-child {
+  margin-bottom: 0;
+}
+
+.notice-section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20rpx;
+}
+
+.notice-subtitle {
+  display: block;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #007aff;
+  margin-bottom: 8rpx;
+  margin-top: 15rpx;
+}
+
+.notice-text {
+  display: block;
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 12rpx;
+}
+
+/* 对比表格样式 */
+.comparison-table {
+  border: 1px solid #e9ecef;
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.table-header {
+  display: flex;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 15rpx 12rpx;
+  font-size: 24rpx;
+  line-height: 1.4;
+  text-align: center;
+  border-right: 1px solid #e9ecef;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.table-cell.header {
+  font-weight: 600;
+  color: #333333;
+  background-color: #e3f2fd;
+}
+
+.table-cell.label {
+  font-weight: 600;
+  color: #666666;
+  background-color: #f8f9fa;
+  flex: 0.5;
+}
+
+/* 工资类型选择样式 */
 .radio-group {
   display: flex;
-  gap: 20rpx;
+  margin-bottom: 20rpx;
+  border: 1px solid #007aff;
+  border-radius: 8rpx;
+  overflow: hidden;
 }
 
 .radio-item {
   flex: 1;
-  height: 88rpx;
-  line-height: 88rpx;
+  padding: 16rpx;
   text-align: center;
-  border-radius: 6rpx;
-  background-color: #f7f7f5;
-  border: 1px solid #e9e9e7;
   font-size: 28rpx;
-  color: #7c7c7a;
-  transition: all 0.2s ease-in-out;
+  color: #007aff;
+  background-color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .radio-item.selected {
   background-color: #007aff;
-  color: white;
+  color: #ffffff;
+}
+
+/* 描述文字样式 */
+.description {
+  font-size: 24rpx;
+  color: #888888;
+  margin-bottom: 20rpx;
+  line-height: 1.4;
+}
+
+/* 日期选择器样式 */
+.picker {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+/* 汇总卡片样式 */
+.summary-card {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.summary-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 15rpx;
+  text-align: center;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.summary-label {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.summary-value {
+  font-size: 26rpx;
+  color: #007aff;
+  font-weight: 600;
+}
+
+/* 结果显示区域样式 */
+.result-label-main {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+  padding: 15rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.result-value {
+  font-size: 28rpx;
+  color: #007aff;
+  font-weight: 600;
+}
+
+.result-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  border-top: 2px solid #007aff;
+}
+
+.result-value-total {
+  font-size: 36rpx;
+  color: #007aff;
+  font-weight: 700;
+}
+
+/* 复制按钮样式 */
+.btn-copy {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #f0f0ee;
+  color: #333;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  margin-top: 20rpx;
+}
+
+.btn-copy:active {
+  background-color: #e0e0de;
+}
+
+/* 详细说明样式 */
+.detail-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-toggle-icon {
+  font-size: 24rpx;
+  color: #007aff;
+}
+
+.detail-content {
+  padding: 20rpx 0;
+}
+
+.detail-section {
+  margin-bottom: 25rpx;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 15rpx;
+}
+
+.detail-subtitle {
+  display: block;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #007aff;
+  margin-bottom: 10rpx;
+  margin-top: 15rpx;
+}
+
+.detail-text {
+  display: block;
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+}
+
+
+
+/* 时间输入区域样式 */
+.time-input-section {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.time-input-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.time-input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.time-label {
+  font-size: 26rpx;
+  color: #666666;
+  width: 120rpx;
+}
+
+.time-picker {
+  flex: 1;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 20rpx;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.calculated-hours {
+  flex: 1;
+  font-size: 26rpx;
+  color: #007aff;
+  font-weight: 600;
+}
+
+.btn-group {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.btn-save-time {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #007aff;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-save-time:active {
+  background-color: #0056cc;
+}
+
+.btn-clear-time {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #f0f0f0;
+  color: #666666;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-clear-time:active {
+  background-color: #e0e0e0;
+}
+
+/* 日历按钮样式 */
+.btn-calendar {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #007aff;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-calendar:active {
+  background-color: #0056cc;
+}
+
+/* 日历模态框样式 */
+.calendar-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.calendar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.calendar-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+/* 日历头部样式 */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.calendar-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.calendar-nav {
+  display: flex;
+  gap: 20rpx;
+}
+
+.nav-btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  font-size: 24rpx;
+  color: #333333;
+}
+
+.nav-btn:active {
+  background-color: #e0e0e0;
+}
+
+/* 星期标题样式 */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 26rpx;
+  color: #666666;
+  font-weight: 600;
+  padding: 10rpx 0;
+}
+
+/* 日历网格样式 */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10rpx;
+  margin-bottom: 30rpx;
+}
+
+.calendar-day {
+  position: relative;
+  height: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  background-color: #f8f9fa;
+  border: 2rpx solid transparent;
+}
+
+.calendar-day.other-month {
+  opacity: 0.3;
+}
+
+.calendar-day.selected {
+  background-color: #007aff;
   border-color: #007aff;
+}
+
+.calendar-day.has-overtime {
+  background-color: #ffebee;
+  border-color: #ff6b6b;
+}
+
+.calendar-day.has-overtime .day-number {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.calendar-day.selected {
+  background-color: #007aff;
+  border-color: #007aff;
+}
+
+.calendar-day.selected .day-number {
+  color: #ffffff;
+}
+
+.calendar-day.selected.has-overtime {
+  background-color: #007aff;
+  border-color: #007aff;
+}
+
+.calendar-day.selected.has-overtime .day-number {
+  color: #ffffff;
+}
+
+.day-number {
+  font-size: 26rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.overtime-indicator {
+  position: absolute;
+  bottom: 4rpx;
+  width: 8rpx;
+  height: 8rpx;
+  background-color: #ff6b6b;
+  border-radius: 50%;
+}
+
+/* 时间选择区域样式 */
+.time-selection {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20rpx;
+}
+
+.time-selection-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+.time-selection-tip {
+  display: block;
+  font-size: 22rpx;
+  color: #666666;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.time-input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.calendar-btn-group {
+  display: flex;
+  gap: 15rpx;
+  margin-top: 20rpx;
+}
+
+.btn-save-calendar {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #007aff;
+  color: #ffffff;
+  font-size: 26rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-save-calendar:active {
+  background-color: #0056cc;
+}
+
+.btn-clear-day {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #ff6b6b;
+  color: #ffffff;
+  font-size: 26rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-clear-day:active {
+  background-color: #e55a5a;
+}
+
+.btn-cancel-calendar {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #f0f0f0;
+  color: #666666;
+  font-size: 26rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-cancel-calendar:active {
+  background-color: #e0e0e0;
+}
+
+/* 加班记录列表样式 */
+.overtime-list {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20rpx;
+}
+
+.overtime-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.overtime-list-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.overtime-clear-all {
+  font-size: 24rpx;
+  color: #ff3b30;
+  padding: 5rpx 10rpx;
+}
+
+.overtime-item {
+  display: flex;
+  flex-direction: column;
+  padding: 15rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.overtime-item:last-child {
+  border-bottom: none;
+}
+
+.overtime-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.overtime-date {
+  font-size: 24rpx;
+  color: #666666;
+  width: 120rpx;
+}
+
+.overtime-time {
+  font-size: 24rpx;
+  color: #333333;
+  flex: 1;
+}
+
+.overtime-type-tag {
+  font-size: 20rpx;
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+  margin-left: 10rpx;
+}
+
+.overtime-type-tag.workday {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.overtime-type-tag.weekend {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.overtime-type-tag.holiday {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.overtime-details {
+  display: flex;
+  align-items: center;
+  margin-left: 120rpx;
+}
+
+.overtime-hours {
+  font-size: 24rpx;
+  color: #007aff;
+  font-weight: 600;
+  margin-right: 15rpx;
+}
+
+.overtime-original {
+  font-size: 22rpx;
+  color: #999999;
+  margin-right: 15rpx;
+}
+
+.overtime-deducted {
+  font-size: 22rpx;
+  color: #ff9800;
+}
+
+.overtime-delete {
+  position: absolute;
+  right: 0;
+  top: 15rpx;
+  font-size: 22rpx;
+  color: #ff3b30;
+  padding: 5rpx 10rpx;
+}
+
+/* 工作时间设置样式 */
+.work-time-settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+  padding: 10rpx 15rpx;
+  background-color: #f8f9fa;
+  border-radius: 6rpx;
+}
+
+.work-time-label {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.work-time-edit {
+  font-size: 24rpx;
+  color: #007aff;
+  padding: 5rpx 10rpx;
+}
+
+/* 工作时间设置模态框样式 */
+.work-time-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.work-time-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.work-time-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+}
+
+.work-time-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.work-time-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.work-time-content {
+  margin-bottom: 30rpx;
+}
+
+.work-time-input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.work-time-label {
+  font-size: 28rpx;
+  color: #666666;
+  width: 120rpx;
+}
+
+.work-time-picker {
+  flex: 1;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 20rpx;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.work-time-tip {
+  display: block;
+  font-size: 22rpx;
+  color: #666666;
+  margin-top: 15rpx;
+  line-height: 1.4;
+}
+
+.work-time-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-cancel {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #f0f0f0;
+  color: #666666;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.btn-save {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #007aff;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  text-align: center;
 }

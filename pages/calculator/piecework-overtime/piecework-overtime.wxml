@@ -1,4 +1,0 @@
-<!--pages/calculator/piecework-overtime/piecework-overtime.wxml-->
-<view class="container">
-  <text>计件工时加班费计算器</text>
-</view>

@@ -1,4 +1,0 @@
-<!--pages/calculator/merged-overtime/merged-overtime.wxml-->
-<view class="container">
-  <text>不定时工时加班费计算器</text>
-</view>

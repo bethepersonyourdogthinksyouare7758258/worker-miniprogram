@@ -4,7 +4,10 @@ Page({
     unusedLeaveDays: null,
     result: null,
     showDetail: false,
-    detailProcess: ''
+    showLegalBasis: false,
+    detailProcess: '',
+    calculationBasis: '根据《中华人民共和国劳动法》及《职工带薪年休假条例》，未休年假应按照日工资收入的300%支付补偿，其中包含正常工资，额外支付200%。',
+    accrualBasis: '"根据《职工带薪年休假条例》，职工的年假可以累积至下一个年度。如果公司因自身原因未能安排员工在第二年休完累积的年假，则必须支付补偿。"'
   },
 
   bindKeyInput: function(e) {
@@ -76,6 +79,12 @@ Page({
     });
   },
 
+  toggleLegalBasis: function() {
+    this.setData({
+      showLegalBasis: !this.data.showLegalBasis
+    });
+  },
+
   copyResult: function() {
     if (this.data.result === null) {
       wx.showToast({
@@ -85,17 +94,11 @@ Page({
       return;
     }
     
-    const resultText = `【未休年假补偿计算】
-    
-${this.data.detailProcess}
-
-最终结果：${this.data.result} 元`;
-    
     wx.setClipboardData({
-      data: resultText,
+      data: this.data.result,
       success: function() {
         wx.showToast({
-          title: '详细计算过程已复制',
+          title: '复制成功',
           icon: 'success'
         });
       },

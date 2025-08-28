@@ -25,25 +25,19 @@
       "pages": [
         "index",
         "scene/scene",
-        "standard-overtime/standard-overtime",
-        "comprehensive-overtime/comprehensive-overtime",
-        "piecework-overtime/piecework-overtime",
-        "severance-pay/severance-pay",
-        "sick-pay/sick-pay",
-        "social-base/social-base",
-        "injury-compensation/injury-compensation",
-        "death-compensation/death-compensation",
-        "net-salary/net-salary",
         "individual-income-tax/individual-income-tax",
         "overtime-pay/overtime-pay",
         "annual-leave-compensation/annual-leave-compensation",
         "double-salary/double-salary",
         "economic-bcj/economics-bcj",
+        "severance-pay/severance-pay",
+        "sick-pay/sick-pay",
+        "social-base/social-base",
+        "injury-compensation/injury-compensation",
+        "death-compensation/death-compensation",
         "after-tax-salary/after-tax-salary",
         "social-insurance/social-insurance",
-        "labor-arbitration/labor-arbitration",
-        "economic-compensation/economic-compensation",
-        "merged-overtime/merged-overtime"
+        "labor-arbitration/labor-arbitration"
       ]
     },
     {

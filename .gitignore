@@ -9,6 +9,9 @@ $RECYCLE.BIN/
 .Spotlight-V100
 .TemporaryItems
 .Trashes
+*.pyc
+/backend/venv/*
 
 # Node.js
 node_modules/
+backend/venv/lib/python3.12/site-packages/yaml/__pycache__/resolver.cpython-312.pyc

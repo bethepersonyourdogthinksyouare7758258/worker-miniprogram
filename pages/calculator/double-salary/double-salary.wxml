@@ -1,62 +1,94 @@
 <view class="container">
   <view class="header">
-    <text class="header-icon">✌️</text>
     <text class="title">双倍工资计算器</text>
+    <view class="subtitle" bindtap="toggleLawDetails">
+      <text>时效和适用范围 →</text>
+    </view>
+  </view>
+  <view class="subtitle">根据《劳动合同法》相关规定，用人单位未依法签订书面劳动合同，应向劳动者支付双倍工资。</view>
+
+  <!-- 双倍工资时效和适用范围展开区域 -->
+  <view class="law-details-card" wx:if="{{showLawDetails}}">
+    <view class="law-details-content">
+      <text class="law-details-title">双倍工资的时效规定</text>
+      <text class="law-details-text">根据中国的《劳动合同法》和相关司法解释，双倍工资的支付是有明确时效的。</text>
+      
+      <view class="law-section">
+        <text class="law-section-title">双倍工资的时效</text>
+        <text class="law-details-text">双倍工资的计算期限是从你入职的第二个月开始，到用人单位与你签订书面劳动合同之日止。</text>
+        <text class="law-details-text">这个支付的最长时限是11个月。</text>
+      </view>
+
+      <view class="law-section">
+        <text class="law-section-title">举例说明</text>
+        <text class="law-details-text">如果你在2024年1月1日入职，公司直到2024年3月1日才和你签订书面劳动合同。那么，公司需要支付你2月1日至2月29日（即满一个月后的次日起到签订合同之日止）期间的双倍工资。</text>
+        <text class="law-details-text">如果你在2024年1月1日入职，但直到2025年1月1日（满一年）公司都没有和你签订书面劳动合同。那么，公司需要支付你11个月的双倍工资，即从2024年2月1日到2024年12月31日期间的双倍工资。</text>
+        <text class="law-details-text">如果超过一年公司仍未签订合同，法律规定视为已订立无固定期限劳动合同，双倍工资的支付责任也就此终止。</text>
+      </view>
+
+      <view class="law-section">
+        <text class="law-section-title">申请仲裁的时效</text>
+        <text class="law-details-text">你需要注意的是，双倍工资的仲裁时效为一年。这个时效是从你与公司解除或终止劳动关系之日起开始计算。如果你在离职后一年内没有提出仲裁申请，可能就会失去获得双倍工资的权利。</text>
+        <text class="law-details-text">希望这些信息能帮助你更好地了解双倍工资的时效问题。</text>
+      </view>
+    </view>
   </view>
 
   <view class="card">
     <view class="input-group">
-      <text class="label">实际用工起始日</text>
-      <picker mode="date" value="{{startDate}}" start="1970-01-01" end="2030-12-31" bindchange="bindStartDateChange">
-        <view class="picker-input">
-          <text>{{startDate ? startDate : '请选择开始时间'}}</text>
-          <text class="picker-arrow">▼</text>
+      <text class="label">用工起始日</text>
+      <text class="description">法律规定，此项补偿最长不超过11个月。</text>
+      <picker mode="date" value="{{startDate}}" bindchange="bindDateChange" data-field="startDate">
+        <view class="picker">
+          {{startDate || '请选择日期'}}
         </view>
       </picker>
     </view>
 
     <view class="input-group">
-      <text class="label">申请仲裁时间</text>
-      <picker mode="date" value="{{arbitrationDate}}" start="1970-01-01" end="2030-12-31" bindchange="bindArbitrationDateChange">
-        <view class="picker-input">
-          <text>{{arbitrationDate ? arbitrationDate : '请选择仲裁时间'}}</text>
-          <text class="picker-arrow">▼</text>
+      <text class="label">签订合同日或申请仲裁日</text>
+      <picker mode="date" value="{{endDate}}" bindchange="bindDateChange" data-field="endDate">
+        <view class="picker">
+          {{endDate || '请选择日期'}}
         </view>
       </picker>
     </view>
 
     <view class="input-group">
-      <text class="label">应发工资 (元/月)</text>
-      <input type="digit" class="input" placeholder="请输入月应发工资" value="{{salary}}" bindinput="bindSalaryInput" />
+      <text class="label">月最高工资 (元/月)</text>
+      <text class="description">请填写你的月最高工资，即税前工资（包括基本工资、岗位工资、奖金、津贴、补贴等，含加班费）。按照最高赔偿金额来计算。</text>
+      <input type="digit" class="input" placeholder="请输入月最高工资" bindinput="bindKeyInput" data-field="monthlySalary" />
     </view>
+    <button class="btn-calculate" bindtap="calculate">计算</button>
   </view>
-
-  <button class="btn-calculate" bindtap="calculate">开始计算</button>
 
   <view class="result-area" wx:if="{{result !== null}}">
     <view class="result-card">
-      <view class="result-item">
-        <text class="result-label">可支持第二倍工资数额</text>
+      <text class="result-label-main">可支持双倍工资数额</text>
+      <view class="result-value-container">
         <text class="result-value">{{result}} 元</text>
       </view>
       <button class="btn-copy" bindtap="copyResult">复制结果</button>
     </view>
 
-    <view class="detail-card" wx:if="{{detailProcess}}">
+    <view class="detail-card">
       <view class="detail-toggle" bindtap="toggleDetail">
-        <text>详细计算过程</text>
+        <text>详细说明与法律须知</text>
         <text class="detail-toggle-icon">{{showDetail ? '▲' : '▼'}}</text>
       </view>
-      <view class="detail-process" wx:if="{{showDetail}}">
-        <text class="detail-content">{{detailProcess}}</text>
-      </view>
-    </view>
-  </view>
+      <view wx:if="{{showDetail}}">
+        <view class="detail-subtitle">1. 详细计算过程</view>
+        <text class="detail-content">第一步：确定计算月数
+计算方式：补偿月数根据"签订合同日或申请仲裁日"与"用工起始日"之间的总天数来计算。
+法律规定时限：补偿期限从用工之日起满一个月的次日开始计算，最长不超过11个月。
 
-  <view class="legal-info card">
-    <view class="legal-title">相关法律条文</view>
-    <view class="legal-content">
-      <text>《劳动合同法》第八十二条 用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当向劳动者每月支付二倍的工资。</text>
+第二步：计算补偿金额
+计算公式：补偿金额 = 你的月最高工资 × 法律支持的月数。
+（注：不足一个月的，按照日工资标准计算。）</text>
+        <view class="detail-subtitle">2. 相关法律条文</view>
+        <text class="detail-content">《劳动合同法》第八十二条：用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当向劳动者每月支付二倍的工资。
+最高人民法院司法解释：用人单位与劳动者均已同意不订立书面劳动合同，但劳动者要求支付二倍工资的，人民法院不予支持。</text>
+      </view>
     </view>
   </view>
 </view>

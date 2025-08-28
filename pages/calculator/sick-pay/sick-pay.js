@@ -1,125 +1,151 @@
-
-
 Page({
   data: {
-    y: null,
-    d: null,
-    pm: null,
+    inputType: 'days', // 'days' or 'date'
+    monthlySalary: null,
+    totalWorkYears: null,
+    currentWorkYears: null,
+    sickDays: null,
+    startDate: null,
+    endDate: null,
     result: null,
-    showDetail: false,
-    detailProcess: '',
-
+    showNotice: false,
+    showDetails: false,
   },
 
 
-  calculate: function() {
-    const { y, d, pm } = this.data;
-    if (y === null || d === null || pm === null) {
-      wx.showToast({
-        title: '请填写所有字段',
-        icon: 'none'
-      });
-      return;
-    }
-    
-    const yVal = parseFloat(y) || 0;
-    const dVal = parseFloat(d) || 0;
-    const pmVal = parseFloat(pm) || 0;
-
-    const dailyMinWage = (pmVal * 8) / 21.75;
-    const actualDays = Math.min(yVal, dVal);
-    const result = actualDays * dailyMinWage;
-
-    // 生成详细计算过程
-    const detailProcess = `计算公式：病假工资 = min(病假天数, 疾病休假天数) × 日最低工资
-其中：日最低工资 = (最低月工资标准 × 8小时) ÷ 21.75天
-
-输入数据：
-• 病假天数(Y)：${yVal} 天
-• 疾病休假天数(D)：${dVal} 天
-• 最低月工资标准(Pm)：${pmVal} 元
-
-计算过程：
-第一步：计算日最低工资
-日最低工资 = (${pmVal} × 8) ÷ 21.75
-           = ${(pmVal * 8).toFixed(2)} ÷ 21.75
-           = ${dailyMinWage.toFixed(2)} 元/天
-
-第二步：确定病假工资计算天数
-实际病假天数 = min(${yVal}, ${dVal}) = ${actualDays} 天
-
-第三步：计算病假工资
-病假工资 = ${actualDays} × ${dailyMinWage.toFixed(2)}
-         = ${result.toFixed(2)} 元`;
-
+  switchInputType: function(e) {
+    const inputType = e.currentTarget.dataset.type;
     this.setData({
-      result: result.toFixed(2),
-      detailProcess: detailProcess,
-      showDetail: false
+      inputType: inputType,
+    });
+    if (inputType === 'date') {
+      if (this.data.startDate && this.data.endDate) {
+        this.calculateDaysFromDate();
+      }
+    } else {
+      this.setData({
+        sickDays: ''
+      });
+    }
+  },
+
+  bindKeyInput: function(e) {
+    const field = e.currentTarget.dataset.field;
+    this.setData({
+      [field]: e.detail.value
     });
   },
 
-  toggleDetail: function() {
+  bindDateChange: function(e) {
+    const field = e.currentTarget.dataset.field;
     this.setData({
-      showDetail: !this.data.showDetail
+      [field]: e.detail.value
+    }, () => {
+      if (this.data.startDate && this.data.endDate) {
+        this.calculateDaysFromDate();
+      }
+    });
+  },
+
+  calculateDaysFromDate: function() {
+    const start = new Date(this.data.startDate);
+    const end = new Date(this.data.endDate);
+    if (start >= end) {
+      wx.showToast({ title: '结束日期需晚于起始日', icon: 'none' });
+      this.setData({ sickDays: '' });
+      return;
+    }
+    
+    const timeDiff = end.getTime() - start.getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1; // 包含起始日和结束日
+    
+    this.setData({ sickDays: daysDiff.toString() });
+  },
+
+  // 获取医疗期（月）
+  getMedicalPeriod: function(totalYears, currentYears) {
+    if (totalYears < 10) {
+      if (currentYears < 5) return 3;
+      else return 6;
+    } else {
+      if (currentYears < 5) return 9;
+      else if (currentYears < 10) return 12;
+      else if (currentYears < 15) return 18;
+      else if (currentYears < 20) return 24;
+      else return 30;
+    }
+  },
+
+  // 获取病假工资比例
+  getSickPayRatio: function(sickDays, medicalPeriodMonths) {
+    const medicalPeriodDays = medicalPeriodMonths * 30; // 简化计算，每月按30天
+    
+    if (sickDays <= medicalPeriodDays) {
+      // 病假未超过医疗期
+      return 0.8; // 80%
+    } else {
+      // 病假已超过医疗期
+      return 0.6; // 60%
+    }
+  },
+
+  calculate: function() {
+    const { monthlySalary, totalWorkYears, currentWorkYears, sickDays } = this.data;
+
+    if (!monthlySalary || !totalWorkYears || !currentWorkYears || !sickDays) {
+      wx.showToast({ title: '请填写所有字段', icon: 'none' });
+      return;
+    }
+
+    const salary = parseFloat(monthlySalary);
+    const totalYears = parseFloat(totalWorkYears);
+    const currentYears = parseFloat(currentWorkYears);
+    const days = parseFloat(sickDays);
+
+    if (isNaN(salary) || isNaN(totalYears) || isNaN(currentYears) || isNaN(days) || 
+        salary <= 0 || totalYears < 0 || currentYears < 0 || days <= 0) {
+      wx.showToast({ title: '请输入有效的数值', icon: 'none' });
+      return;
+    }
+
+    // 第一步：确定医疗期
+    const medicalPeriodMonths = this.getMedicalPeriod(totalYears, currentYears);
+    
+    // 第二步：确定病假工资比例
+    const payRatio = this.getSickPayRatio(days, medicalPeriodMonths);
+    
+    // 第三步：计算病假工资总额
+    const dailyWage = salary / 21.75;
+    const totalSickPay = dailyWage * days * payRatio;
+
+    this.setData({
+      result: totalSickPay.toFixed(2)
+    });
+
+    wx.showToast({ title: '计算完成', icon: 'success' });
+  },
+
+  toggleNotice: function() {
+    this.setData({
+      showNotice: !this.data.showNotice
+    });
+  },
+
+  toggleDetails: function() {
+    this.setData({
+      showDetails: !this.data.showDetails
     });
   },
 
   copyResult: function() {
     if (this.data.result === null) {
-      wx.showToast({
-        title: '没有计算结果可复制',
-        icon: 'none'
-      });
+      wx.showToast({ title: '没有计算结果可复制', icon: 'none' });
       return;
     }
-    
-    const { y, d, pm } = this.data;
-    const yVal = parseFloat(y) || 0;
-    const dVal = parseFloat(d) || 0;
-    const pmVal = parseFloat(pm) || 0;
-    
-    const dailyMinWage = (pmVal ) / 21.75;
-    const actualDays = Math.min(yVal, dVal);
-    
-    const resultText = `【病假工资计算】
-    
-计算公式：病假工资 = min(病假天数, 疾病休假天数) × 日最低工资
-其中：日最低工资 = (最低月工资标准 ) ÷ 21.75天
-
-输入数据：
-• 病假天数(Y)：${yVal} 天
-• 疾病休假天数(D)：${dVal} 天
-• 最低月工资标准(Pm)：${pmVal} 元
-
-计算过程：
-第一步：计算日最低工资
-日最低工资 = (${pmVal} ) ÷ 21.75
-           = ${(pmVal ).toFixed(2)} ÷ 21.75
-           = ${dailyMinWage.toFixed(2)} 元/天
-
-第二步：确定病假工资计算天数
-实际病假天数 = min(${yVal}, ${dVal}) = ${actualDays} 天
-
-第三步：计算病假工资
-病假工资 = ${actualDays} × ${dailyMinWage.toFixed(2)}
-         = ${this.data.result} 元
-
-最终结果：${this.data.result} 元`;
-    
     wx.setClipboardData({
-      data: resultText,
-      success: function() {
-        wx.showToast({
-          title: '详细计算过程已复制',
-          icon: 'success'
-        });
-      },
-      fail: function() {
-        wx.showToast({
-          title: '复制失败',
-          icon: 'none'
-        });
+      data: this.data.result,
+      success: () => {
+        wx.showToast({ title: '复制成功', icon: 'success' });
       }
     });
   },
@@ -131,7 +157,7 @@ Page({
     
     return {
       title: shareTitle,
-      path: '/sick-pay/sick-pay',
+      path: '/pages/calculator/sick-pay/sick-pay',
       success: (res) => {
         console.log('分享成功', res);
         wx.showToast({

@@ -50,6 +50,13 @@ Page({
     });
   },
 
+  // 计算社保基数的工具函数
+  calculateSocialBase: function(salary, averageSalary) {
+    const minBase = averageSalary * 0.6;
+    const maxBase = averageSalary * 3;
+    return Math.max(minBase, Math.min(salary, maxBase));
+  },
+
   // 计算五险一金
   calculate: function() {
     // 获取所有输入数据
@@ -90,9 +97,8 @@ Page({
     if (autoCalculate) {
       // 自动计算社保基数
       if (averageSalaryVal > 0) {
-        // 使用工具函数计算社保基数
-        const { calculateSocialBase } = require('../utils/calculator.js');
-        base = calculateSocialBase(salaryVal, averageSalaryVal);
+        // 使用内部工具函数计算社保基数
+        base = this.calculateSocialBase(salaryVal, averageSalaryVal);
       } else {
         // 如果没有提供上年度平均工资，则使用工资总额作为基数
         base = salaryVal;
@@ -221,7 +227,7 @@ ${this.data.detailProcess}
     
     return {
       title: shareTitle,
-      path: '/social-insurance/social-insurance',
+      path: '/pages/calculator/social-insurance/social-insurance',
       success: (res) => {
         console.log('分享成功', res);
         wx.showToast({

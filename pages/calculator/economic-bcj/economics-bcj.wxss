@@ -1,3 +1,95 @@
 @import "../calculator-common.wxss";
 
-/* Add any page-specific styles here */
+/* 适用情况说明样式 */
+.explanation-toggle {
+  background: #f5f5f5;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  text-align: center;
+  color: #1976D2;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.explanation-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.explanation-section {
+  margin-bottom: 20px;
+}
+
+.explanation-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #1976D2;
+}
+
+.explanation-section text {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding-left: 10px;
+}
+
+/* 输入切换按钮样式 */
+.input-switch {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.switch-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #666;
+  background: #f5f5f5;
+  transition: all 0.3s;
+}
+
+.switch-item.active {
+  background: #1976D2;
+  color: white;
+}
+
+/* 日期选择器样式 */
+.picker {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background: #fff;
+  color: #333;
+}
+
+/* 结果区域样式 */
+.result-area {
+  margin-top: 20px;
+}
+
+.result-label-main {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.result-value.highlight {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1976D2;
+}

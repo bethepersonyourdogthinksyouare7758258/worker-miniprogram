@@ -1,11 +1,32 @@
 Page({
   data: {
-    n: null,
-    w: null,
-    aw: null,
+    inputType: 'months', // 'months' or 'date'
+    workMonths: '',
+    startDate: null,
+    endDate: null,
+    monthlySalary: '',
+    avgSalaryLastYear: '',
     result: null,
+    compensationMonths: null,
     showDetail: false,
-    detailProcess: ''
+    showDetails: false,
+    showCompensationDetails: false,
+  },
+
+  switchInputType: function(e) {
+    const inputType = e.currentTarget.dataset.type;
+    this.setData({
+      inputType: inputType,
+    });
+    if (inputType === 'date') {
+      if (this.data.startDate && this.data.endDate) {
+        this.calculateMonthsFromDate();
+      }
+    } else {
+      this.setData({
+        workMonths: ''
+      });
+    }
   },
 
   bindKeyInput: function(e) {
@@ -15,159 +36,106 @@ Page({
     });
   },
 
-  calculate: function() {
-    const { n, w, aw } = this.data;
-    if (n === null || w === null || aw === null) {
-      wx.showToast({
-        title: '请填写所有字段',
-        icon: 'none'
-      });
-      return;
-    }
-    
-    const nVal = parseFloat(n) || 0;
-    var wVal = parseFloat(w) || 0;
-    var awVal = parseFloat(aw) || 0;
-
-    let nm = 0;
-    if (nVal < 6) nm = 0.5;
-    else if (nVal < 12) nm = 1;
-    else nm = Math.floor(nVal/12) + (nVal % 12 > 6 ? 1 : (nVal % 12 > 0 ? 0.5 : 0));
-    if(wVal<awVal)
-    {
-      wVal=awVal
-    }
-
-    
-    const result = nm * wVal*2;
-
-    // 生成详细计算过程
-    const detailProcess = `计算公式：经济赔偿金 = 补偿年限系数 × 月工资 × 2
-
-输入数据：
-• 工作月数(N)：${nVal} 个月
-• 月工资(W)：${wVal} 元
-• 上年度平均工资(AW)：${awVal} 元
-
-计算过程：
-第一步：计算补偿年限系数
-工作月数：${nVal} 个月
-- 如果 < 6个月：系数 = 0.5
-- 如果 6-11个月：系数 = 1  
-- 如果 ≥ 12个月：系数 = 完整年数 + 余月系数
-  (余月 > 6个月按1年算，≤ 6个月按0.5年算)
-
-当前工作月数：${nVal} 个月
-补偿年限系数：${nm}
-计算工资基数
-如果月平均工资${wVal}小于社会平均工资${awVal},那么工资基数为后者,反之为前者 
-工资基数${wVal=Math.max(wVal,awVal)}
-第二步：计算最终经济赔偿金
-经济赔偿金 = ${nm} × ${wVal} × 2 = ${(nm * wVal).toFixed(2)*2} 元`;
-
+  bindDateChange: function(e) {
+    const field = e.currentTarget.dataset.field;
     this.setData({
-      result: result.toFixed(2),
-      detailProcess: detailProcess,
-      showDetail: false
+      [field]: e.detail.value
+    }, () => {
+      if (this.data.startDate && this.data.endDate) {
+        this.calculateMonthsFromDate();
+      }
     });
   },
 
-  toggleDetail: function() {
+  calculateMonthsFromDate: function() {
+    const start = new Date(this.data.startDate);
+    const end = new Date(this.data.endDate);
+    if (start >= end) {
+      wx.showToast({ title: '结束日期需晚于起始日', icon: 'none' });
+      this.setData({ workMonths: '' });
+      return;
+    }
+    
+    let yearDiff = end.getFullYear() - start.getFullYear();
+    let monthDiff = end.getMonth() - start.getMonth();
+    let dayDiff = end.getDate() - start.getDate();
+
+    let totalMonths = yearDiff * 12 + monthDiff;
+    if (dayDiff < 0) {
+      totalMonths--;
+    }
+    
+    this.setData({ workMonths: totalMonths.toString() });
+  },
+
+  calculate: function() {
+    const { workMonths, monthlySalary } = this.data;
+
+    if (!workMonths || !monthlySalary) {
+      wx.showToast({ title: '请填写所有字段', icon: 'none' });
+      return;
+    }
+
+    const months = parseFloat(workMonths);
+    const salary = parseFloat(monthlySalary);
+
+    if (isNaN(months) || isNaN(salary) || months <= 0 || salary <= 0) {
+      wx.showToast({ title: '请输入有效的数值', icon: 'none' });
+      return;
+    }
+
+    // 计算经济赔偿金 - "2N"赔偿金
+    // 对于违法解除劳动合同，赔偿金为经济补偿的二倍
+    let compensationMonths = months;
+    
+    // 6个月以上不满一年的，按一年计算
+    if (compensationMonths >= 6 && compensationMonths < 12) {
+      compensationMonths = 12;
+    }
+    // 不满六个月的，按半年计算
+    else if (compensationMonths < 6) {
+      compensationMonths = 6;
+    }
+    
+    // 计算公式：赔偿金额 = 月工资 × 工作年限 × 2
+    const totalCompensation = compensationMonths * salary * 2;
+
     this.setData({
-      showDetail: !this.data.showDetail
+      result: totalCompensation.toFixed(2),
+      compensationMonths: compensationMonths
     });
+
+    wx.showToast({ title: '计算完成', icon: 'success' });
   },
 
   copyResult: function() {
     if (this.data.result === null) {
-      wx.showToast({
-        title: '没有计算结果可复制',
-        icon: 'none'
-      });
+      wx.showToast({ title: '没有计算结果可复制', icon: 'none' });
       return;
     }
-    
-    const { n, w, aw } = this.data;
-    const nVal = parseFloat(n) || 0;
-    const wVal = parseFloat(w) || 0;
-    const awVal = parseFloat(aw) || 0;
-    
-    let nm = 0;
-    if (nVal < 6) nm = 0.5;
-    else if (nVal < 12) nm = 1;
-    else nm = Math.floor(nVal/12) + (nVal % 12 > 6 ? 1 : (nVal % 12 > 0 ? 0.5 : 0));
-    
-    const cap = 12 * Math.min(3 * awVal, wVal);
-    
-    const resultText = `【经济补偿金计算】
-    
-计算公式：经济赔偿金 =补偿年限系数 × 月工资× 2
-
-输入数据：
-• 工作月数(N)：${nVal} 个月
-• 月工资(W)：${wVal} 元
-• 上年度平均工资(AW)：${awVal} 元
-
-计算过程：
-第一步：计算补偿年限系数
-工作月数：${nVal} 个月
-- 如果 < 6个月：系数 = 0.5
-- 如果 6-11个月：系数 = 1  
-- 如果 ≥ 12个月：系数 = 完整年数 + 余月系数
-  (余月 > 6个月按1年算，≤ 6个月按0.5年算)
-计算工资基数
-如果月平均工资${wVal}小于社会平均工资${awVal},那么工资基数为后者,反之为前者 
-工资基数${wVal=Math.max(wVal,awVal)}
-当前工作月数：${nVal} 个月
-补偿年限系数：${nm}
-
-
-
-第三步：计算最终经济赔偿金
-基本补偿 = ${nm} × ${wVal} × 2 = ${(nm * wVal).toFixed(2)} 元
-经济补偿金 = (nm * wVal).toFixed(2)} = ${this.data.result} 元
-
-最终结果：${this.data.result} 元`;
-    
     wx.setClipboardData({
-      data: resultText,
-      success: function() {
-        wx.showToast({
-          title: '详细计算过程已复制',
-          icon: 'success'
-        });
-      },
-      fail: function() {
-        wx.showToast({
-          title: '复制失败',
-          icon: 'none'
-        });
+      data: this.data.result,
+      success: () => {
+        wx.showToast({ title: '复制成功', icon: 'success' });
       }
     });
   },
 
-  // 分享功能
-  onShareAppMessage: function () {
-    const { result } = this.data;
-    const shareTitle = result ? `我用经济赔偿金计算器算出了${result}元，快来试试吧！` : '经济赔偿金计算器，快来计算你的赔偿金！';
-    
-    return {
-      title: shareTitle,
-      path: '/severance-pay/severance-pay',
-      success: (res) => {
-        console.log('分享成功', res);
-        wx.showToast({
-          title: '分享成功',
-          icon: 'success'
-        });
-      },
-      fail: (err) => {
-        console.error('分享失败', err);
-        wx.showToast({
-          title: '分享取消',
-          icon: 'none'
-        });
-      }
-    };
-  }
-})
+  toggleDetails: function() {
+    this.setData({
+      showDetails: !this.data.showDetails
+    });
+  },
+
+  toggleCompensationDetails: function() {
+    this.setData({
+      showCompensationDetails: !this.data.showCompensationDetails
+    });
+  },
+
+  openLawLink: function(e) {
+    wx.navigateTo({
+      url: `/pages/core-laws-pack/core-laws-detail/core-laws-detail?id=47`
+    });
+  },
+});

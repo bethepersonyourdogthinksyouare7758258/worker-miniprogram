@@ -27,10 +27,11 @@ Page({
     const result = 20 * pnVal;
 
     // 生成详细计算过程
-    const detailProcess =` 计算公式：死亡赔偿金为二十倍的人均可支配收入(年收入)
+    const detailProcess = `计算公式：死亡赔偿金为二十倍的人均可支配收入(年收入)
 
-    • 上一年度城镇居民人均可支配收入每年${pnVal} 元
-    则死亡赔偿金为20倍的人均收入(${pnVal})=>${result.toFixed(2)} 元`;
+• 上一年度城镇居民人均可支配收入每年${pnVal} 元
+则死亡赔偿金为20倍的人均收入(${pnVal})=>${result.toFixed(2)} 元`;
+    
     this.setData({
       result: result.toFixed(2),
       detailProcess: detailProcess,
@@ -53,21 +54,29 @@ Page({
       return;
     }
     
-    const { pn } = this.data;
-    const pnVal = parseFloat(pn) || 0;
-    
-    const resultText = `【死亡赔偿计算】
-    
-计算公式：死亡赔偿金为二十倍的人均可支配收入(年收入)
-
-• 上一年度城镇居民人均可支配收入每年${pnVal} 元
-则死亡赔偿金为20倍的人均收入(${pnVal})=>${this.data.result} 元`;
-    
     wx.setClipboardData({
-      data: resultText,
+      data: this.data.result,
       success: function() {
         wx.showToast({
-          title: '详细计算过程已复制',
+          title: '复制成功',
+          icon: 'success'
+        });
+      },
+      fail: function() {
+        wx.showToast({
+          title: '复制失败',
+          icon: 'none'
+        });
+      }
+    });
+  },
+
+  copyIncomeText: function() {
+    wx.setClipboardData({
+      data: '国家统计局 xxxx年全国城镇居民人均可支配收入',
+      success: function() {
+        wx.showToast({
+          title: '复制成功',
           icon: 'success'
         });
       },
@@ -87,7 +96,7 @@ Page({
     
     return {
       title: shareTitle,
-      path: '/death-compensation/death-compensation',
+      path: '/pages/calculator/death-compensation/death-compensation',
       success: (res) => {
         console.log('分享成功', res);
         wx.showToast({

@@ -1,5 +1,3 @@
-
-
 Page({
   data: {
     a: null,
@@ -9,6 +7,12 @@ Page({
     detailProcess: '',
   },
 
+  bindKeyInput: function(e) {
+    const field = e.currentTarget.dataset.field;
+    this.setData({
+      [field]: e.detail.value
+    });
+  },
 
   calculate: function() {
     const { a, c } = this.data;
@@ -124,7 +128,7 @@ Page({
     
     return {
       title: shareTitle,
-      path: '/social-base/social-base',
+      path: '/pages/calculator/social-base/social-base',
       success: (res) => {
         console.log('分享成功', res);
         wx.showToast({

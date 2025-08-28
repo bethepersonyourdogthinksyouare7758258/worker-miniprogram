@@ -107,24 +107,11 @@ Page({
     });
   },
 
-  // 滑动条组件事件处理
-  bindSliderChange: function(e) {
-    const field = e.currentTarget.dataset.field;
-    const value = e.detail.value === 1 ? true : false;
-    
-    // 添加过渡效果
+  // 展开/收起工资组成说明
+  toggleExplanation: function() {
     this.setData({
-      [field]: value
+      showExplanation: !this.data.showExplanation
     });
-    
-    // 可以在这里添加其他交互效果
-    if (field === 'autoCalculateInsurance') {
-      wx.showToast({
-        title: value ? '已开启自动计算' : '已关闭自动计算',
-        icon: 'none',
-        duration: 1000
-      });
-    }
   },
 
   // 按钮切换事件处理
@@ -153,6 +140,44 @@ Page({
     this.setData({
       showDetail: !this.data.showDetail
     });
+  },
+
+  // 简化的个税计算函数
+  calculateIndividualIncomeTax: function(income, socialInsurance, specialDeduction) {
+    const monthlyIncome = income;
+    const deduction = 5000; // 起征点
+    const socialInsuranceVal = socialInsurance || 0;
+    const specialDeductionVal = specialDeduction || 0;
+    
+    const taxableIncome = Math.max(0, monthlyIncome - deduction - socialInsuranceVal - specialDeductionVal);
+    
+    let tax = 0;
+    if (taxableIncome <= 3000) {
+      tax = taxableIncome * 0.03;
+    } else if (taxableIncome <= 12000) {
+      tax = 3000 * 0.03 + (taxableIncome - 3000) * 0.10;
+    } else if (taxableIncome <= 25000) {
+      tax = 3000 * 0.03 + 9000 * 0.10 + (taxableIncome - 12000) * 0.20;
+    } else if (taxableIncome <= 35000) {
+      tax = 3000 * 0.03 + 9000 * 0.10 + 13000 * 0.20 + (taxableIncome - 25000) * 0.25;
+    } else if (taxableIncome <= 55000) {
+      tax = 3000 * 0.03 + 9000 * 0.10 + 13000 * 0.20 + 10000 * 0.25 + (taxableIncome - 35000) * 0.30;
+    } else if (taxableIncome <= 80000) {
+      tax = 3000 * 0.03 + 9000 * 0.10 + 13000 * 0.20 + 10000 * 0.25 + 20000 * 0.30 + (taxableIncome - 55000) * 0.35;
+    } else {
+      tax = 3000 * 0.03 + 9000 * 0.10 + 13000 * 0.20 + 10000 * 0.25 + 20000 * 0.30 + 25000 * 0.35 + (taxableIncome - 80000) * 0.45;
+    }
+    
+    return { tax: tax.toFixed(2) };
+  },
+
+  // 简化的社保计算函数
+  calculateSocialSecurity: function(income, socialBase) {
+    const base = socialBase || income;
+    // 简化计算：假设个人承担比例约为22%
+    const personalRate = 0.22;
+    const total = base * personalRate;
+    return { total: total.toFixed(2) };
   },
 
   // 计算税后工资
@@ -221,7 +246,7 @@ Page({
       W1 = baseSalaryVal * (1 - absentDaysVal / 21.75);
     } else {
       // 缺勤天数大于21天
-      W1 = baseSalaryVal * workDaysVal;
+      W1 = baseSalaryVal * workDaysVal / 21.75;
     }
     
     // 计算可变工资W2
@@ -233,33 +258,30 @@ Page({
     let individualTaxVal = 0;
     let socialInsuranceVal = 0;
     
-    if (autoCalculateTax) {
-      // 自动计算个税
-      const totalIncome = W1 + W2;
-      const taxResult = calculateIndividualIncomeTax(totalIncome, socialInsuranceVal, specialDeductionVal);
-      individualTaxVal = parseFloat(taxResult.tax) || 0;
-    } else {
-      // 手动输入个税
-      individualTaxVal = parseFloat(individualTax) || 0;
-    }
+    const totalIncome = W1 + W2;
     
     if (autoCalculateInsurance) {
       // 自动计算五险一金
-      const totalIncome = W1 + W2;
-      // 计算社保基数（需要用户提供上年度平均工资）
-      // 如果用户输入了上年度平均工资，则使用该值计算社保基数
-      // 否则使用总收入作为基数
       let socialBase = totalIncome;
       if (averageSalaryVal > 0) {
-        // 使用工具函数计算社保基数
-        const { calculateSocialBase } = require('../utils/calculator.js');
-        socialBase = calculateSocialBase(totalIncome, averageSalaryVal);
+        const minBase = averageSalaryVal * 0.6;
+        const maxBase = averageSalaryVal * 3;
+        socialBase = Math.max(minBase, Math.min(totalIncome, maxBase));
       }
-      const insuranceResult = calculateSocialSecurity(totalIncome, socialBase);
+      const insuranceResult = this.calculateSocialSecurity(totalIncome, socialBase);
       socialInsuranceVal = parseFloat(insuranceResult.total) || 0;
     } else {
       // 手动输入五险一金
       socialInsuranceVal = parseFloat(socialInsurance) || 0;
+    }
+
+    if (autoCalculateTax) {
+      // 自动计算个税
+      const taxResult = this.calculateIndividualIncomeTax(totalIncome, socialInsuranceVal, specialDeductionVal);
+      individualTaxVal = parseFloat(taxResult.tax) || 0;
+    } else {
+      // 手动输入个税
+      individualTaxVal = parseFloat(individualTax) || 0;
     }
     
     W3 = individualTaxVal + socialInsuranceVal;
@@ -301,7 +323,7 @@ ${isFullAttendance ?
   `员工全勤，固定工资W1 = 底薪 = ${baseSalaryVal.toFixed(2)} 元` :
   (absentDaysVal <= 21 ? 
     `缺勤天数(${absentDaysVal}天) ≤ 21天，固定工资W1 = 底薪 × (1 - 缺勤时间/21.75) = ${baseSalaryVal.toFixed(2)} × (1 - ${absentDaysVal}/21.75) = ${W1.toFixed(2)} 元` :
-    `缺勤天数(${absentDaysVal}天) > 21天，固定工资W1 = 底薪 × 出勤天数 = ${baseSalaryVal.toFixed(2)} × ${workDaysVal} = ${W1.toFixed(2)} 元`)
+    `缺勤天数(${absentDaysVal}天) > 21天，固定工资W1 = 底薪 × 出勤天数/21.75 = ${baseSalaryVal.toFixed(2)} × ${workDaysVal}/21.75 = ${W1.toFixed(2)} 元`)
 }
 
 第二步：计算可变工资W2
@@ -318,7 +340,7 @@ ${autoCalculateTax ?
 
 ${autoCalculateInsurance ? 
   `自动计算五险一金：
-  ${averageSalaryVal > 0 ? `社保基数 = ${socialBase.toFixed(2)} 元\n  ` : ''}五险一金 = ${socialInsuranceVal.toFixed(2)} 元` : 
+  五险一金 = ${socialInsuranceVal.toFixed(2)} 元` : 
   `手动输入五险一金：${socialInsuranceVal.toFixed(2)} 元`}
 
 个税保险费W3 = 个税 + 五险一金 = ${individualTaxVal.toFixed(2)} + ${socialInsuranceVal.toFixed(2)} = ${W3.toFixed(2)} 元
@@ -377,7 +399,7 @@ ${this.data.detailProcess}
     
     return {
       title: shareTitle,
-      path: '/after-tax-salary/after-tax-salary',
+      path: '/pages/calculator/after-tax-salary/after-tax-salary',
       success: (res) => {
         console.log('分享成功', res);
         wx.showToast({
@@ -398,12 +420,11 @@ ${this.data.detailProcess}
   // 显示解释文本
   showExplanation: function(e) {
     const field = e.currentTarget.dataset.field;
-    const explanation = afterTaxSalaryExplanations[field];
     
-    if (explanation) {
+    if (field === 'salary') {
       wx.showModal({
-        title: '说明',
-        content: explanation,
+        title: '底薪说明',
+        content: '底薪是指劳动者在提供了正常劳动的前提下，用人单位应支付给劳动者的最低劳动报酬。',
         showCancel: false,
         confirmText: '确定'
       });
