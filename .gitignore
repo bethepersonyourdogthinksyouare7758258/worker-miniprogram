@@ -6,6 +6,7 @@ $RECYCLE.BIN/
 # macOS
 .DS_Store
 .fseventsd
+.vscode/*
 .Spotlight-V100
 .TemporaryItems
 .Trashes

@@ -9,11 +9,154 @@
     </navigator>
     <view class="title-area">
       <text class="page-title">{{title}}</text>
+      <view class="help-hint">
+        <view class="hint-text">
+          <text>💡 温馨提示</text>
+          <text>
+  在写被迫离职声明时，我们只需引用《劳动合同法》第三十八条所有内容并要求赔偿金，避免详述公司违法细节或赔偿金额，以防给对方反驳空间。
+
+出于用户信息安全和平台审查机制考虑，个人敏感信息已设置为默认信息（马大帅），用户可在生成文书后复制内容并自行修改填写真实信息。
+          </text>
+        </view>
+      </view>
     </view>
   </view>
 
   <!-- 表单区域 -->
-  <view class="form-container">
-    <text>This is a placeholder for the form content.</text>
+  <view class="form-container" wx:if="{{formType === 'resignation'}}">
+    
+    <!-- 员工信息卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <text class="card-icon">👤</text>
+        <text class="card-title">员工信息</text>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">员工姓名 <text class="required-mark">*</text></text>
+        <view class="form-input readonly-field">
+          <text>{{formData.employeeName}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">身份证号 <text class="required-mark">*</text></text>
+        <view class="form-input readonly-field">
+          <text>{{formData.employeeIdCard}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">住址 <text class="required-mark">*</text></text>
+        <view class="form-textarea readonly-field">
+          <text>{{formData.employeeAddress}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">联系电话</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.employeePhone}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 单位信息卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <text class="card-icon">🏢</text>
+        <text class="card-title">单位信息</text>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">单位名称 <text class="required-mark">*</text></text>
+        <view class="form-input readonly-field">
+          <text>{{formData.companyName}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">统一社会信用代码</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.companyCreditCode}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">法定代表人</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.companyLegalRep}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">联系人</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.companyContact}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">联系电话</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.companyPhone}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 解除劳动关系信息卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <text class="card-icon">📝</text>
+        <text class="card-title">解除劳动关系信息</text>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">解除日期 <text class="required-mark">*</text></text>
+        <picker class="form-picker" 
+                mode="date" 
+                value="{{formData.terminationDate}}" 
+                bindchange="handleTerminationDateChange">
+          <text>{{formData.terminationDate || '请选择日期'}}</text>
+        </picker>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">解除原因 <text class="required-mark">*</text></text>
+        <text class="section-subtitle">根据《劳动合同法》第三十八条规定</text>
+        <view class="form-textarea readonly-field fixed-reasons-display">
+          <text>{{formData.selectedReasonsText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 生成按钮 -->
+  <view class="button-section" wx:if="{{formType === 'resignation'}}">
+    <button class="generate-button" bindtap="handleGenerateDocument">
+      📋 生成！
+    </button>
+  </view>
+
+  <!-- 预览区域 -->
+  <view class="preview-container" wx:if="{{showPreview && documentContent}}">
+    <view class="preview-header">
+      <text class="preview-title">📄 文书预览</text>
+    </view>
+    <view class="document-display">
+      <text class="document-text">{{documentContent}}</text>
+    </view>
+    <view class="action-section">
+      <button class="copy-button" bindtap="handleCopyDocument">📋 复制文书</button>
+      <button class="share-button" bindtap="handleShareDocument">📤 分享文书</button>
+    </view>
+  </view>
+
+  <!-- 其他文书类型的占位符 -->
+  <view class="form-container" wx:if="{{formType !== 'resignation'}}">
+    <view class="form-card">
+      <text class="card-title">{{title}}</text>
+      <text style="color: #999; margin-top: 20rpx; display: block;">此功能正在开发中...</text>
+    </view>
   </view>
 </view>

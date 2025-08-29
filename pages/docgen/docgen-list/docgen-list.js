@@ -10,7 +10,7 @@ Page({
       },
       {
         type: 'resignation', 
-        title: '被迫离职申请书',
+        title: '被迫离职通知书',
         desc: '公司违法行为迫使离职',
         icon: '📋'
       },
@@ -27,6 +27,16 @@ Page({
     wx.setNavigationBarTitle({
       title: '文书生成器'
     });
+  },
+
+  // 处理文书类型点击事件
+  handleDocumentTypeClick(e) {
+    const type = e.currentTarget.dataset.type;
+    if (type) {
+      wx.navigateTo({
+        url: `../docgen-form/docgen-form?type=${type}`
+      });
+    }
   },
 
   /**
