@@ -13,7 +13,7 @@
         <view class="hint-text">
           <text>💡 温馨提示</text>
           <text>
-  在写被迫离职声明时，我们只需引用《劳动合同法》第三十八条所有内容并要求赔偿金，避免详述公司违法细节或赔偿金额，以防给对方反驳空间。
+不能强制劳动者超时，不能拖欠劳动者薪酬，只要用工有《劳动合同法》第三十八条规定的法定事由，劳动者都可以被迫解除劳动合同，以保护自身合法权益。
 
 出于用户信息安全和平台审查机制考虑，个人敏感信息已设置为默认信息（马大帅），用户可在生成文书后复制内容并自行修改填写真实信息。
           </text>
@@ -23,7 +23,7 @@
   </view>
 
   <!-- 表单区域 -->
-  <view class="form-container" wx:if="{{formType === 'resignation'}}">
+  <view class="form-container">
     
     <!-- 员工信息卡片 -->
     <view class="form-card">
@@ -132,9 +132,9 @@
   </view>
 
   <!-- 生成按钮 -->
-  <view class="button-section" wx:if="{{formType === 'resignation'}}">
+  <view class="button-section">
     <button class="generate-button" bindtap="handleGenerateDocument">
-      📋 生成！
+      📋 生成被迫离职通知书
     </button>
   </view>
 
@@ -149,14 +149,6 @@
     <view class="action-section">
       <button class="copy-button" bindtap="handleCopyDocument">📋 复制文书</button>
       <button class="share-button" bindtap="handleShareDocument">📤 分享文书</button>
-    </view>
-  </view>
-
-  <!-- 其他文书类型的占位符 -->
-  <view class="form-container" wx:if="{{formType !== 'resignation'}}">
-    <view class="form-card">
-      <text class="card-title">{{title}}</text>
-      <text style="color: #999; margin-top: 20rpx; display: block;">此功能正在开发中...</text>
     </view>
   </view>
 </view>

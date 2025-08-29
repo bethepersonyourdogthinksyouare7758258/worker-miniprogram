@@ -53,7 +53,9 @@
       "name": "文书自动生成器",
       "pages": [
         "docgen-list/docgen-list",
-        "docgen-form/docgen-form"
+        "complaint-letter/complaint-letter",
+        "resignation-notice/resignation-notice",
+        "arbitration-request/arbitration-request"
       ]
     },
     {

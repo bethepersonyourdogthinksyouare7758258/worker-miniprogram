@@ -1,58 +1,32 @@
-// pages/docgen/docgen-form.js
+// pages/docgen/resignation-notice/resignation-notice.js
 Page({
   data: {
-    formType: '',
-    title: '',
+    title: '被迫离职通知书',
     formData: {
       // 员工信息（固定默认信息）
       employeeName: '马大帅',
       employeeIdCard: '210381199001010123',
       employeeAddress: '辽宁省铁岭市银州区工人街32号',
       employeePhone: '15640234567',
-      // 单位信息（固定虚拟信息）
+      // 公司信息（固定默认信息）
       companyName: '铁岭维多利亚国际娱乐广场',
       companyCreditCode: '912112001234567890',
       companyLegalRep: '范德彪',
       companyContact: '赵四',
       companyPhone: '024-87654321',
-      // 解除信息（时间可选择，原因固定）
+      // 解除日期
       terminationDate: '',
-      selectedReasons: ['reason1', 'reason2', 'reason3', 'reason4', 'reason5', 'reason6'],
+      // 固定的解除原因
       selectedReasonsText: '（一）未按照劳动合同约定提供劳动保护或者劳动条件的；\n（二）未及时足额支付劳动报酬的；\n（三）未依法为劳动者缴纳社会保险费的；\n（四）用人单位的规章制度违反法律、法规的规定，损害劳动者权益的；\n（五）因本法第二十六条第一款规定的情形致使劳动合同无效的；\n（六）法律、行政法规规定劳动者可以解除劳动合同的其他情形。'
     },
     documentContent: '',
-    showPreview: false,
-    reasonsMap: {
-      'reason1': '（一）未按照劳动合同约定提供劳动保护或者劳动条件的；',
-      'reason2': '（二）未及时足额支付劳动报酬的；',
-      'reason3': '（三）未依法为劳动者缴纳社会保险费的；',
-      'reason4': '（四）用人单位的规章制度违反法律、法规的规定，损害劳动者权益的；',
-      'reason5': '（五）因本法第二十六条第一款规定的情形致使劳动合同无效的；',
-      'reason6': '（六）法律、行政法规规定劳动者可以解除劳动合同的其他情形。'
-    }
+    showPreview: false
   },
 
   onLoad(options) {
-    const type = options.type || 'arbitration'
-    const title = this.getTitleByType(type)
-    
-    this.setData({
-      formType: type,
-      title: title
-    })
-    
     wx.setNavigationBarTitle({
-      title: title
+      title: this.data.title
     })
-  },
-
-  getTitleByType(type) {
-    const titles = {
-      arbitration: '劳动仲裁申请书',
-      resignation: '被迫离职通知书',
-      complaint: '劳动监察投诉书'
-    }
-    return titles[type] || '法律文书生成'
   },
 
   // 解除日期选择处理
@@ -77,18 +51,19 @@ Page({
     return true
   },
 
-  // 生成文书内容
+  // 格式化日期
+  formatDate(dateStr) {
+    if (!dateStr) return '[请填写日期]'
+    const date = new Date(dateStr)
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+  },
+
+  // 生成被迫离职通知书
   generateResignationNotice() {
     const { formData } = this.data
-    
-    // 格式化日期
-    const formatDate = (dateStr) => {
-      if (!dateStr) return ''
-      const date = new Date(dateStr)
-      return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
-    }
 
     const content = `被迫解除劳动关系通知书
+
 员工姓名：${formData.employeeName}
 身份证号：${formData.employeeIdCard}
 单位名称：${formData.companyName}
@@ -101,21 +76,24 @@ Page({
 正文：
 
 ${formData.companyName}：
+
 因下列原因，根据《劳动合同法》第三十八条的规定
 
-（一） 未按照劳动合同约定提供劳动保护或者劳动条件的；
-（二） 未及时足额支付劳动报酬的；
-（三） 未依法为劳动者缴纳社会保险费的；
-（四） 用人单位的规章制度违反法律、法规的规定，损害劳动者权益的；
-（五） 因本法第二十六条第一款规定的情形致使劳动合同无效的；
-（六） 法律、行政法规规定劳动者可以解除劳动合同的其他情形。
+（一）未按照劳动合同约定提供劳动保护或者劳动条件的；
+（二）未及时足额支付劳动报酬的；
+（三）未依法为劳动者缴纳社会保险费的；
+（四）用人单位的规章制度违反法律、法规的规定，损害劳动者权益的；
+（五）因本法第二十六条第一款规定的情形致使劳动合同无效的；
+（六）法律、行政法规规定劳动者可以解除劳动合同的其他情形。
 
-本人决定从${formatDate(formData.terminationDate)}起解除与贵单位的劳动关系。
+本人决定从${this.formatDate(formData.terminationDate)}起解除与贵单位的劳动关系。
 
 根据《劳动合同法》第38条、第46条规定，贵单位应向本人支付经济补偿金。如单位拒绝支付，本人将不得不提起劳动仲裁及向有关部门投诉。
+
 特此通知
+
 员工姓名：${formData.employeeName}
-${formatDate(new Date().toISOString().split('T')[0])}`
+${this.formatDate(new Date().toISOString().split('T')[0])}`
 
     return content
   },
@@ -126,11 +104,7 @@ ${formatDate(new Date().toISOString().split('T')[0])}`
       return
     }
 
-    let documentContent = ''
-    
-    if (this.data.formType === 'resignation') {
-      documentContent = this.generateResignationNotice()
-    }
+    const documentContent = this.generateResignationNotice()
     
     this.setData({
       documentContent: documentContent,
@@ -198,7 +172,7 @@ ${formatDate(new Date().toISOString().split('T')[0])}`
   onShareAppMessage() {
     return {
       title: `${this.data.title} - 法律文书生成器`,
-      path: `/pages/docgen/docgen-form/docgen-form?type=${this.data.formType}`,
+      path: `/pages/docgen/resignation-notice/resignation-notice`,
       imageUrl: ''
     }
   },
@@ -207,7 +181,7 @@ ${formatDate(new Date().toISOString().split('T')[0])}`
   onShareTimeline() {
     return {
       title: `${this.data.title} - 专业法律文书生成`,
-      query: `type=${this.data.formType}`,
+      query: ``,
       imageUrl: ''
     }
   }

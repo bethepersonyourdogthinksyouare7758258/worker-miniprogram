@@ -1,0 +1,85 @@
+<!--pages/docgen/arbitration-request/arbitration-request.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="title">劳动仲裁申请书</view>
+    <view class="subtitle">填写相关信息生成仲裁申请书</view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">申请人信息</view>
+    <view class="form-item">
+      <view class="label">姓名</view>
+      <input class="input" placeholder="请输入申请人姓名" bindinput="onEmployeeNameInput" value="{{formData.employeeName}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">身份证号</view>
+      <input class="input" placeholder="请输入身份证号码" bindinput="onEmployeeIdInput" value="{{formData.employeeId}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">联系电话</view>
+      <input class="input" placeholder="请输入联系电话" bindinput="onEmployeePhoneInput" value="{{formData.employeePhone}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">地址</view>
+      <input class="input" placeholder="请输入联系地址" bindinput="onEmployeeAddressInput" value="{{formData.employeeAddress}}" />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">被申请人信息</view>
+    <view class="form-item">
+      <view class="label">公司名称</view>
+      <input class="input" placeholder="请输入公司全名" bindinput="onCompanyNameInput" value="{{formData.companyName}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">法定代表人</view>
+      <input class="input" placeholder="请输入法定代表人姓名" bindinput="onCompanyRepInput" value="{{formData.companyRep}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">公司地址</view>
+      <input class="input" placeholder="请输入公司地址" bindinput="onCompanyAddressInput" value="{{formData.companyAddress}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">联系电话</view>
+      <input class="input" placeholder="请输入公司电话" bindinput="onCompanyPhoneInput" value="{{formData.companyPhone}}" />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">仲裁请求</view>
+    <view class="form-item">
+      <view class="label">争议金额</view>
+      <input class="input" placeholder="请输入争议金额(元)" type="number" bindinput="onDisputeAmountInput" value="{{formData.disputeAmount}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">仲裁请求</view>
+      <textarea class="textarea" placeholder="请详细说明您的仲裁请求" bindinput="onArbitrationRequestInput" value="{{formData.arbitrationRequest}}" />
+    </view>
+    <view class="form-item">
+      <view class="label">事实与理由</view>
+      <textarea class="textarea" placeholder="请详细描述事实经过和法律理由" bindinput="onFactsAndReasonsInput" value="{{formData.factsAndReasons}}" />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">其他信息</view>
+    <view class="form-item">
+      <view class="label">申请日期</view>
+      <picker mode="date" value="{{formData.applicationDate}}" bindchange="onApplicationDateChange">
+        <view class="picker">
+          {{formData.applicationDate || '请选择申请日期'}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="preview-section" wx:if="{{showPreview}}">
+    <view class="section-title">文档预览</view>
+    <view class="preview-content">{{previewContent}}</view>
+  </view>
+
+  <view class="button-group">
+    <button class="btn btn-preview" bindtap="previewDocument">预览文档</button>
+    <button class="btn btn-generate" bindtap="generateDocument">生成文档</button>
+  </view>
+</view>

@@ -33,9 +33,26 @@ Page({
   handleDocumentTypeClick(e) {
     const type = e.currentTarget.dataset.type;
     if (type) {
-      wx.navigateTo({
-        url: `../docgen-form/docgen-form?type=${type}`
-      });
+      // 每个文书类型都有独立的页面
+      switch(type) {
+        case 'complaint':
+          wx.navigateTo({
+            url: `../complaint-letter/complaint-letter`
+          });
+          break;
+        case 'resignation':
+          wx.navigateTo({
+            url: `../resignation-notice/resignation-notice`
+          });
+          break;
+        case 'arbitration':
+          wx.navigateTo({
+            url: `../arbitration-request/arbitration-request`
+          });
+          break;
+        default:
+          console.warn('Unknown document type:', type);
+      }
     }
   },
 
