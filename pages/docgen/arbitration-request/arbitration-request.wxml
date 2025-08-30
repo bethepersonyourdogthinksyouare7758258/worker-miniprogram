@@ -1,85 +1,407 @@
-<!--pages/docgen/arbitration-request/arbitration-request.wxml-->
-<view class="container">
-  <view class="header">
-    <view class="title">劳动仲裁申请书</view>
-    <view class="subtitle">填写相关信息生成仲裁申请书</view>
-  </view>
+<view class="page-container">
+  <!-- 头部区域 -->
+  <view class="header-section">
+    <navigator url="../docgen-list/docgen-list" class="back-button-wrapper">
+      <view class="back-button">
+        <text class="back-icon">←</text>
+        <text class="back-text">返回</text>
+      </view>
+    </navigator>
+    <view class="title-area">
+      <text class="page-title">{{title}}</text>
+      <view class="help-hint">
+        <view class="hint-text">
+          <text>💡 温馨提示</text>
+          <text>
+劳动仲裁申请书是向劳动人事争议仲裁委员会申请仲裁的重要文书。请根据实际争议情况选择适用的诉讼请求，并填写相关变量信息。
 
-  <view class="form-section">
-    <view class="section-title">申请人信息</view>
-    <view class="form-item">
-      <view class="label">姓名</view>
-      <input class="input" placeholder="请输入申请人姓名" bindinput="onEmployeeNameInput" value="{{formData.employeeName}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">身份证号</view>
-      <input class="input" placeholder="请输入身份证号码" bindinput="onEmployeeIdInput" value="{{formData.employeeId}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">联系电话</view>
-      <input class="input" placeholder="请输入联系电话" bindinput="onEmployeePhoneInput" value="{{formData.employeePhone}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">地址</view>
-      <input class="input" placeholder="请输入联系地址" bindinput="onEmployeeAddressInput" value="{{formData.employeeAddress}}" />
-    </view>
-  </view>
-
-  <view class="form-section">
-    <view class="section-title">被申请人信息</view>
-    <view class="form-item">
-      <view class="label">公司名称</view>
-      <input class="input" placeholder="请输入公司全名" bindinput="onCompanyNameInput" value="{{formData.companyName}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">法定代表人</view>
-      <input class="input" placeholder="请输入法定代表人姓名" bindinput="onCompanyRepInput" value="{{formData.companyRep}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">公司地址</view>
-      <input class="input" placeholder="请输入公司地址" bindinput="onCompanyAddressInput" value="{{formData.companyAddress}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">联系电话</view>
-      <input class="input" placeholder="请输入公司电话" bindinput="onCompanyPhoneInput" value="{{formData.companyPhone}}" />
-    </view>
-  </view>
-
-  <view class="form-section">
-    <view class="section-title">仲裁请求</view>
-    <view class="form-item">
-      <view class="label">争议金额</view>
-      <input class="input" placeholder="请输入争议金额(元)" type="number" bindinput="onDisputeAmountInput" value="{{formData.disputeAmount}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">仲裁请求</view>
-      <textarea class="textarea" placeholder="请详细说明您的仲裁请求" bindinput="onArbitrationRequestInput" value="{{formData.arbitrationRequest}}" />
-    </view>
-    <view class="form-item">
-      <view class="label">事实与理由</view>
-      <textarea class="textarea" placeholder="请详细描述事实经过和法律理由" bindinput="onFactsAndReasonsInput" value="{{formData.factsAndReasons}}" />
-    </view>
-  </view>
-
-  <view class="form-section">
-    <view class="section-title">其他信息</view>
-    <view class="form-item">
-      <view class="label">申请日期</view>
-      <picker mode="date" value="{{formData.applicationDate}}" bindchange="onApplicationDateChange">
-        <view class="picker">
-          {{formData.applicationDate || '请选择申请日期'}}
+本页面采用变量替换方式生成文书，各变量字母对应不同的信息内容。出于用户信息安全考虑，个人信息已设置为默认信息，用户可在生成文书后复制内容并自行修改。
+          </text>
         </view>
-      </picker>
+      </view>
     </view>
   </view>
 
-  <view class="preview-section" wx:if="{{showPreview}}">
-    <view class="section-title">文档预览</view>
-    <view class="preview-content">{{previewContent}}</view>
+  <!-- 表单区域 -->
+  <view class="form-container">
+    
+    <!-- 申请人信息卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <text class="card-icon">👤</text>
+        <text class="card-title">申请人信息</text>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">姓名</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.applicantName}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">身份证号码</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.applicantIdCard}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">性别</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.applicantGender}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">民族</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.applicantEthnic}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">住址</text>
+        <view class="form-textarea readonly-field">
+          <text>{{formData.applicantAddress}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 被申请人信息卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <text class="card-icon">🏢</text>
+        <text class="card-title">被申请人信息</text>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">单位名称</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.respondentName}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">统一社会信用代码</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.respondentCreditCode}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">法定代表人</text>
+        <view class="form-input readonly-field">
+          <text>{{formData.respondentLegalRep}}</text>
+        </view>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">住址</text>
+        <view class="form-textarea readonly-field">
+          <text>{{formData.respondentAddress}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 诉讼请求选择卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <text class="card-icon">⚖️</text>
+        <text class="card-title">诉讼请求选择</text>
+      </view>
+      
+      <view class="input-group">
+        <text class="input-label">请选择适用的诉讼请求 <text class="required-mark">*</text></text>
+        <text class="section-subtitle">可多选，根据实际争议情况勾选</text>
+        
+        <view class="selected-items-summary" wx:if="{{selectedItems.length > 0}}">
+          <text class="summary-text">✅ 已选择 {{selectedItems.length}} 项诉讼请求</text>
+          <view class="selected-list">
+            <text class="selected-item" wx:for="{{arbitrationItems}}" wx:key="id" wx:if="{{item.checked}}">
+              • {{item.label}}
+            </text>
+          </view>
+        </view>
+        
+        <view class="complaint-options">
+          <view class="complaint-item {{item.checked ? 'selected' : ''}}" 
+                bindtap="handleArbitrationItemSelect" 
+                data-item="{{item.id}}"
+                wx:for="{{arbitrationItems}}"
+                wx:key="id">
+            <view class="custom-checkbox {{item.checked ? 'checked' : ''}}">
+              <text class="check-icon" wx:if="{{item.checked}}">✓</text>
+            </view>
+            <text class="complaint-label">{{item.label}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 统一的动态变量填写区域 -->
+    <view class="form-card" wx:if="{{selectedItems.length > 0}}">
+      <view class="card-header">
+        <text class="card-icon">📝</text>
+        <text class="card-title">变量信息填写</text>
+      </view>
+      
+      <!-- 申请日期 - 必填基础项 -->
+      <view class="input-group">
+        <text class="input-label">申请日期 <text class="required-mark">*</text></text>
+        <picker class="form-picker" 
+                mode="date" 
+                value="{{formData.variables.applicationDate}}" 
+                bindchange="handleDateChange"
+                data-variable="applicationDate"
+                style="display:block;">
+          <view class="picker-content">
+            <text>{{formData.variables.applicationDate || '请选择申请日期'}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- item1相关字段 - 确认劳动关系 -->
+      <block wx:if="{{showItem1Form}}">
+        <view class="field-section-header">⚖️ 确认劳动关系相关信息</view>
+        <view class="input-group">
+          <text class="input-label">入职日期 (变量a) <text class="required-mark">*</text></text>
+          <picker class="form-picker" 
+                  mode="date" 
+                  value="{{formData.variables.a}}" 
+                  bindchange="handleDateChange"
+                  data-variable="a"
+                  style="display:block;">
+            <view class="picker-content">
+              <text>{{formData.variables.a || '请选择入职日期'}}</text>
+            </view>
+          </picker>
+        </view>
+        <view class="input-group">
+          <text class="input-label">离职日期 (变量b)</text>
+          <picker class="form-picker" 
+                  mode="date" 
+                  value="{{formData.variables.b}}" 
+                  bindchange="handleDateChange"
+                  data-variable="b"
+                  style="display:block;">
+            <view class="picker-content">
+              <text>{{formData.variables.b || '请选择离职日期'}}</text>
+            </view>
+          </picker>
+        </view>
+        <view class="input-group">
+          <text class="input-label">工作岗位 (变量r) <text class="required-mark">*</text></text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="请输入工作岗位" 
+                 value="{{formData.variables.r}}"
+                 bindinput="handleVariableInput"
+                 data-variable="r" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">工资结构 (变量t)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="如：3000元底薪+2000绩效工资" 
+                 value="{{formData.variables.t}}"
+                 bindinput="handleVariableInput"
+                 data-variable="t" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">合同签订情况 (变量x)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="如：并签订书面劳动合同" 
+                 value="{{formData.variables.x}}"
+                 bindinput="handleVariableInput"
+                 data-variable="x" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">合同期限 (变量y)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="如：合同期限为3年" 
+                 value="{{formData.variables.y}}"
+                 bindinput="handleVariableInput"
+                 data-variable="y" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">工作地点 (变量z)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="请输入具体工作地点" 
+                 value="{{formData.variables.z}}"
+                 bindinput="handleVariableInput"
+                 data-variable="z" />
+        </view>
+      </block>
+
+      <!-- item2相关字段 - 支付拖欠劳动报酬 -->
+      <block wx:if="{{showItem2Form}}">
+        <view class="field-section-header">💰 拖欠劳动报酬相关信息</view>
+        <view class="input-group">
+          <text class="input-label">拖欠工资金额 (变量c) <text class="required-mark">*</text></text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入拖欠工资总额（元）" 
+                 value="{{formData.variables.c}}"
+                 bindinput="handleVariableInput"
+                 data-variable="c" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">拖欠工资时间段 (变量q)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="如：2024年3月至2024年6月" 
+                 value="{{formData.variables.q}}"
+                 bindinput="handleVariableInput"
+                 data-variable="q" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">工资结构 (变量t)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="如：3000元底薪+2000绩效工资" 
+                 value="{{formData.variables.t}}"
+                 bindinput="handleVariableInput"
+                 data-variable="t" />
+        </view>
+      </block>
+
+      <!-- item3相关字段 - 违法解除赔偿金 -->
+      <block wx:if="{{showItem3Form}}">
+        <view class="field-section-header">⚖️ 违法解除劳动合同赔偿金相关信息</view>
+        <view class="input-group">
+          <text class="input-label">违法解除赔偿金 (变量o) <text class="required-mark">*</text></text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入赔偿金总额（元）" 
+                 value="{{formData.variables.o}}"
+                 bindinput="handleVariableInput"
+                 data-variable="o" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">违法解除日期 (变量b)</text>
+          <picker class="form-picker" 
+                  mode="date" 
+                  value="{{formData.variables.b}}" 
+                  bindchange="handleDateChange"
+                  data-variable="b"
+                  style="display:block;">
+            <view class="picker-content">
+              <text>{{formData.variables.b || '请选择解除日期'}}</text>
+            </view>
+          </picker>
+        </view>
+        <view class="input-group">
+          <text class="input-label">平均工资 (变量e)</text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入离职前12个月平均工资" 
+                 value="{{formData.variables.e}}"
+                 bindinput="handleVariableInput"
+                 data-variable="e" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">工作年限 (变量f)</text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入工作年限（年）" 
+                 value="{{formData.variables.f}}"
+                 bindinput="handleVariableInput"
+                 data-variable="f" />
+        </view>
+        <text class="input-hint">💡 公式：赔偿金 = 2 × 平均工资 × 工作年限</text>
+      </block>
+
+      <!-- item4相关字段 - 延时加班工资 -->
+      <block wx:if="{{showItem4Form}}">
+        <view class="field-section-header">⏰ 延时加班工资相关信息</view>
+        <view class="input-group">
+          <text class="input-label">延时加班总小时数 (变量k) <text class="required-mark">*</text></text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入延时加班总小时数" 
+                 value="{{formData.variables.k}}"
+                 bindinput="handleVariableInput"
+                 data-variable="k" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">工资结构 (变量t)</text>
+          <input class="form-input" 
+                 type="text"
+                 placeholder="如：3000元底薪+2000绩效工资" 
+                 value="{{formData.variables.t}}"
+                 bindinput="handleVariableInput"
+                 data-variable="t" />
+        </view>
+        <view class="input-group">
+          <text class="input-label">延时加班工资 (变量d)</text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="可手动计算或填写具体金额" 
+                 value="{{formData.variables.d}}"
+                 bindinput="handleVariableInput"
+                 data-variable="d" />
+        </view>
+        <text class="input-hint">💡 公式：延时加班工资 = 工资 ÷ 21.75 ÷ 8 × 加班小时 × 1.5</text>
+        <text class="input-hint">💡 提示：可使用"加班费计算器"功能计算准确金额</text>
+      </block>
+
+      <!-- item5相关字段 - 休息日加班工资 -->
+      <block wx:if="{{showItem5Form}}">
+        <view class="field-section-header">📅 休息日加班工资相关信息</view>
+        <view class="input-group">
+          <text class="input-label">休息日加班工资 (变量e)</text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入休息日加班工资（元）" 
+                 value="{{formData.variables.e}}"
+                 bindinput="handleVariableInput"
+                 data-variable="e" />
+        </view>
+        <text class="input-hint">💡 休息日加班工资 = 日工资 × 加班天数 × 2.0</text>
+      </block>
+
+      <!-- item6相关字段 - 法定节假日加班工资 -->
+      <block wx:if="{{showItem6Form}}">
+        <view class="field-section-header">🎉 法定节假日加班工资相关信息</view>
+        <view class="input-group">
+          <text class="input-label">法定节假日加班工资 (变量f)</text>
+          <input class="form-input" 
+                 type="number"
+                 placeholder="请输入法定节假日加班工资（元）" 
+                 value="{{formData.variables.f}}"
+                 bindinput="handleVariableInput"
+                 data-variable="f" />
+        </view>
+        <text class="input-hint">💡 法定节假日加班工资 = 日工资 × 加班天数 × 3.0</text>
+      </block>
+    </view>
   </view>
 
-  <view class="button-group">
-    <button class="btn btn-preview" bindtap="previewDocument">预览文档</button>
-    <button class="btn btn-generate" bindtap="generateDocument">生成文档</button>
+  <!-- 仲裁申请书生成按钮 -->
+  <view class="button-section">
+    <button class="generate-button {{selectedItems.length === 0 ? 'disabled' : ''}}" 
+            bindtap="handleGenerateDocument"
+            disabled="{{selectedItems.length === 0}}">
+      <text wx:if="{{selectedItems.length === 0}}">⚠️ 请先选择诉讼请求</text>
+      <text wx:else>⚖️ 生成劳动仲裁申请书</text>
+    </button>
+  </view>
+
+  <!-- 预览区域 -->
+  <view class="preview-container" wx:if="{{showPreview && documentContent}}">
+    <view class="preview-header">
+      <text class="preview-title">📄 文书预览</text>
+    </view>
+    <view class="document-display">
+      <text class="document-text">{{documentContent}}</text>
+    </view>
+    <view class="action-section">
+      <button class="copy-button" bindtap="handleCopyDocument">📋 复制文书</button>
+      <button class="share-button" bindtap="handleShareDocument">📤 分享文书</button>
+    </view>
   </view>
 </view>
