@@ -146,6 +146,13 @@
 .input-group {
   margin-bottom: 30rpx;
   width: 100%;
+  position: relative;
+}
+
+/* 确保picker组件在input-group中不被遮挡 */
+.input-group .form-picker {
+  position: relative;
+  z-index: 2;
 }
 
 .input-label {
@@ -163,7 +170,7 @@
 }
 
 /* 表单控件 */
-.form-input, .form-textarea, .form-picker {
+.form-input, .form-textarea {
   width: 100%;
   padding: 24rpx;
   border: 2rpx solid #e1e8ed;
@@ -174,6 +181,26 @@
   box-sizing: border-box;
   display: block;
   min-height: 80rpx;
+}
+
+/* picker组件专用样式 - 简化避免冲突 */
+.form-picker {
+  width: 100%;
+  padding: 0;
+  border: 2rpx solid #e1e8ed;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  background: white;
+  box-sizing: border-box;
+  min-height: 80rpx;
+  position: relative;
+  /* 确保点击区域正确 */
+  z-index: 1;
+  /* 添加视觉指示 */
+  cursor: pointer;
+  /* 清除默认样式，让内容填充整个区域 */
+  display: block;
+  overflow: hidden;
 }
 
 .form-input:focus, .form-textarea:focus {
@@ -194,11 +221,75 @@
   background-color: #f5f5f5;
 }
 
-.form-picker {
-  color: #333;
+/* picker内容包装器 - 关键修复：扩展可点击区域 */
+.picker-content {
+  position: relative;
+  width: 100%;
+  min-height: 80rpx;
   display: flex;
   align-items: center;
-  min-height: 28rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  /* 确保整个区域都可以点击 */
+  z-index: 1;
+  /* 添加右侧下拉箭头指示 */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 24rpx center;
+  background-size: 24rpx 24rpx;
+  padding-right: 60rpx;
+}
+
+/* picker内部文字样式 */
+.form-picker text {
+  color: #333;
+  display: block;
+  width: 100%;
+  line-height: 1.4;
+  /* 确保文字不会阻挡点击 */
+  pointer-events: none;
+}
+
+/* 兼容性修复：对于直接包含text的picker组件，扩展点击区域 */
+.form-picker > text {
+  position: relative;
+  width: 100%;
+  min-height: 80rpx;
+  display: flex !important;
+  align-items: center;
+  padding: 24rpx;
+  box-sizing: border-box;
+  /* 添加右侧下拉箭头 */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 24rpx center;
+  background-size: 24rpx 24rpx;
+  padding-right: 60rpx;
+  /* 重要：允许点击事件传递 */
+  pointer-events: auto;
+}
+
+/* picker激活状态 */
+.form-picker:active {
+  border-color: #E6A23C;
+}
+
+.form-picker:active .picker-content {
+  background-color: #f8f9fa;
+  /* 激活时的箭头颜色 */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23E6A23C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 24rpx center;
+  background-size: 24rpx 24rpx;
+}
+
+/* 添加hover效果（对于支持的设备） */
+.form-picker:hover {
+  border-color: #d3d8e0;
+}
+
+.form-picker:hover .picker-content {
+  background-color: #fafbfc;
 }
 
 /* 按钮区域 */
@@ -242,6 +333,18 @@
 .generate-button:active {
   transform: translateY(2rpx);
   box-shadow: 0 4rpx 12rpx rgba(230, 162, 60, 0.3);
+}
+
+.generate-button.disabled {
+  background: linear-gradient(135deg, #ccc 0%, #999 100%);
+  color: #666;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.generate-button.disabled:active {
+  transform: none;
+  box-shadow: none;
 }
 
 /* 预览容器 */
@@ -352,11 +455,21 @@
   border-radius: 12rpx;
   transition: all 0.3s ease;
   cursor: pointer;
+  border: 2rpx solid transparent;
+}
+
+.complaint-item.selected {
+  background: rgba(40, 167, 69, 0.1);
+  border-color: #28a745;
+  box-shadow: 0 2rpx 8rpx rgba(40, 167, 69, 0.2);
 }
 
 .complaint-item:active {
-  background: #e9ecef;
   transform: scale(0.98);
+}
+
+.complaint-item:not(.selected):active {
+  background: #e9ecef;
 }
 
 .custom-checkbox {
@@ -428,6 +541,37 @@
   background: rgba(230, 162, 60, 0.1);
   padding: 8rpx 16rpx;
   border-radius: 8rpx;
+  display: block;
+}
+
+/* 选中项摘要样式 */
+.selected-items-summary {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+  border-radius: 12rpx;
+  border-left: 4rpx solid #28a745;
+  box-shadow: 0 2rpx 8rpx rgba(40, 167, 69, 0.15);
+}
+
+.summary-text {
+  font-size: 26rpx;
+  color: #28a745;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.selected-item {
+  font-size: 24rpx;
+  color: #495057;
+  line-height: 1.4;
   display: block;
 }
 

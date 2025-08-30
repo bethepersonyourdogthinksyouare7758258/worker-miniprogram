@@ -29,7 +29,7 @@ Page({
   },
   navigateToCoreLaws: function() {
     wx.navigateTo({
-      url: '/pages/core-laws-pack/core-laws/core-laws'
+      url: '/pages/core-laws-pack/core-laws-api/core-laws-api'
     });
   },
   navigateToBackgroundCheckGuide: function() {

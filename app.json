@@ -69,8 +69,7 @@
       "root": "pages/core-laws-pack",
       "name": "核心法条",
       "pages": [
-        "core-laws/core-laws",
-        "core-laws-detail/core-laws-detail",
+        "core-laws-api/core-laws-api",
         "scenario-detail/scenario-detail"
       ]
     },

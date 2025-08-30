@@ -170,7 +170,7 @@ Page({
       fail: () => {
         // 如果无法返回，跳转到主页
         wx.redirectTo({
-          url: '/pages/core-laws-pack/core-laws/core-laws'
+          url: '/pages/core-laws-pack/core-laws-api/core-laws-api'
         });
       }
     });
@@ -179,7 +179,7 @@ Page({
   // 跳转到主页
   onGoHome() {
     wx.redirectTo({
-      url: '/pages/core-laws-pack/core-laws/core-laws',
+      url: '/pages/core-laws-pack/core-laws-api/core-laws-api',
       success: () => {
         console.log('跳转主页成功');
       },
@@ -195,7 +195,7 @@ Page({
     if (!scenario) {
       return {
         title: '维权场景详情',
-        path: '/pages/core-laws-pack/core-laws/core-laws'
+        path: '/pages/core-laws-pack/core-laws-api/core-laws-api'
       };
     }
 

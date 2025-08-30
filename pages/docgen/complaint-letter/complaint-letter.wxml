@@ -115,90 +115,25 @@
         <text class="input-label">请选择适用的投诉事项 <text class="required-mark">*</text></text>
         <text class="section-subtitle">可多选</text>
         
-        <text class="input-hint" wx:if="{{selectedItems.length > 0}}">
-          ✅ 已选择 {{selectedItems.length}} 项投诉事项
-        </text>
+        <view class="selected-items-summary" wx:if="{{selectedItems.length > 0}}">
+          <text class="summary-text">✅ 已选择 {{selectedItems.length}} 项投诉事项</text>
+          <view class="selected-list">
+            <text class="selected-item" wx:for="{{complaintItems}}" wx:key="id" wx:if="{{item.checked}}">
+              • {{item.label}}
+            </text>
+          </view>
+        </view>
         
         <view class="complaint-options">
-          <view class="complaint-item {{selectedItems.indexOf('item1') > -1 ? 'selected' : ''}}" 
+          <view class="complaint-item {{item.checked ? 'selected' : ''}}" 
                 bindtap="handleComplaintItemSelect" 
-                data-item="item1">
-            <view class="custom-checkbox {{selectedItems.indexOf('item1') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item1') > -1}}">✓</text>
+                data-item="{{item.id}}"
+                wx:for="{{complaintItems}}"
+                wx:key="id">
+            <view class="custom-checkbox {{item.checked ? 'checked' : ''}}">
+              <text class="check-icon" wx:if="{{item.checked}}">✓</text>
             </view>
-            <text class="complaint-label">制定的内部劳动保障规章违反劳动法律法规</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item2') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item2">
-            <view class="custom-checkbox {{selectedItems.indexOf('item2') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item2') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">未依法与投诉人订立书面劳动合同</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item3') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item3">
-            <view class="custom-checkbox {{selectedItems.indexOf('item3') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item3') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">违法使用童工</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item4') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item4">
-            <view class="custom-checkbox {{selectedItems.indexOf('item4') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item4') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">违反女职工特殊劳动保护规定</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item5') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item5">
-            <view class="custom-checkbox {{selectedItems.indexOf('item5') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item5') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">违法延长工作时间，侵害劳动者休息休假权利</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item6') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item6">
-            <view class="custom-checkbox {{selectedItems.indexOf('item6') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item6') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">拖欠工资且未执行最低工资标准</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item7') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item7">
-            <view class="custom-checkbox {{selectedItems.indexOf('item7') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item7') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">未依法为投诉人缴纳社会保险费</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item8') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item8">
-            <view class="custom-checkbox {{selectedItems.indexOf('item8') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item8') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">劳务派遣单位与用工单位违反劳务派遣规定</text>
-          </view>
-          
-          <view class="complaint-item {{selectedItems.indexOf('item9') > -1 ? 'selected' : ''}}" 
-                bindtap="handleComplaintItemSelect" 
-                data-item="item9">
-            <view class="custom-checkbox {{selectedItems.indexOf('item9') > -1 ? 'checked' : ''}}">
-              <text class="check-icon" wx:if="{{selectedItems.indexOf('item9') > -1}}">✓</text>
-            </view>
-            <text class="complaint-label">违反职业介绍规定，收取高额费用且提供虚假岗位信息</text>
+            <text class="complaint-label">{{item.label}}</text>
           </view>
         </view>
       </view>
@@ -218,13 +153,17 @@
                 mode="date" 
                 value="{{formData.complaintVariables.complaintDate}}" 
                 bindchange="handleComplaintDateChange"
-                data-variable="complaintDate">
-          <text>{{formData.complaintVariables.complaintDate || '请选择投诉日期'}}</text>
+                bindtap="handlePickerTap"
+                data-variable="complaintDate"
+                style="display:block;">
+          <view class="picker-content">
+            <text>{{formData.complaintVariables.complaintDate || '请选择投诉日期'}}</text>
+          </view>
         </picker>
       </view>
 
       <!-- item1相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item1') > -1}}">
+      <block wx:if="{{showItem1Form}}">
         <view class="field-section-header">📋 规章制度违法相关信息</view>
         <view class="input-group">
           <text class="input-label">违法规章制定日期</text>
@@ -232,14 +171,18 @@
                   mode="date" 
                   value="{{formData.complaintVariables.violationDate}}" 
                   bindchange="handleComplaintDateChange"
-                  data-variable="violationDate">
-            <text>{{formData.complaintVariables.violationDate || '请选择日期'}}</text>
+                  bindtap="handlePickerTap"
+                  data-variable="violationDate"
+                  style="display:block;">
+            <view class="picker-content">
+              <text>{{formData.complaintVariables.violationDate || '请选择日期'}}</text>
+            </view>
           </picker>
         </view>
       </block>
 
       <!-- item2相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item2') > -1}}">
+      <block wx:if="{{showItem2Form}}">
         <view class="field-section-header">📝 未签劳动合同相关信息</view>
         <view class="input-group">
           <text class="input-label">入职日期</text>
@@ -247,8 +190,12 @@
                   mode="date" 
                   value="{{formData.complaintVariables.workStartDate}}" 
                   bindchange="handleComplaintDateChange"
-                  data-variable="workStartDate">
-            <text>{{formData.complaintVariables.workStartDate || '请选择入职日期'}}</text>
+                  bindtap="handlePickerTap"
+                  data-variable="workStartDate"
+                  style="display:block;">
+            <view class="picker-content">
+              <text>{{formData.complaintVariables.workStartDate || '请选择入职日期'}}</text>
+            </view>
           </picker>
         </view>
         <view class="input-group">
@@ -275,8 +222,12 @@
                   mode="date" 
                   value="{{formData.complaintVariables.workEndDate}}" 
                   bindchange="handleComplaintDateChange"
-                  data-variable="workEndDate">
-            <text>{{formData.complaintVariables.workEndDate || '请选择截至日期'}}</text>
+                  bindtap="handlePickerTap"
+                  data-variable="workEndDate"
+                  style="display:block;">
+            <view class="picker-content">
+              <text>{{formData.complaintVariables.workEndDate || '请选择截至日期'}}</text>
+            </view>
           </picker>
         </view>
         <view class="input-group">
@@ -301,7 +252,7 @@
       </block>
 
       <!-- item3相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item3') > -1}}">
+      <block wx:if="{{showItem3Form}}">
         <view class="field-section-header">👶 使用童工相关信息</view>
         <view class="input-group">
           <text class="input-label">童工年龄</text>
@@ -325,7 +276,7 @@
       </block>
 
       <!-- item4相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item4') > -1}}">
+      <block wx:if="{{showItem4Form}}">
         <view class="field-section-header">👩 女职工保护相关信息</view>
         <view class="input-group">
           <text class="input-label">怀孕日期</text>
@@ -350,7 +301,7 @@
       </block>
 
       <!-- item5相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item5') > -1}}">
+      <block wx:if="{{showItem5Form}}">
         <view class="field-section-header">⏰ 违法加班相关信息</view>
         <view class="input-group">
           <text class="input-label">违法加班开始日期</text>
@@ -374,7 +325,7 @@
       </block>
 
       <!-- item6相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item6') > -1}}">
+      <block wx:if="{{showItem6Form}}">
         <view class="field-section-header">💰 拖欠工资相关信息</view>
         <view class="input-group">
           <text class="input-label">拖欠工资起始月</text>
@@ -437,7 +388,7 @@
       </block>
 
       <!-- item7相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item7') > -1}}">
+      <block wx:if="{{showItem7Form}}">
         <view class="field-section-header">🛡️ 社保缴纳相关信息</view>
         <view class="input-group">
           <text class="input-label">入职日期</text>
@@ -462,7 +413,7 @@
       </block>
 
       <!-- item8相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item8') > -1}}">
+      <block wx:if="{{showItem8Form}}">
         <view class="field-section-header">🔄 劳务派遣相关信息</view>
         <view class="input-group">
           <text class="input-label">拖欠工资起始月</text>
@@ -498,7 +449,7 @@
       </block>
 
       <!-- item9相关字段 -->
-      <block wx:if="{{selectedItems.indexOf('item9') > -1}}">
+      <block wx:if="{{showItem9Form}}">
         <view class="field-section-header">🏢 职业介绍违法相关信息</view>
         <view class="input-group">
           <text class="input-label">求职日期</text>
@@ -543,8 +494,11 @@
 
   <!-- 投诉书生成按钮 -->
   <view class="button-section">
-    <button class="generate-button" bindtap="handleGenerateDocument">
-      📋 生成劳动监察投诉书
+    <button class="generate-button {{selectedItems.length === 0 ? 'disabled' : ''}}" 
+            bindtap="handleGenerateDocument"
+            disabled="{{selectedItems.length === 0}}">
+      <text wx:if="{{selectedItems.length === 0}}">⚠️ 请先选择投诉事项</text>
+      <text wx:else>📋 生成劳动监察投诉书</text>
     </button>
   </view>
 
