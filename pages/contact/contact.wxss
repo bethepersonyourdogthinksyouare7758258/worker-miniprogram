@@ -1,94 +1,33 @@
-/* 页面容器 */
-.page-container {
-  background-color: #f5f7fa;
-  min-height: 100vh;
-}
+/* 引入全局样式系统 */
+@import "../../styles/index.wxss";
 
-/* 页面头部 */
-.header-section {
-  padding-top: 20rpx;
-  padding-bottom: 40rpx;
-}
+/* 页面特有样式 */
 
-.header-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 60rpx 40rpx;
-  text-align: center;
-  border-radius: 0 0 50rpx 50rpx;
-  box-shadow: 0 10rpx 30rpx rgba(102, 126, 234, 0.3);
-}
-
-.header-title {
-  font-size: 48rpx;
-  font-weight: bold;
-  color: #ffffff;
-  display: block;
-  margin-bottom: 16rpx;
-}
-
-.header-subtitle {
-  font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.9);
-  display: block;
-}
-
-/* 通用卡片样式 */
-.section-card {
-  background: #ffffff;
-  margin: 0 30rpx 30rpx;
-  border-radius: 20rpx;
-  padding: 40rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30rpx;
-  padding-bottom: 20rpx;
-  border-bottom: 2rpx solid #f0f0f0;
-}
-
-.card-icon {
-  font-size: 36rpx;
-  margin-right: 16rpx;
-}
-
-.card-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-/* 介绍部分 */
-.intro-section {
-  margin-top: -20rpx;
-}
-
+/* 介绍项目样式 */
 .intro-content {
   display: flex;
   flex-direction: column;
-  gap: 24rpx;
+  gap: var(--spacing-lg);
 }
 
 .intro-item {
   display: flex;
   align-items: flex-start;
-  padding: 20rpx;
-  background: #f8f9fa;
-  border-radius: 16rpx;
-  transition: all 0.3s ease;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-normal);
 }
 
 .intro-item:active {
-  background: #e9ecef;
+  background: #F5F2E6;
   transform: scale(0.98);
 }
 
 .intro-icon {
-  font-size: 40rpx;
-  margin-right: 20rpx;
-  margin-top: 4rpx;
+  font-size: var(--font-size-2xl);
+  margin-right: var(--spacing-lg);
+  margin-top: var(--spacing-xs);
 }
 
 .intro-text {
@@ -98,55 +37,56 @@
 }
 
 .intro-title {
-  font-size: 28rpx;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8rpx;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
 }
 
 .intro-desc {
-  font-size: 24rpx;
-  color: #666;
-  line-height: 1.6;
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-relaxed);
 }
 
-/* 特色功能 */
+/* 特色功能网格 */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24rpx;
+  gap: var(--spacing-lg);
 }
 
 .feature-item {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-  border-radius: 16rpx;
-  padding: 32rpx 24rpx;
+  background: var(--color-bg-secondary);
+  border: 2rpx solid var(--color-border-tertiary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .feature-item:active {
-  transform: translateY(-4rpx);
-  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.1);
+  transform: translateY(-2rpx);
+  box-shadow: var(--shadow-lg);
 }
 
 .feature-icon {
-  font-size: 48rpx;
-  margin-bottom: 16rpx;
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
   display: block;
 }
 
 .feature-name {
-  font-size: 26rpx;
-  font-weight: 600;
-  color: #333;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
   display: block;
-  margin-bottom: 8rpx;
+  margin-bottom: var(--spacing-sm);
 }
 
 .feature-desc {
-  font-size: 22rpx;
-  color: #666;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
   display: block;
 }
 
@@ -159,105 +99,78 @@
 .feedback-textarea {
   width: 100%;
   min-height: 200rpx;
-  padding: 24rpx;
-  border: 2rpx solid #e1e8ed;
-  border-radius: 16rpx;
-  font-size: 28rpx;
-  background: #f8f9fa;
+  padding: var(--spacing-lg);
+  border: 2rpx solid var(--color-border-secondary);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  background: var(--color-bg-secondary);
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
 }
 
 .feedback-textarea:focus {
-  border-color: #667eea;
-  background: #ffffff;
-  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+  border-color: var(--color-text-primary);
+  box-shadow: 0 0 0 4rpx rgba(44, 44, 44, 0.1);
 }
 
 .textarea-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 12rpx;
-  margin-bottom: 24rpx;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
 }
 
 .char-count {
-  font-size: 24rpx;
-  color: #999;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-quaternary);
 }
 
-.submit-button {
-  width: 100%;
-  height: 88rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 44rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12rpx;
-  border: none;
-  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.submit-button:active {
-  transform: scale(0.95);
-  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
-}
-
-.button-icon {
-  font-size: 32rpx;
-}
-
-.button-text {
-  font-size: 30rpx;
-  color: #ffffff;
-  font-weight: 500;
-}
-
-/* 常见问题 */
+/* FAQ样式 */
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  gap: var(--spacing-md);
 }
 
 .faq-item {
-  background: #f8f9fa;
-  border-radius: 16rpx;
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .faq-question {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx;
+  padding: var(--spacing-lg);
   cursor: pointer;
+  transition: var(--transition-normal);
 }
 
 .faq-question:active {
-  background: #e9ecef;
+  background: #F5F2E6;
 }
 
 .faq-q {
-  font-size: 26rpx;
-  font-weight: 500;
-  color: #333;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
   flex: 1;
-  padding-right: 20rpx;
+  padding-right: var(--spacing-lg);
 }
 
 .faq-arrow {
-  font-size: 24rpx;
-  color: #666;
-  transition: transform 0.3s ease;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  transition: transform var(--duration-normal);
 }
 
 .faq-answer {
-  padding: 0 24rpx 24rpx;
-  animation: slideDown 0.3s ease;
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  animation: slideDown var(--duration-normal) var(--ease-smooth);
 }
 
 @keyframes slideDown {
@@ -272,38 +185,59 @@
 }
 
 .faq-a {
-  font-size: 24rpx;
-  color: #666;
-  line-height: 1.6;
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-relaxed);
 }
 
 /* 页脚 */
 .footer-section {
   text-align: center;
-  padding: 40rpx 30rpx 60rpx;
+  padding: var(--spacing-4xl) var(--spacing-xl) var(--spacing-5xl);
 }
 
 .footer-text {
-  font-size: 28rpx;
-  color: #666;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
   display: block;
-  margin-bottom: 12rpx;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .footer-desc {
-  font-size: 24rpx;
-  color: #999;
+  font-size: var(--font-size-base);
+  color: var(--color-text-quaternary);
   display: block;
 }
 
 /* 响应式设计 */
-@media (min-width: 750rpx) {
-  .section-card {
-    margin: 0 40rpx 40rpx;
-    padding: 50rpx;
+@media (max-width: 375px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
   
+  .feature-item {
+    padding: var(--spacing-lg);
+  }
+  
+  .intro-item {
+    padding: var(--spacing-md);
+  }
+  
+  .intro-icon {
+    font-size: var(--font-size-xl);
+    margin-right: var(--spacing-md);
+  }
+}
+
+@media (min-width: 750px) {
   .features-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+  }
+  
+  .intro-content {
+    gap: var(--spacing-xl);
   }
 }

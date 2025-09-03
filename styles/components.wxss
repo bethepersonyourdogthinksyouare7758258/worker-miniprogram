@@ -1,0 +1,512 @@
+/**
+ * 通用组件样式 - Component Styles
+ * 包含项目中可复用的组件样式
+ * 
+ * 使用说明：
+ * 1. 在需要使用组件样式的页面引入此文件
+ * 2. 直接使用类名，如：<view class="btn btn-primary">按钮</view>
+ * 3. 可以组合使用多个类名来实现不同效果
+ * 
+ * 组件命名规范：
+ * - 基础组件：.组件名 (如 .btn)
+ * - 变体：.组件名-变体 (如 .btn-primary)
+ * - 修饰符：.组件名--修饰符 (如 .btn--large)
+ * - 状态：.组件名.状态 (如 .btn.disabled)
+ */
+
+/* 引入设计令牌 */
+@import "./design-tokens.wxss";
+
+/* ========================================
+   🎛️ 按钮组件 - Button Components
+   ======================================== */
+
+/* === 基础按钮样式 - 统一黑底白字风格 === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--height-base);
+  padding: 0 var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  border-radius: var(--radius-base);
+  border: none;
+  background: #333333;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-sizing: border-box;
+  white-space: nowrap;
+  box-shadow: 0 4rpx 12rpx rgba(51, 51, 51, 0.15);
+}
+
+/* === 按钮主题变体 - 保持统一黑底白字，通过阴影区分 === */
+.btn-primary {
+  background: #333333;
+  color: #ffffff;
+  box-shadow: 0 4rpx 12rpx rgba(51, 51, 51, 0.2);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #333333;
+  border: 2rpx solid #333333;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.btn-success {
+  background: #333333;
+  color: #ffffff;
+  box-shadow: 0 4rpx 12rpx rgba(82, 196, 26, 0.3);
+}
+
+.btn-warning {
+  background: #333333;
+  color: #ffffff;
+  box-shadow: 0 4rpx 12rpx rgba(250, 173, 20, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2rpx solid #333333;
+  color: #333333;
+}
+
+.btn-outline-primary {
+  background: transparent;
+  border: 2rpx solid #333333;
+  color: #333333;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #666666;
+  box-shadow: none;
+}
+
+/* === 按钮尺寸变体 === */
+.btn--xs {
+  height: var(--height-xs);
+  padding: 0 var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.btn--sm {
+  height: var(--height-sm);
+  padding: 0 var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.btn--lg {
+  height: var(--height-lg);
+  padding: 0 var(--spacing-2xl);
+  font-size: var(--font-size-md);
+}
+
+.btn--xl {
+  height: var(--height-xl);
+  padding: 0 var(--spacing-3xl);
+  font-size: var(--font-size-lg);
+}
+
+/* === 按钮形状变体 === */
+.btn--rounded {
+  border-radius: var(--radius-full);
+}
+
+.btn--circle {
+  width: var(--height-base);
+  height: var(--height-base);
+  padding: 0;
+  border-radius: var(--radius-circle);
+}
+
+.btn--block {
+  width: 100%;
+  display: flex;
+}
+
+/* === 按钮状态 === */
+.btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(51, 51, 51, 0.2);
+}
+
+.btn.disabled,
+.btn:disabled {
+  background: #cccccc;
+  color: #888888;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.btn.loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ========================================
+   🃏 卡片组件 - Card Components
+   ======================================== */
+
+/* === 基础卡片 === */
+.card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition: var(--transition-normal);
+}
+
+.card-hover:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+/* === 卡片内容区域 === */
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.card-body {
+  padding: var(--spacing-xl);
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+  border-top: 1rpx solid var(--color-border-tertiary);
+}
+
+/* === 卡片标题 === */
+.card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: var(--spacing-xs) 0 0 0;
+}
+
+/* === 卡片变体 === */
+.card--bordered {
+  border: 2rpx solid var(--color-border-primary);
+}
+
+.card--primary {
+  border-left: 4rpx solid var(--color-primary);
+}
+
+.card--gradient {
+  background: var(--gradient-card);
+}
+
+/* === 列表卡片（特殊卡片用于列表项）=== */
+.list-card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-base);
+  border: 1rpx solid var(--color-border-tertiary);
+  overflow: hidden;
+  transition: var(--transition-normal);
+}
+
+.list-card:active {
+  transform: translateY(2rpx);
+  box-shadow: var(--shadow-sm);
+}
+
+.list-card-content {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.list-card-icon {
+  font-size: var(--font-size-xl);
+  margin-right: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.list-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.list-card-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.list-card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.list-card-arrow {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-tertiary);
+  margin-left: var(--spacing-sm);
+}
+
+/* ========================================
+   📝 表单组件 - Form Components
+   ======================================== */
+
+/* === 表单组 === */
+.form-group {
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: var(--color-error);
+  font-weight: var(--font-weight-bold);
+}
+
+/* === 输入控件 === */
+.form-control {
+  width: 100%;
+  height: var(--height-base);
+  padding: 0 var(--spacing-lg);
+  border: 2rpx solid var(--color-border-secondary);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  transition: var(--transition-normal);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4rpx rgba(0, 122, 255, 0.1);
+  outline: none;
+}
+
+.form-control.error {
+  border-color: var(--color-error);
+}
+
+/* === 文本域 === */
+.form-textarea {
+  min-height: 150rpx;
+  padding: var(--spacing-md) var(--spacing-lg);
+  resize: vertical;
+  line-height: var(--line-height-relaxed);
+}
+
+/* === 选择器 === */
+.form-picker {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-picker-placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* === 表单提示 === */
+.form-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin-top: var(--spacing-xs);
+  line-height: var(--line-height-normal);
+}
+
+.form-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+}
+
+/* ========================================
+   🏷️ 标签组件 - Tag Components
+   ======================================== */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.tag-primary {
+  background: var(--gradient-primary);
+  color: var(--color-text-inverse);
+}
+
+.tag-secondary {
+  background: var(--gradient-secondary);
+  color: var(--color-text-inverse);
+}
+
+.tag-success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.tag-warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.tag-error {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.tag-outline {
+  background: transparent;
+  border: 1rpx solid var(--color-border-primary);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   🔄 加载组件 - Loading Components
+   ======================================== */
+
+.loading-spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid var(--color-border-primary);
+  border-top: 4rpx solid var(--color-primary);
+  border-radius: var(--radius-circle);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+}
+
+/* ========================================
+   🚫 空状态组件 - Empty State Components
+   ======================================== */
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+}
+
+.empty-state-icon {
+  width: 120rpx;
+  height: 120rpx;
+  opacity: 0.3;
+  margin: 0 auto var(--spacing-xl) auto;
+}
+
+.empty-state-title {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state-desc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ========================================
+   🎭 模态框组件 - Modal Components
+   ======================================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  margin: var(--spacing-xl);
+  max-width: 600rpx;
+  max-height: 80vh;
+  box-shadow: var(--shadow-2xl);
+  z-index: var(--z-modal);
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-md);
+  border-bottom: 1rpx solid var(--color-border-tertiary);
+}
+
+.modal-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.modal-body {
+  padding: var(--spacing-xl);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+  border-top: 1rpx solid var(--color-border-tertiary);
+}

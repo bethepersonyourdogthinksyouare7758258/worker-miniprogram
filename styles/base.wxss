@@ -1,0 +1,271 @@
+/**
+ * 基础样式 - Base Styles
+ * 包含页面重置样式、基础字体设置等
+ * 
+ * 使用说明：
+ * 这个文件提供了项目的基础样式设置，包括：
+ * - 页面默认样式
+ * - 字体设置
+ * - 基础布局样式
+ * - 通用重置样式
+ */
+
+/* 引入设计令牌 */
+@import "./design-tokens.wxss";
+
+/* ========================================
+   🔄 样式重置 - Style Reset
+   ======================================== */
+
+/* 页面基础样式 */
+page {
+  background-color: var(--color-bg-primary);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 基础容器重置 */
+view, text, button, input, textarea, picker, scroll-view, swiper {
+  box-sizing: border-box;
+}
+
+/* 按钮重置 */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/* 输入框重置 */
+input, textarea {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ========================================
+   🏠 基础布局 - Base Layout
+   ======================================== */
+
+/* 标准页面容器 */
+.page-container {
+  background-color: var(--color-bg-primary);
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* 内容区域容器 */
+.content-container {
+  padding: var(--spacing-xl);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 页面标题区域 */
+.page-title-section {
+  text-align: center;
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* 页面主标题 */
+.page-main-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
+  padding: 0;
+}
+
+/* 页面副标题 */
+.page-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* 标准内容区域（带安全距离）*/
+.safe-area-container {
+  padding: var(--spacing-xl);
+  padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom));
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   📝 基础文字样式 - Base Typography
+   ======================================== */
+
+/* 标题系列 */
+.title-1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.title-2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.title-3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.title-4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 正文文字 */
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+}
+
+.text-body-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.text-caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-tertiary);
+}
+
+/* 文字颜色工具类 */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.text-inverse { color: var(--color-text-inverse); }
+.text-link { color: var(--color-text-link); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+
+/* 文字对齐 */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* 文字截断 */
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========================================
+   🔗 基础链接和交互 - Base Links & Interactions
+   ======================================== */
+
+/* 可点击元素的通用样式 */
+.clickable {
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.clickable:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+
+/* 禁用状态 */
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   📱 响应式断点 - Responsive Breakpoints
+   ======================================== */
+
+/* 小屏幕优化（iPhone SE 等）*/
+@media (max-width: 375px) {
+  .content-container,
+  .safe-area-container {
+    padding: var(--spacing-md);
+  }
+  
+  .page-title-section {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+  }
+  
+  .page-main-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .title-1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .title-2 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* 大屏幕优化（iPad 等）*/
+@media (min-width: 750px) {
+  .content-container,
+  .safe-area-container {
+    padding: var(--spacing-4xl);
+    max-width: 800rpx;
+    margin: 0 auto;
+  }
+  
+  .page-title-section {
+    padding-top: var(--spacing-4xl);
+    padding-bottom: var(--spacing-2xl);
+  }
+}

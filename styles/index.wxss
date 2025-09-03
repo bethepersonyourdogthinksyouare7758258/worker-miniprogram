@@ -1,0 +1,15 @@
+/**
+ * Global Style System Entry
+ */
+
+/* Design tokens */
+@import "./design-tokens.wxss";
+
+/* Base styles */
+@import "./base.wxss";
+
+/* Components */
+@import "./components.wxss";
+
+/* Utilities */
+@import "./utilities.wxss";

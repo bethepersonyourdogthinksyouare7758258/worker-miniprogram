@@ -1,50 +1,109 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40rpx;
-  box-sizing: border-box;
-}
+/* 引入全局样式系统 */
+@import "../../styles/index.wxss";
 
-.title {
-  font-size: 48rpx;
-  font-weight: bold;
-  margin-bottom: 25px;
-  margin-top: 25px;
-}
+/* 页面特有样式 */
 
-.grid {
+/* 首页功能网格 */
+.home-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40rpx;
+  gap: var(--spacing-lg);
   width: 100%;
-  
+  padding: 0 var(--spacing-md);
 }
 
-.grid-item {
+.home-grid-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 250rpx;
-  border-radius: 32rpx;
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
-  transition: all 0.2s ease-in-out;
-  background-color:snow
+  height: 280rpx;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-normal);
+  overflow: hidden;
+  padding: var(--spacing-lg);
 }
 
-.grid-item:active {
-  transform: scale(0.96);
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+.home-grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: var(--gradient-primary);
+  transform: translateY(-4rpx);
+  transition: var(--transition-normal);
 }
 
-.grid-icon {
-  font-size: 64rpx;
-  margin-bottom: 20rpx;
+.home-grid-item:active::before {
+  transform: translateY(0);
 }
 
-.grid-text {
-  font-size: 30rpx;
-  color: #333;
-  font-weight: 500;
+.home-grid-icon {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
+  transform: scale(1.5);
+}
+
+.home-grid-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  line-height: var(--line-height-normal);
+}
+
+/* 开发中状态标签 */
+.home-grid-status {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  transform: scale(0.9);
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .home-grid {
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .home-grid-item {
+    height: 240rpx;
+    padding: var(--spacing-md);
+  }
+  
+  .home-grid-icon {
+    transform: scale(1.3);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .home-grid-text {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (min-width: 750px) {
+  .home-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-2xl);
+    max-width: 900rpx;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .home-grid-item {
+    height: 320rpx;
+    padding: var(--spacing-xl);
+  }
 }

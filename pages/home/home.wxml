@@ -1,37 +1,60 @@
-<view class="container">
-  <view class="title">🧰 打工者生存工具包</view>
-  <view class="grid">
-    <view class="grid-item" bindtap="navigateToOfferComparer">
-      <text class="grid-icon">📊</text>
-      <text class="grid-text">工作对比器</text>
+<view class="page-container">
+  <view class="content-container">
+    <!-- 页面标题区域 -->
+    <view class="page-title-section">
+      <text class="page-main-title">🧰 打工者生存工具包</text>
     </view>
-    <view class="grid-item" bindtap="navigateToCalculator">
-      <text class="grid-icon">🧮</text>
-      <text class="grid-text">超有用计算器</text>
-    </view>
-    <view class="grid-item" bindtap="navigateToTextPack">
-      <text class="grid-icon">📋</text>
-      <text class="grid-text">沟通文本库</text>
-    </view>
-    <view class="grid-item" bindtap="navigateToDocGen">
-      <text class="grid-icon">✍️</text>
-      <text class="grid-text">文书自动生成器</text>
-    </view>
-    <view class="grid-item" bindtap="navigateToCityCompare">
-      <text class="grid-icon">🏙️</text>
-      <text class="grid-text">城市横向对比</text>
-    </view>
-    <view class="grid-item" bindtap="navigateToCoreLaws">
-      <text class="grid-icon">⚖️</text>
-      <text class="grid-text">核心法条</text>
-    </view>
-    <view class="grid-item" bindtap="navigateToBackgroundCheckGuide">
-      <text class="grid-icon">🕵️</text>
-      <text class="grid-text">背调公司指南</text>
-    </view>
-    <view class="grid-item" bindtap="navigateToContact">
-      <text class="grid-icon">📧</text>
-      <text class="grid-text">联系我们</text>
+    
+    <!-- 功能网格 -->
+    <view class="home-grid">
+      <!-- 工作对比器 -->
+      <view class="home-grid-item clickable" bindtap="navigateToOfferComparer">
+        <text class="home-grid-icon">📊</text>
+        <text class="home-grid-text">工作对比器</text>
+      </view>
+      
+      <!-- 超有用计算器 -->
+      <view class="home-grid-item clickable" bindtap="navigateToCalculator">
+        <text class="home-grid-icon">🧮</text>
+        <text class="home-grid-text">超有用计算器</text>
+      </view>
+      
+      <!-- 沟通文本库 -->
+      <view class="home-grid-item clickable" bindtap="navigateToTextPack">
+        <text class="home-grid-icon">📋</text>
+        <text class="home-grid-text">沟通文本库</text>
+      </view>
+      
+      <!-- 文书自动生成器 -->
+      <view class="home-grid-item clickable" bindtap="navigateToDocGen">
+        <text class="home-grid-icon">✍️</text>
+        <text class="home-grid-text">文书自动生成器</text>
+      </view>
+      
+      <!-- 城市横向对比 -->
+      <view class="home-grid-item clickable" bindtap="navigateToCityCompare">
+        <text class="home-grid-icon">🏙️</text>
+        <text class="home-grid-text">城市横向对比</text>
+        <text class="home-grid-status">开发中</text>
+      </view>
+      
+      <!-- 核心法条 -->
+      <view class="home-grid-item clickable" bindtap="navigateToCoreLaws">
+        <text class="home-grid-icon">⚖️</text>
+        <text class="home-grid-text">核心法条</text>
+      </view>
+      
+      <!-- 背调公司指南 -->
+      <view class="home-grid-item clickable" bindtap="navigateToBackgroundCheckGuide">
+        <text class="home-grid-icon">🕵️</text>
+        <text class="home-grid-text">背调公司指南</text>
+      </view>
+      
+      <!-- 联系我们 -->
+      <view class="home-grid-item clickable" bindtap="navigateToContact">
+        <text class="home-grid-icon">📧</text>
+        <text class="home-grid-text">联系我们</text>
+      </view>
     </view>
   </view>
 </view>

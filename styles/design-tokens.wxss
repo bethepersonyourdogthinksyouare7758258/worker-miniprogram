@@ -1,0 +1,211 @@
+/**
+ * 设计令牌系统 - Design Tokens System
+ * 定义整个小程序的设计变量，确保样式统一性
+ * 
+ * 使用方法：
+ * 1. 在页面样式文件顶部引入：@import "../../styles/design-tokens.wxss"
+ * 2. 使用变量：background-color: var(--color-bg-primary)
+ * 
+ * 变量命名规范：
+ * --类别-子类别-描述-状态
+ * 例如：--color-text-primary, --spacing-medium, --font-size-large
+ */
+
+/* ========================================
+   🎨 颜色系统 - Color System
+   ======================================== */
+
+page {
+  /* === 主题色系 - Primary Colors === */
+  --color-primary: #007aff;           /* 主题蓝色 */
+  --color-primary-light: #74b9ff;     /* 浅蓝色 */
+  --color-primary-dark: #0984e3;      /* 深蓝色 */
+  --color-primary-hover: #0056cc;     /* 悬停状态 */
+
+  /* === 辅助色系 - Secondary Colors === */
+  --color-secondary: #E6A23C;         /* 橙色 */
+  --color-secondary-light: #F7BA2A;   /* 浅橙色 */
+  --color-secondary-dark: #D2691E;    /* 深橙色 */
+  --color-accent: #F56C6C;            /* 强调色（红橙色）*/
+
+  /* === 功能色系 - Functional Colors === */
+  --color-success: #52c41a;           /* 成功色 */
+  --color-success-light: #95de64;     /* 浅成功色 */
+  --color-warning: #faad14;           /* 警告色 */
+  --color-warning-light: #ffd666;     /* 浅警告色 */
+  --color-error: #ff4d4f;             /* 错误色 */
+  --color-error-light: #ff7875;       /* 浅错误色 */
+
+  /* === 背景色系 - Background Colors === */
+  --color-bg-primary: #FDF8E1;        /* 页面主背景（米黄色）*/
+  --color-bg-secondary: #ffffff;      /* 卡片背景（白色）*/
+  --color-bg-tertiary: #f8f9fa;       /* 次级背景（浅灰）*/
+  --color-bg-quaternary: #f5f5f5;     /* 四级背景（更浅灰）*/
+  --color-bg-hover: #f0f0f0;          /* 悬停背景 */
+  --color-bg-active: #e0e0e0;         /* 激活背景 */
+  --color-bg-disabled: #cccccc;       /* 禁用背景 */
+
+  /* === 文字色系 - Text Colors === */
+  --color-text-primary: #2C2C2C;      /* 主要文字色（深炭灰，非纯黑）*/
+  --color-text-secondary: #4A4A4A;    /* 次要文字色（中深灰）*/
+  --color-text-tertiary: #666666;     /* 三级文字色 */
+  --color-text-quaternary: #888888;   /* 四级文字色 */
+  --color-text-disabled: #cccccc;     /* 禁用文字色 */
+  --color-text-inverse: #ffffff;      /* 反色文字（白色）*/
+  --color-text-link: var(--color-primary); /* 链接文字色 */
+
+  /* === 边框色系 - Border Colors === */
+  --color-border-primary: #e9ecef;    /* 主要边框色 */
+  --color-border-secondary: #e1e8ed;  /* 次要边框色 */
+  --color-border-tertiary: #f0f0f0;   /* 三级边框色 */
+  --color-border-focus: var(--color-primary); /* 聚焦边框色 */
+
+  /* === 渐变色系 - Gradient Colors === */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+  --gradient-success: linear-gradient(135deg, var(--color-success) 0%, #00b894 100%);
+  --gradient-warning: linear-gradient(135deg, var(--color-warning) 0%, #ff9500 100%);
+  --gradient-card: linear-gradient(135deg, #ffffff 0%, #fefbf3 100%);
+
+/* ========================================
+   📝 字体系统 - Typography System
+   ======================================== */
+
+  /* === 字体族 - Font Family === */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* === 字体大小 - Font Size === */
+  --font-size-xs: 20rpx;              /* 极小字号 */
+  --font-size-sm: 24rpx;              /* 小字号 */
+  --font-size-base: 28rpx;            /* 基础字号 */
+  --font-size-md: 30rpx;              /* 中等字号 */
+  --font-size-lg: 32rpx;              /* 大字号 */
+  --font-size-xl: 36rpx;              /* 特大字号 */
+  --font-size-2xl: 40rpx;             /* 二级大字号 */
+  --font-size-3xl: 48rpx;             /* 三级大字号 */
+
+  /* === 字体重量 - Font Weight === */
+  --font-weight-light: 300;           /* 细体 */
+  --font-weight-normal: 400;          /* 正常 */
+  --font-weight-medium: 500;          /* 中等 */
+  --font-weight-semibold: 600;        /* 半粗 */
+  --font-weight-bold: 700;            /* 粗体 */
+
+  /* === 行高 - Line Height === */
+  --line-height-tight: 1.2;           /* 紧密行高 */
+  --line-height-normal: 1.4;          /* 正常行高 */
+  --line-height-relaxed: 1.6;         /* 宽松行高 */
+  --line-height-loose: 1.8;           /* 松散行高 */
+
+/* ========================================
+   📐 间距系统 - Spacing System
+   ======================================== */
+
+  /* === 基础间距单位 - Base Unit: 4rpx === */
+  --spacing-xs: 8rpx;                 /* 2 * 4rpx */
+  --spacing-sm: 12rpx;                /* 3 * 4rpx */
+  --spacing-base: 16rpx;              /* 4 * 4rpx */
+  --spacing-md: 20rpx;                /* 5 * 4rpx */
+  --spacing-lg: 24rpx;                /* 6 * 4rpx */
+  --spacing-xl: 30rpx;                /* 7.5 * 4rpx */
+  --spacing-2xl: 40rpx;               /* 10 * 4rpx */
+  --spacing-3xl: 50rpx;               /* 12.5 * 4rpx */
+  --spacing-4xl: 60rpx;               /* 15 * 4rpx */
+  --spacing-5xl: 80rpx;               /* 20 * 4rpx */
+
+/* ========================================
+   📱 尺寸系统 - Size System
+   ======================================== */
+
+  /* === 高度系统 - Height System === */
+  --height-xs: 60rpx;                 /* 小按钮高度 */
+  --height-sm: 70rpx;                 /* 中等按钮高度 */
+  --height-base: 80rpx;               /* 标准按钮/输入框高度 */
+  --height-lg: 90rpx;                 /* 大按钮高度 */
+  --height-xl: 100rpx;                /* 特大按钮高度 */
+
+  /* === 宽度系统 - Width System === */
+  --width-xs: 120rpx;                 /* 小宽度 */
+  --width-sm: 150rpx;                 /* 中小宽度 */
+  --width-base: 200rpx;               /* 基础宽度 */
+  --width-lg: 300rpx;                 /* 大宽度 */
+  --width-xl: 400rpx;                 /* 特大宽度 */
+  --width-full: 100%;                 /* 全宽 */
+
+  /* === 圆角系统 - Border Radius === */
+  --radius-xs: 4rpx;                  /* 小圆角 */
+  --radius-sm: 8rpx;                  /* 中小圆角 */
+  --radius-base: 12rpx;               /* 基础圆角 */
+  --radius-lg: 16rpx;                 /* 大圆角 */
+  --radius-xl: 20rpx;                 /* 特大圆角 */
+  --radius-2xl: 30rpx;                /* 二级大圆角 */
+  --radius-full: 50rpx;               /* 全圆角（胶囊形）*/
+  --radius-circle: 50%;               /* 圆形 */
+
+/* ========================================
+   🎭 阴影系统 - Shadow System
+   ======================================== */
+
+  /* === 阴影深度 - Shadow Depth === */
+  --shadow-xs: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);     /* 极浅阴影 */
+  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);     /* 浅阴影 */
+  --shadow-base: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);   /* 基础阴影 */
+  --shadow-lg: 0 4rpx 20rpx rgba(0, 0, 0, 0.12);    /* 大阴影 */
+  --shadow-xl: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);    /* 特大阴影 */
+  --shadow-2xl: 0 8rpx 32rpx rgba(0, 0, 0, 0.18);   /* 二级大阴影 */
+
+  /* === 彩色阴影 - Colored Shadows === */
+  --shadow-primary: 0 4rpx 15rpx rgba(116, 185, 255, 0.3);
+  --shadow-secondary: 0 4rpx 16rpx rgba(230, 162, 60, 0.3);
+  --shadow-success: 0 4rpx 15rpx rgba(82, 196, 26, 0.3);
+  --shadow-warning: 0 4rpx 15rpx rgba(250, 173, 20, 0.3);
+  --shadow-error: 0 4rpx 15rpx rgba(255, 77, 79, 0.3);
+
+/* ========================================
+   🎬 动画系统 - Animation System
+   ======================================== */
+
+  /* === 缓动函数 - Easing Functions === */
+  --ease-linear: linear;
+  --ease-in: ease-in;
+  --ease-out: ease-out;
+  --ease-in-out: ease-in-out;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* === 过渡时长 - Transition Duration === */
+  --duration-fast: 0.1s;             /* 快速过渡 */
+  --duration-normal: 0.2s;           /* 正常过渡 */
+  --duration-slow: 0.3s;             /* 慢速过渡 */
+  --duration-slower: 0.5s;           /* 更慢过渡 */
+
+  /* === 通用过渡 - Common Transitions === */
+  --transition-fast: all var(--duration-fast) var(--ease-smooth);
+  --transition-normal: all var(--duration-normal) var(--ease-smooth);
+  --transition-slow: all var(--duration-slow) var(--ease-smooth);
+
+/* ========================================
+   📏 Z-Index 系统 - Z-Index System
+   ======================================== */
+
+  --z-dropdown: 100;                 /* 下拉菜单 */
+  --z-tooltip: 200;                  /* 工具提示 */
+  --z-modal-backdrop: 500;           /* 模态框背景 */
+  --z-modal: 600;                    /* 模态框 */
+  --z-toast: 700;                    /* 轻提示 */
+  --z-loading: 800;                  /* 加载遮罩 */
+  --z-maximum: 9999;                 /* 最高层级 */
+}
+
+/**
+ * 深色模式支持 - Dark Mode Support
+ * 如果需要支持深色模式，可以在这里定义对应的颜色变量
+ */
+@media (prefers-color-scheme: dark) {
+  page {
+    /* 深色模式下的颜色重定义 */
+    /* --color-bg-primary: #1a1a1a; */
+    /* --color-text-primary: #ffffff; */
+    /* ... 其他深色模式变量 */
+  }
+}
