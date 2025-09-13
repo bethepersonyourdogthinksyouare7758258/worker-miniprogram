@@ -1,13 +1,377 @@
+/* ========================================
+   WeChat Mini Program Global Styles
+   小程序全局样式系统 - 精简版
+   ======================================== */
+
+/* === 全局基础 === */
 page {
   background-color: #FDF8E1;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.container {
+/* === 布局容器 === */
+.page-container {
+  padding: 20rpx;
+  background-color: #FDF8E1;
+  min-height: 100vh;
+}
+
+.form-container {
+  padding: 0 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-section {
+  padding: 20rpx 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title-area {
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 15rpx;
+}
+
+/* === 卡片组件 === */
+.form-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #E6A23C 0%, #F56C6C 100%);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.card-icon {
+  font-size: 36rpx;
+  margin-right: 15rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* === 表单组件 === */
+.input-group {
+  margin-bottom: 30rpx;
+}
+
+.input-label {
+  display: block;
+  font-size: 28rpx;
+  color: #34495e;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.required-mark {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 24rpx;
+  border: 2rpx solid #e1e8ed;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  background: white;
+  box-sizing: border-box;
+  min-height: 80rpx;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: #E6A23C;
+  outline: none;
+}
+
+.form-textarea {
+  min-height: 150rpx;
+}
+
+.readonly-field {
+  color: #666;
+  background-color: #f5f5f5;
+}
+
+/* === 选择器 === */
+.form-picker {
+  width: 100%;
+  border: 2rpx solid #e1e8ed;
+  border-radius: 12rpx;
+  background: white;
+  min-height: 80rpx;
+  display: block;
+}
+
+.picker-content {
+  padding: 24rpx;
+  min-height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+/* === 按钮组件 === */
+button {
+  background: #74b9ff;
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+/* 大按钮 - 生成按钮 */
+.generate-button {
+  width: 100%;
+  height: 100rpx;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.generate-button.disabled {
+  background: #ccc;
+  color: #666;
+}
+
+/* 小按钮 - 操作按钮 */
+.copy-button, .share-button {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  margin: 0 10rpx;
+}
+
+.button-section {
+  margin-top: 50rpx;
+  padding: 0 20rpx;
+}
+
+/* === 复选框组件 === */
+.custom-checkbox {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid #dcdfe6;
+  border-radius: 8rpx;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16rpx;
+  margin-top: 2rpx;
+}
+
+.custom-checkbox.checked {
+  background: #28a745;
+  border-color: #28a745;
+}
+
+.check-icon {
+  color: white;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.complaint-options, .arbitration-options {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.complaint-item, .arbitration-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+  margin-bottom: 20rpx;
+}
+
+.complaint-item.selected, .arbitration-item.selected {
+  background: rgba(40, 167, 69, 0.1);
+  border-color: #28a745;
+}
+
+.complaint-label, .arbitration-label {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* === 预览区域 === */
+.preview-container {
+  margin-top: 50rpx;
+  padding: 0 20rpx;
+}
+
+.preview-header {
+  background: white;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 30rpx 40rpx 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.preview-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #F7BA2A 0%, #FF9500 100%);
+}
+
+.preview-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.document-display {
+  background: white;
+  padding: 30rpx 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  border-left: 1rpx solid rgba(255, 255, 255, 0.2);
+  border-right: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.document-text {
+  white-space: pre-wrap;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #333;
+}
+
+.action-section {
+  display: flex;
+  gap: 20rpx;
+  background: white;
+  padding: 30rpx 40rpx;
+  border-radius: 0 0 20rpx 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+}
+
+/* === 提示信息 === */
+.help-hint {
+  margin: 20rpx 0;
+  padding: 0;
+}
+
+.help-hint .hint-text {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  color: #333;
+  font-size: 26rpx;
+  line-height: 1.6;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.help-hint .hint-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: linear-gradient(90deg, #F7BA2A 0%, #FF9500 100%);
+}
+
+.help-hint .hint-text text:first-child {
+  font-weight: bold;
+  color: #E6A23C;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.input-hint {
+  font-size: 24rpx;
+  color: #E6A23C;
+  margin-top: 8rpx;
+  background: rgba(230, 162, 60, 0.1);
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  display: block;
+}
+
+/* === 特殊组件 === */
+.selected-items-summary {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+  border-radius: 12rpx;
+  border-left: 4rpx solid #28a745;
+}
+
+.summary-text {
+  font-size: 26rpx;
+  color: #28a745;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.selected-item {
+  font-size: 24rpx;
+  color: #495057;
+  line-height: 1.4;
+}
+
+.field-section-header {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #E6A23C;
+  margin: 40rpx 0 20rpx;
+  padding: 15rpx 20rpx;
+  background: linear-gradient(135deg, rgba(230, 162, 60, 0.1) 0%, rgba(245, 108, 108, 0.05) 100%);
+  border-radius: 12rpx;
+  border-left: 4rpx solid #E6A23C;
+}
+
+.fixed-reasons-display {
+  white-space: pre-wrap;
+  line-height: 1.6;
 }

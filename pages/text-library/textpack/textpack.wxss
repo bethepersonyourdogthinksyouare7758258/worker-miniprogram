@@ -1,3 +1,6 @@
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
+
 /* textpack.wxss - 温暖活泼风格 */
 .scrollarea {
   height: 100vh;

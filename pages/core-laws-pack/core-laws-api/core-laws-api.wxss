@@ -1,3 +1,6 @@
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
+
 .container {
   padding: 30rpx;
   background-color: #FDF8E1;

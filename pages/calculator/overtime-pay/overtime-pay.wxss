@@ -1,4 +1,5 @@
-@import "../calculator-common.wxss";
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
 
 /* 页面标题和副说明样式 */
 .subtitle {

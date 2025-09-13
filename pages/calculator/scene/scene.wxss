@@ -1,3 +1,6 @@
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
+
 /* pages/calculator/scene/scene.wxss */
 .container {
   padding: 20rpx;

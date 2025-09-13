@@ -1,3 +1,4 @@
-@import "../calculator-common.wxss";
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
 
 /* Add any page-specific styles here */

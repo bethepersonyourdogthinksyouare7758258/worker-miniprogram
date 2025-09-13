@@ -1,4 +1,5 @@
-@import "../calculator-common.wxss";
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
 
 .picker-input {
   display: flex;

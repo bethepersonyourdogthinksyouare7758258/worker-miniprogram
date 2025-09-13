@@ -1,12 +1,6 @@
 <view class="page-container">
   <!-- 头部区域 -->
   <view class="header-section">
-    <navigator url="../docgen-list/docgen-list" class="back-button-wrapper">
-      <view class="back-button">
-        <text class="back-icon">←</text>
-        <text class="back-text">返回</text>
-      </view>
-    </navigator>
     <view class="title-area">
       <text class="page-title">{{title}}</text>
       <view class="help-hint">

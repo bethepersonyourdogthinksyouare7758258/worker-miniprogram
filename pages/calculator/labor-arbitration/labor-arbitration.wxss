@@ -1,3 +1,6 @@
+/* 引入全局样式系统 */
+@import "../../../styles/index.wxss";
+
 /* 劳动仲裁计算器特定样式 */
 
 .detail-toggle {
